@@ -402,3 +402,5 @@ begin
     execute 'alter publication supabase_realtime add table public.kitchen_state';
   end if;
 end $$;
+
+-- ═══ Fine dello schema: se vedi questa riga nel SQL Editor hai copiato tutto ═══
