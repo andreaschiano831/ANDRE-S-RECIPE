@@ -142,8 +142,8 @@ function ScanLinea({ partitaInit, onClose }: { partitaInit: string; onClose: () 
 
   async function addFiles(list: FileList | null) {
     if (!list) return
-    for (const f of Array.from(list).slice(0, 4)) {
-      try { const b = await shrinkImage(f); setImgs((x) => [...x, b].slice(0, 4)) } catch (e: any) { toast(e.message, 'error') }
+    for (const f of Array.from(list).slice(0, 3)) {
+      try { const b = await shrinkImage(f); setImgs((x) => [...x, b].slice(0, 3)) } catch (e: any) { toast(e.message, 'error') }
     }
   }
   async function analyse() {

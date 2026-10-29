@@ -1,9 +1,7 @@
 // Estrazione ricette con Groq (testo o immagine), condivisa da /api/import e /api/import-url
 import { CATEGORIES } from '@/lib/recipes'
 
-const GROQ_URL = process.env.GROQ_API_URL || 'https://api.groq.com/openai/v1/chat/completions'
-const VISION_MODEL = process.env.GROQ_VISION_MODEL || 'meta-llama/llama-4-scout-17b-16e-instruct'
-const TEXT_MODEL = process.env.GROQ_TEXT_MODEL || 'llama-3.3-70b-versatile'
+import { groqChat } from './groq'
 
 export function recipePrompt(sections: string[]) {
   return `Sei l'assistente di uno chef stellato. Estrai TUTTE le ricette presenti nel materiale e restituisci SOLO un oggetto JSON, senza testo fuori dal JSON, in questo formato:
@@ -30,27 +28,13 @@ function extractJson(text: string): any {
   return null
 }
 
-export class AIError extends Error { status = 502 }
+export { GroqError as AIError } from './groq'
 
 export async function extractRecipes(input: { text?: string; image?: string; sections: string[] }): Promise<any[]> {
-  const key = process.env.GROQ_API_KEY
-  if (!key) { const e = new AIError('GROQ_API_KEY non configurata su Vercel'); e.status = 500; throw e }
   const sys = recipePrompt(input.sections)
-  const payload = input.image
-    ? {
-        model: VISION_MODEL, temperature: 0.05, max_completion_tokens: 4096,
-        messages: [{ role: 'user', content: [{ type: 'text', text: sys }, { type: 'image_url', image_url: { url: input.image } }] }],
-      }
-    : {
-        model: TEXT_MODEL, temperature: 0.05, max_completion_tokens: 6000, response_format: { type: 'json_object' },
-        messages: [{ role: 'system', content: sys }, { role: 'user', content: String(input.text ?? '').slice(0, 24000) }],
-      }
-  const res = await fetch(GROQ_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` }, body: JSON.stringify(payload) })
-  const data = await res.json().catch(() => null)
-  if (!res.ok) {
-    const msg = data?.error?.message || `Errore Groq ${res.status}`
-    throw new AIError(res.status === 429 ? 'Troppe richieste all’AI: attendi 30 secondi e riprova.' : res.status === 401 ? 'Chiave Groq non valida.' : msg)
-  }
-  const parsed = extractJson(data?.choices?.[0]?.message?.content ?? '')
+  const out = input.image
+    ? await groqChat({ system: sys, user: 'Estrai le ricette da questa immagine e rispondi solo con il JSON.', images: [input.image], json: true })
+    : await groqChat({ system: sys, user: String(input.text ?? '').slice(0, 24000), json: true })
+  const parsed = extractJson(out)
   return Array.isArray(parsed?.recipes) ? parsed.recipes : Array.isArray(parsed) ? parsed : parsed?.name ? [parsed] : []
 }
