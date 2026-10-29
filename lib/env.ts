@@ -1,9 +1,14 @@
 /** Controlla le variabili di Supabase e restituisce un messaggio chiaro se qualcosa non va */
+/** Accetta anche l'indirizzo copiato con /rest/v1/ o con lo slash finale */
+export function cleanSupabaseUrl(raw: string | undefined) {
+  return (raw ?? '').trim().replace(/\/(rest|auth)\/v1\/?.*$/i, '').replace(/\/+$/, '')
+}
+
 export function supabaseEnvProblem(): string | null {
-  const url = (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').trim()
+  const url = cleanSupabaseUrl(process.env.NEXT_PUBLIC_SUPABASE_URL)
   const key = (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '').trim()
   if (!url) return 'Manca la variabile NEXT_PUBLIC_SUPABASE_URL su Vercel.'
-  if (!/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(url))
+  if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url))
     return `NEXT_PUBLIC_SUPABASE_URL non è nel formato giusto. Deve essere tipo https://abcdefgh.supabase.co (adesso inizia con "${url.slice(0, 30)}").`
   if (!key) return 'Manca la variabile NEXT_PUBLIC_SUPABASE_ANON_KEY su Vercel.'
   if (!/^(eyJ|sb_publishable_)/.test(key))
@@ -11,7 +16,7 @@ export function supabaseEnvProblem(): string | null {
   return null
 }
 
-export function supabaseUrl() { return (process.env.NEXT_PUBLIC_SUPABASE_URL ?? '').trim().replace(/\/$/, '') }
+export function supabaseUrl() { return cleanSupabaseUrl(process.env.NEXT_PUBLIC_SUPABASE_URL) }
 export function supabaseKey() { return (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '').trim() }
 
 export function configErrorPage(msg: string, detail = '') {
