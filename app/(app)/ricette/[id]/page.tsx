@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation'
-import Header from '@/components/Header'
 import RecipeView from '@/components/RecipeView'
 import { getSession } from '@/lib/supabase/server'
 import { loadCatalog } from '@/lib/catalog'
@@ -19,12 +18,7 @@ export default async function RecipePage({ params }: { params: Promise<{ id: str
   const sec = sections.find((x) => x.id === recipe.section_id)
   const book = books.find((b) => b.id === sec?.book_id)
   return (
-    <>
-      <Header active="ricette" />
-      <main className="narrow page">
-        <RecipeView recipe={recipe} bookName={book?.name ?? ''} sectionName={sec?.name ?? ''}
-          backHref={`/ricette?ricettario=${book?.id ?? ''}&sezione=${sec?.id ?? ''}`} canEdit={s.canEdit} />
-      </main>
-    </>
+    <RecipeView recipe={recipe} bookName={books.length > 1 ? book?.name ?? '' : ''} sectionName={sec?.name ?? ''}
+      backHref={`/ricette?ricettario=${book?.id ?? ''}&sezione=${sec?.id ?? ''}`} canEdit={s.canEdit} />
   )
 }

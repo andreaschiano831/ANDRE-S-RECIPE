@@ -22,6 +22,11 @@ export default function RecipeEditor({ initial, books, sections, groups, ingredi
     return () => window.removeEventListener('beforeunload', h)
   }, [dirty])
 
+  useEffect(() => {
+    const h = (e: KeyboardEvent) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save() } }
+    window.addEventListener('keydown', h); return () => window.removeEventListener('keydown', h)
+  })
+
   async function save() {
     if (!draft.name.trim()) { show('Inserisci il nome della ricetta', 'err'); return }
     if (!draft.section_id) { show('Scegli la sezione', 'err'); return }
@@ -38,12 +43,12 @@ export default function RecipeEditor({ initial, books, sections, groups, ingredi
 
   return (
     <>
-      <h1 className="h1" style={{ marginBottom: 16 }}>{initial.id ? 'Modifica ricetta' : 'Nuova ricetta'}</h1>
+      <div className="ph"><h1 className="h1">{initial.id ? 'Modifica ricetta' : 'Nuova ricetta'}</h1></div>
       <DraftFields draft={draft} onChange={(d) => { setDraft(d); setDirty(true) }} books={books} sections={sections} groups={groups} ingredientNames={ingredientNames} />
       <div className="sticky-actions">
         <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
-          <Link href={initial.id ? `/ricette/${initial.id}` : '/ricette'} className="btn">Annulla</Link>
-          <button className="btn btn-gold" disabled={busy} onClick={save}>{busy ? 'Salvataggio…' : 'Salva ricetta'}</button>
+          <Link href={initial.id ? `/ricette/${initial.id}` : '/ricette'} className="btn btn-lg btn-ghost">Annulla</Link>
+          <button className="btn btn-gold btn-lg" disabled={busy} onClick={save}>{busy ? 'Salvataggio…' : 'Salva ricetta'}</button>
         </div>
       </div>
       {node}

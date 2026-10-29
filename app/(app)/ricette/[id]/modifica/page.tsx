@@ -1,5 +1,4 @@
 import { notFound, redirect } from 'next/navigation'
-import Header from '@/components/Header'
 import RecipeEditor from '@/components/RecipeEditor'
 import { getSession } from '@/lib/supabase/server'
 import { loadEditorData } from '@/lib/editor-data'
@@ -21,7 +20,6 @@ export default async function EditRecipe({ params }: { params: Promise<{ id: str
   if (!draft.ingredients.length) draft.ingredients = [{ name: '', quantity: '', unit: 'g', note: '' }]
   return (
     <>
-      <Header active="ricette" />
       <main className="narrow page"><RecipeEditor initial={draft} {...data} /></main>
     </>
   )

@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation'
-import Header from '@/components/Header'
 import BooksManager from '@/components/BooksManager'
 import { getSession } from '@/lib/supabase/server'
 import { loadCatalog } from '@/lib/catalog'
@@ -17,13 +16,12 @@ export default async function BooksPage() {
   for (const r of rows ?? []) counts[r.section_id] = (counts[r.section_id] ?? 0) + 1
   return (
     <>
-      <Header active="ricettari" />
       <main className="narrow page">
-        <h1 className="h1">Ricettari</h1>
-        <p className="muted" style={{ fontSize: '.86rem', margin: '6px 0 18px' }}>
-          Ogni ricettario è un libro con le sue sezioni: di uno chef, di un ristorante, di una stagione o personale.
-          Puoi aggiungerne quanti vuoi; le ricette si spostano da uno all’altro cambiando la sezione nell’editor.
-        </p>
+        <header className="ph"><div style={{ flex: 1, minWidth: 240 }}>
+          <h1 className="h1">Ricettari</h1>
+          <p>Ogni ricettario è un libro con le sue sezioni: di uno chef, di un ristorante, di una stagione o personale.
+          Puoi aggiungerne quanti vuoi; per spostare ricette selezionale dall’elenco e scegli «Sposta».</p>
+        </div></header>
         <BooksManager initialBooks={books} initialSections={sections} counts={counts} />
       </main>
     </>

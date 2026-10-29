@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import { fmtDose, type Recipe } from '@/lib/recipes'
+import { ArrowDown, ArrowUp, ChevronLeft, FileDown, Printer, X } from 'lucide-react'
+import { fmtDose, scaleQty, type Recipe } from '@/lib/recipes'
 import { IngredientTable, StepList } from './RecipeView'
 
 type Item = { id: string; dose: number; recipe: Recipe }
@@ -39,6 +40,27 @@ export default function DocumentEditor({ doc, initialItems, appName }: { doc: { 
   async function togglePage(v: boolean) {
     setOnePer(v); await sb().from('print_documents').update({ one_per_page: v }).eq('id', doc.id)
   }
+  /** Esporta un .doc (HTML che Word apre e modifica), come nel vecchio ricettario */
+  function exportWord() {
+    const esc = (v: unknown) => String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    const body = items.map((it, i) => {
+      const r = it.recipe
+      const meta = [r.category, r.dish_group, r.yield_note, it.dose !== 1 ? `dose ×${fmtDose(it.dose)}` : ''].filter(Boolean).join(' · ')
+      const rows = r.recipe_ingredients.map((x) => `<tr><td>${esc(x.name)}${x.note ? ` <i style="color:#888">${esc(x.note)}</i>` : ''}</td><td style="text-align:right;white-space:nowrap">${x.quantity == null ? 'q.b.' : esc(scaleQty(x.quantity, it.dose)) + ' ' + esc(x.unit)}</td></tr>`).join('')
+      const steps = r.recipe_steps.map((x) => `<li>${esc(x.body)}${x.duration_min ? ` <b>(${x.duration_min}′)</b>` : ''}${x.temperature ? ` <b>${esc(x.temperature)}</b>` : ''}</li>`).join('')
+      return `<div${onePer && i < items.length - 1 ? ' style="page-break-after:always"' : ''}>
+<h2>${esc(r.name)}</h2><p class="meta">${esc(meta)}</p>
+<table>${rows}</table>${steps ? `<ol>${steps}</ol>` : ''}${r.notes ? `<p><i>${esc(r.notes)}</i></p>` : ''}</div>`
+    }).join('')
+    const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>${esc(name)}</title>
+<style>body{font-family:Georgia,serif;font-size:11pt}h1{font-style:italic;font-weight:normal;text-align:center}h2{font-style:italic;font-weight:normal;border-bottom:1px solid #ccc;margin-top:18pt}
+.meta{color:#8B6914;font-size:9pt}table{border-collapse:collapse;width:100%}td{border-bottom:1px solid #eee;padding:3pt 4pt}ol{padding-left:18pt}li{margin:3pt 0}</style></head>
+<body><p style="text-align:center;color:#8B6914;font-size:9pt">${esc(appName)}</p><h1>${esc(name)}</h1>${body}</body></html>`
+    const blob = new Blob(['\ufeff', html], { type: 'application/msword' })
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(blob); a.download = `${name.replace(/[\\/:*?"<>|]+/g, ' ').trim() || 'documento'}.doc`
+    a.click(); URL.revokeObjectURL(a.href)
+  }
   async function del() {
     if (!confirm(`Eliminare il documento «${name}»? Le ricette restano nel ricettario.`)) return
     await sb().from('print_documents').delete().eq('id', doc.id)
@@ -48,17 +70,17 @@ export default function DocumentEditor({ doc, initialItems, appName }: { doc: { 
   return (
     <>
       <div className="no-print">
-        <Link href="/documenti" className="btn btn-ghost btn-sm">‹ Documenti</Link>
+        <Link href="/documenti" className="btn btn-ghost btn-sm"><ChevronLeft size={16} /> Documenti</Link>
         <h1 className="h1" style={{ margin: '12px 0 4px' }}>{name}</h1>
-        <p className="sc muted" style={{ fontSize: '.6rem', marginBottom: 16 }}>{items.length} ricette</p>
+        <p className="muted small" style={{ marginBottom: 16 }}>{items.length} {items.length === 1 ? 'ricetta' : 'ricette'}, nell’ordine di stampa</p>
 
         {items.length === 0 ? <p className="empty">Documento vuoto. Apri una ricetta e tocca «Stampa» per aggiungerla.</p> : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {items.map((it, i) => (
               <div key={it.id} className="panel" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 12px' }}>
-                <span className="chip">{i + 1}</span>
+                <span className="chip num">{i + 1}</span>
                 <Link href={`/ricette/${it.recipe.id}`} style={{ flex: 1, minWidth: 0 }}>
-                  <p className="serif" style={{ fontStyle: 'italic', fontSize: '1.08rem' }}>{it.recipe.name}</p>
+                  <p className="dish" style={{ fontSize: '1.12rem' }}>{it.recipe.name}</p>
                   <p className="muted" style={{ fontSize: '.7rem' }}>{it.recipe.recipe_ingredients.length} ingredienti · {it.recipe.category}</p>
                 </Link>
                 <div className="dose">
@@ -66,22 +88,23 @@ export default function DocumentEditor({ doc, initialItems, appName }: { doc: { 
                   <input readOnly value={'×' + fmtDose(it.dose)} />
                   <button onClick={() => setDose(i, it.dose + (it.dose < 1 ? 0.25 : 1))}>+</button>
                 </div>
-                <button className="icon-btn" disabled={i === 0} onClick={() => move(i, -1)}>↑</button>
-                <button className="icon-btn" disabled={i === items.length - 1} onClick={() => move(i, 1)}>↓</button>
-                <button className="icon-btn" onClick={() => remove(i)}>×</button>
+                <button className="icon-btn" disabled={i === 0} onClick={() => move(i, -1)} aria-label="Sposta su"><ArrowUp size={16} /></button>
+                <button className="icon-btn" disabled={i === items.length - 1} onClick={() => move(i, 1)} aria-label="Sposta giù"><ArrowDown size={16} /></button>
+                <button className="icon-btn" onClick={() => remove(i)} aria-label="Togli dal documento"><X size={16} /></button>
               </div>
             ))}
           </div>
         )}
 
         <label style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '16px 0', fontSize: '.86rem' }}>
-          <input type="checkbox" checked={onePer} onChange={(e) => togglePage(e.target.checked)} style={{ accentColor: 'var(--gold2)', width: 16, height: 16 }} />
+          <input type="checkbox" checked={onePer} onChange={(e) => togglePage(e.target.checked)} style={{ accentColor: 'var(--accent)', width: 16, height: 16 }} />
           Una ricetta per pagina
         </label>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           <button className="btn" onClick={rename}>Rinomina</button>
           <button className="btn btn-danger" onClick={del}>Elimina</button>
-          <button className="btn btn-gold" style={{ marginLeft: 'auto' }} disabled={!items.length} onClick={() => window.print()}>🖨 Stampa / PDF</button>
+          <button className="btn" style={{ marginLeft: 'auto' }} disabled={!items.length} onClick={exportWord}><FileDown size={16} /> Word</button>
+          <button className="btn btn-gold" disabled={!items.length} onClick={() => window.print()}><Printer size={16} /> Stampa o PDF</button>
         </div>
       </div>
 

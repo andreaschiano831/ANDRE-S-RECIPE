@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Header from '@/components/Header'
+import { ChefHat, ChevronRight, Users } from 'lucide-react'
 import KitchenJoinCreate from '@/components/KitchenJoinCreate'
 import { getSession } from '@/lib/supabase/server'
 import { KITCHEN_ROLES } from '@/lib/kitchens'
@@ -22,30 +22,28 @@ export default async function KitchensPage() {
 
   return (
     <>
-      <Header active="cucine" />
       <main className="narrow page" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <div>
-          <h1 className="h1">Gestione cucina</h1>
-          <p className="muted" style={{ fontSize: '.86rem', marginTop: 6 }}>
-            Ogni cucina ha la sua brigata e i suoi dati condivisi: giacenze, preparazioni e MEP, spesa e ordini, servizio, HACCP, food cost.
-          </p>
-        </div>
+        <header className="ph" style={{ marginBottom: 6 }}><div style={{ flex: 1, minWidth: 240 }}>
+          <h1 className="h1">Cucine</h1>
+          <p>Ogni cucina ha la sua brigata e i suoi dati condivisi: giacenze, preparazioni e MEP, spesa e ordini, servizio, HACCP, food cost.</p>
+        </div></header>
 
-        {(kitchens ?? []).length === 0 && <p className="empty">Non fai ancora parte di nessuna cucina.</p>}
+        {(kitchens ?? []).length === 0 && <div className="panel empty"><ChefHat size={28} strokeWidth={1.4} /><span className="dish">Nessuna cucina</span><p>Creane una qui sotto o entra con il codice che ti ha dato lo chef.</p></div>}
         {(kitchens ?? []).map((k: any) => {
           const st = (states ?? []).find((x: any) => x.kitchen_id === k.id) as any
           const n = (counts ?? []).filter((c: any) => c.kitchen_id === k.id).length
           return (
-            <div key={k.id} className="panel" style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', flexWrap: 'wrap' }}>
+            <div key={k.id} className="panel" style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '16px 18px', flexWrap: 'wrap' }}>
+              <span style={{ width: 44, height: 44, borderRadius: 12, display: 'grid', placeItems: 'center', background: 'var(--accent-soft)', color: 'var(--accent)' }}><ChefHat size={22} /></span>
               <div style={{ flex: 1, minWidth: 180 }}>
-                <p className="serif" style={{ fontStyle: 'italic', fontSize: '1.35rem' }}>{k.name}</p>
-                <p className="muted" style={{ fontSize: '.74rem' }}>
+                <p className="dish" style={{ fontSize: '1.4rem' }}>{k.name}</p>
+                <p className="muted small">
                   {label(roleOf.get(k.id) ?? '')} · {n} {n === 1 ? 'persona' : 'persone'}
                   {st?.version > 0 && ` · aggiornata ${new Date(st.updated_at).toLocaleString('it-IT', { dateStyle: 'short', timeStyle: 'short' })}`}
                 </p>
               </div>
-              <Link href={`/cucine/${k.id}`} className="btn btn-sm">Brigata e impostazioni</Link>
-              <Link href={`/cucine/${k.id}/app`} className="btn btn-gold">Apri ›</Link>
+              <Link href={`/cucine/${k.id}`} className="btn btn-sm"><Users size={15} /> Brigata e impostazioni</Link>
+              <Link href={`/cucine/${k.id}/app`} className="btn btn-gold">Apri la cucina <ChevronRight size={16} /></Link>
             </div>
           )
         })}

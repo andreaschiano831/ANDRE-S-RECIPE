@@ -90,6 +90,46 @@ const STORAGE_KEY = "kitchen-pro-v4";
    Impostato dal componente esterno prima del render.
    ════════════════════════════════════════════════════════ */
 let BRIDGE = null;
+
+/* Tema: Kitchen Pro usa i colori dell'app (variabili CSS del tema scelto) */
+function _hex(v, fb) {
+  v = (v || "").trim();
+  if (/^#[0-9a-f]{6}$/i.test(v)) return v;
+  if (/^#[0-9a-f]{3}$/i.test(v)) return "#" + v.slice(1).split("").map(c => c + c).join("");
+  return fb;
+}
+function _rgb(h) { const n = parseInt(h.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+function _rgba(h, a) { const [r, g, b] = _rgb(h); return `rgba(${r},${g},${b},${a})`; }
+function _mix(h, to, k) { const a = _rgb(h), b = _rgb(to); return "#" + a.map((x, i) => Math.round(x + (b[i] - x) * k).toString(16).padStart(2, "0")).join(""); }
+function _lum(h) { const [r, g, b] = _rgb(h); return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255; }
+function appTheme() {
+  if (typeof window === "undefined") return THEMES.carta;
+  const cs = getComputedStyle(document.documentElement);
+  const v = (n, fb) => _hex(cs.getPropertyValue(n), fb);
+  const paper = v("--paper", "#F7F2E8"), dark = _lum(paper) < 0.35;
+  const ink = v("--ink", "#1C2135"), accent = v("--accent", "#A47A2C"), nav = v("--nav", "#1C2135");
+  const primary = dark ? _mix(accent, "#000000", 0.38) : (_lum(nav) > 0.8 ? _mix(accent, "#000000", 0.15) : nav);
+  return {
+    name: "App", icon: "🎨",
+    bg: paper, bgAlt: v("--sunk", "#F2ECDF"), bgCard: v("--card", "#FFFDF8"), bgCardAlt: v("--paper-2", "#EFE7D7"), bgGlass: _rgba(paper, 0.9),
+    ink, inkSoft: v("--ink-2", "#4A4F63"), inkMuted: v("--muted", "#857F70"), inkFaint: v("--faint", "#B5AE9E"), inkGhost: v("--line-2", "#D4C7AE"),
+    accent: primary, accentDeep: _mix(primary, "#000000", 0.25), accentGlow: _rgba(accent, 0.14),
+    secondary: dark ? _mix(accent, "#000000", 0.5) : (_lum(nav) > 0.8 ? "#2E3A5C" : nav), secondaryDeep: dark ? _mix(accent, "#000000", 0.65) : _mix(_lum(nav) > 0.8 ? "#2E3A5C" : nav, "#000000", 0.3),
+    gold: accent, goldBright: _mix(accent, "#ffffff", 0.18), goldDim: _rgba(accent, 0.3), goldFaint: _rgba(accent, 0.1),
+    success: v("--ok", "#4E7458"), warning: v("--warn", "#B7791F"), danger: v("--danger", "#9B2C3F"),
+    div: _rgba(ink, 0.08), divStrong: _rgba(ink, 0.15),
+    shadow: dark ? "rgba(0,0,0,0.3)" : "rgba(28,33,53,0.06)", shadowStrong: dark ? "rgba(0,0,0,0.55)" : "rgba(28,33,53,0.14)", grain: 0,
+  };
+}
+function useAppTheme() {
+  const [t, setT] = useState(() => appTheme());
+  useEffect(() => {
+    const h = () => setT(appTheme());
+    h(); window.addEventListener("rc-theme", h);
+    return () => window.removeEventListener("rc-theme", h);
+  }, []);
+  return t;
+}
 const syncEmit = (status) => { try { window.dispatchEvent(new CustomEvent("kp-sync", { detail: status })); } catch {} };
 function stateFromData(data) {
   const b = BRIDGE;
@@ -9072,15 +9112,11 @@ function BridgeBar({ t, isMobile }) {
   const [st, setSt] = useState("saved");
   useEffect(() => { const h = (e) => setSt(e.detail); window.addEventListener("kp-sync", h); return () => window.removeEventListener("kp-sync", h); }, []);
   const col = st === "saved" ? t.success : st === "saving" ? t.warning : t.danger;
-  const lbl = st === "saved" ? "Sincronizzato" : st === "saving" ? "Salvataggio…" : "Offline: le modifiche restano sul telefono e partono appena torna la rete";
+  const lbl = st === "saved" ? "Sincronizzato" : st === "saving" ? "Salvataggio…" : "Offline, salvo appena torna la rete";
   return (
-    <div style={{display:"flex",alignItems:"center",gap:8,flexShrink:0}}>
-      <a href={BRIDGE.urls.home} title="Torna all'app" style={{display:"flex",alignItems:"center",justifyContent:"center",width:34,height:34,borderRadius:9,
-        border:`1px solid ${t.div}`,color:t.inkMuted,textDecoration:"none",fontSize:16}}>‹</a>
-      <a href={BRIDGE.urls.recipes} title="Ricettario" style={{display:isMobile?"none":"flex",alignItems:"center",gap:6,padding:"6px 12px",borderRadius:9,
-        border:`1px solid ${t.div}`,color:t.inkMuted,textDecoration:"none",fontFamily:"var(--mono)",fontSize:10}}>📖 Ricettario</a>
-      <span title={lbl} style={{width:9,height:9,borderRadius:"50%",background:col,boxShadow:`0 0 0 3px ${col}22`}}/>
-    </div>
+    <span title={lbl} style={{display:"inline-flex",alignItems:"center",gap:6,padding:"2px 10px 2px 8px",borderRadius:999,background:col+"18",color:col,fontSize:12,fontWeight:500}}>
+      <span style={{width:7,height:7,borderRadius:"50%",background:col}}/>{lbl}
+    </span>
   );
 }
 
@@ -9167,7 +9203,8 @@ function KitchenBridgeCard({ t }) {
 
 function KitchenProInner() {
   const [themeKey,    setThemeKey]    = useState(()=>{ const s=localStorage.getItem("kp-theme"); return s&&THEMES[s]?s:"carta"; });
-  const [section,     setSection]     = useState("dashboard");
+  const [section,     setSection]     = useState(() => (BRIDGE && BRIDGE.section) || "dashboard");
+  useEffect(() => { if (BRIDGE && BRIDGE.onSection) BRIDGE.onSection(section); }, [section]);
   const [ready,       setReady]       = useState(false);
   const [sideCollapsed,setSideCollapsed]= useState(false);
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
@@ -9182,7 +9219,7 @@ function KitchenProInner() {
   const [showImportAI,  setShowImportAI]  = useState(false);
   const [showDrawer,    setShowDrawer]    = useState(false);
   const isMobile = useIsMobile();
-  const t = THEMES[themeKey]||THEMES.carta;
+  const t = useAppTheme(); void themeKey;
   const { state, kitchen } = useK();
   const alertCount = selectAlertCritici(kitchen).length;
 
@@ -9215,7 +9252,7 @@ function KitchenProInner() {
       <style>{CSS(t)}</style>
 
       {/* Sidebar — nascosta su mobile */}
-      {!isMobile && <aside style={{
+      {false && !isMobile && <aside style={{
         width:sideCollapsed?68:240,background:`linear-gradient(180deg,${t.secondary},${t.secondaryDeep})`,
         display:"flex",flexDirection:"column",transition:"width 0.4s cubic-bezier(0.4,0,0.2,1)",
         position:"fixed",top:0,bottom:0,left:0,zIndex:20,
@@ -9318,7 +9355,7 @@ function KitchenProInner() {
       {/* Main */}
       <div style={{
         flex:1,
-        marginLeft:isMobile?0:(sideCollapsed?68:240),
+        marginLeft:0,
         transition:"margin-left 0.4s cubic-bezier(0.4,0,0.2,1)",
         display:"flex",flexDirection:"column",
         paddingBottom:isMobile?"calc(64px + env(safe-area-inset-bottom,0px))":0,
@@ -9329,20 +9366,22 @@ function KitchenProInner() {
           background:t.bgGlass,backdropFilter:"blur(20px)",
           borderBottom:`1px solid ${t.div}`,
           display:"flex",justifyContent:"space-between",alignItems:"center",
-          position:"sticky",top:0,zIndex:10,transition:"background 0.4s",
+          position:"relative",zIndex:10,transition:"background 0.4s",
           gap:12,
         }}>
-          <BridgeBar t={t} isMobile={isMobile}/>
           <div style={{minWidth:0,flex:1}}>
             <div style={{
-              fontSize:isMobile?16:22,fontWeight:600,
+              fontFamily:"var(--f-display)",fontWeight:500,display:isMobile?"none":"block",
+              fontSize:isMobile?16:30,
               letterSpacing:isMobile?"0.02em":"0.06em",
               color:t.ink,
               whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",
             }}>{SECTION_TITLE[section]}</div>
-            {!isMobile&&<div className="mono" style={{fontSize:9,color:t.inkFaint,letterSpacing:"0.1em",marginTop:3}}>
-              {kitchen?.name?.toUpperCase()||"—"} · {new Date().toLocaleDateString("it-IT",{weekday:"long",day:"2-digit",month:"long"})}
-            </div>}
+            <div style={{fontSize:13,color:t.inkMuted,marginTop:isMobile?0:4,display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
+              <span>{kitchen?.name||"—"}</span>
+              {!isMobile && <span>{new Date().toLocaleDateString("it-IT",{weekday:"long",day:"numeric",month:"long"})}</span>}
+              <BridgeBar t={t} isMobile={isMobile}/>
+            </div>
           </div>
           <div style={{display:"flex",alignItems:"center",gap:isMobile?8:18,flexShrink:0}}>
             <button onClick={()=>setShowExport(true)} style={{display:"flex",alignItems:"center",gap:5,padding:"6px 12px",borderRadius:9,border:`1px solid ${t.div}`,cursor:"pointer",background:t.bgCard,color:t.inkMuted,fontFamily:"var(--mono)",fontSize:9}}><span>⬇</span><span>{isMobile?"":"Export"}</span></button>
@@ -9396,8 +9435,8 @@ function KitchenProInner() {
         </main>
       </div>
 
-      {/* Bottom Nav + Drawer — mobile only */}
-      {isMobile&&(
+      {/* Bottom Nav + Drawer — sostituiti dalla barra dell'app */}
+      {false&&isMobile&&(
         <>
           {/* ── DRAWER ALTRO (slide-up) ── */}
           {showDrawer&&(
@@ -9690,8 +9729,9 @@ function BottomNav_UNUSED({ active, onChange, alertCount=0, t }) {
    ════════════════════════════════════════════════════════ */
 function CSS(t) {
   return `
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
-    :root { --serif:'Playfair Display',Georgia,serif; --mono:'JetBrains Mono',monospace; }
+    /* caratteri: quelli dell'app */
+    :root { --serif:var(--f-display); --mono:var(--f-ui); }
+    .kp-host .mono{letter-spacing:0!important;text-transform:none}
     *{margin:0;padding:0;box-sizing:border-box;}
     .mono{font-family:var(--mono);}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.25}}
@@ -9708,16 +9748,15 @@ function CSS(t) {
     input[type=date]::-webkit-calendar-picker-indicator{filter:${t.ink==="#151210"?"none":"invert(1)"};}
     /* ── MOBILE TOUCH ── */
     @media(max-width:768px){
-      aside{display:none!important;}
-      div[style*="marginLeft"]{margin-left:0!important;}
-      header{padding:12px 16px!important;}
+      .kp-host div[style*="marginLeft"]{margin-left:0!important;}
+      .kp-host header{padding:12px 16px!important;}
     }
-    button,a,[role=button]{min-height:44px;min-width:44px;}
+    .kp-host button,.kp-host [role=button]{min-height:40px;}
     .bottom-nav{position:fixed;bottom:0;left:0;right:0;}
     /* touch scrolling */
     *{-webkit-overflow-scrolling:touch;}
     /* no horizontal overflow */
-    body,html{overflow-x:hidden;max-width:100vw;}
+
     input,select{color-scheme:${t.bg.startsWith("#0")||t.bg.startsWith("#1")||t.bg.startsWith("#2")?"dark":"light"};}
     /* ── TOUCH & MOBILE ── */
     button,input,select,a{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}

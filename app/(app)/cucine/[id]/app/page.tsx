@@ -5,8 +5,8 @@ import { loadKitchen } from '@/lib/kitchens'
 
 export const dynamic = 'force-dynamic'
 
-export default async function KitchenAppPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
+export default async function KitchenAppPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ s?: string }> }) {
+  const [{ id }, { s: sec }] = await Promise.all([params, searchParams])
   const s = (await getSession())!
   const k = await loadKitchen(s.supabase, id, s.user.id)
   if (!k) notFound()
@@ -41,6 +41,7 @@ export default async function KitchenAppPage({ params }: { params: Promise<{ id:
       initialVersion={Number(state?.version ?? 0)}
       recipes={recipes}
       canManage={k.canManage}
+      section={sec ?? 'dashboard'}
     />
   )
 }

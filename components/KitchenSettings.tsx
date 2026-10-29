@@ -75,7 +75,7 @@ export default function KitchenSettings({ kitchen, members: initial, me, myRole,
           : <h1 className="h1">{kitchen.name}</h1>}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
           <span className="label">Codice invito</span>
-          <span className="sc gold" style={{ fontSize: '1.3rem', letterSpacing: '.3em' }}>{code}</span>
+          <span className="gold num" style={{ fontSize: '1.4rem', letterSpacing: '.25em', fontWeight: 600 }}>{code}</span>
           <button className="btn btn-sm" onClick={() => { navigator.clipboard?.writeText(code); show('Codice copiato', 'ok') }}>Copia</button>
           {canManage && <button className="btn btn-sm btn-ghost" onClick={regen}>Nuovo codice</button>}
         </div>

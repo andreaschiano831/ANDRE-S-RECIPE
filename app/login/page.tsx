@@ -40,16 +40,17 @@ function LoginForm() {
   }
 
   return (
-    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-      <form onSubmit={submit} className="panel panel-pad" style={{ width: '100%', maxWidth: 360, display: 'flex', flexDirection: 'column', gap: 14 }}>
-        <div style={{ textAlign: 'center' }}>
-          <p className="sc gold" style={{ fontSize: '.6rem', letterSpacing: '.4em' }}>{app.tagline}</p>
-          <h1 className="h1" style={{ marginTop: 6 }}>{app.name}</h1>
-          <div className="rule">✦ ✦ ✦</div>
-        </div>
+    <main className="login">
+      <section className="login-brand">
+        <p className="login-tag">{app.tagline}</p>
+        <h1 className="login-name">{app.name}</h1>
+        <p className="login-lead">Le ricette della brigata e la gestione della cucina, in un solo posto: dosi, passaggi, giacenze, MEP, HACCP.</p>
+      </section>
+      <form onSubmit={submit} className="login-form">
+        <h2 className="h2">{mode === 'in' ? 'Accedi' : 'Crea il tuo account'}</h2>
         {mode === 'up' && (
           <label className="field"><span className="label">Nome</span>
-            <input className="input" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" />
+            <input className="input" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" placeholder="Come ti chiama la brigata" />
           </label>
         )}
         <label className="field"><span className="label">Email</span>
@@ -57,14 +58,14 @@ function LoginForm() {
         </label>
         <label className="field"><span className="label">Password</span>
           <input className="input" type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)}
-            autoComplete={mode === 'in' ? 'current-password' : 'new-password'} />
+            autoComplete={mode === 'in' ? 'current-password' : 'new-password'} placeholder="Almeno 6 caratteri" />
         </label>
         {msg && <p className="err">{msg}</p>}
-        <button className="btn btn-gold" disabled={busy}>{busy ? '…' : mode === 'in' ? 'Accedi' : 'Crea account'}</button>
+        <button className="btn btn-gold btn-lg" disabled={busy}>{busy ? 'Un momento…' : mode === 'in' ? 'Accedi' : 'Crea account'}</button>
         <button type="button" className="btn btn-ghost btn-sm" onClick={() => { setMode(mode === 'in' ? 'up' : 'in'); setMsg('') }}>
-          {mode === 'in' ? 'Non hai un account? Registrati' : 'Hai già un account? Accedi'}
+          {mode === 'in' ? 'Prima volta qui? Crea un account' : 'Hai già un account? Accedi'}
         </button>
-        {mode === 'up' && <p className="muted" style={{ fontSize: '.72rem', textAlign: 'center' }}>Il primo account creato diventa amministratore. I successivi entrano in sola lettura finché l’admin non li promuove.</p>}
+        {mode === 'up' && <p className="muted small" style={{ textAlign: 'center' }}>Il primo account diventa amministratore. Gli altri entrano in sola lettura finché l’amministratore non li promuove.</p>}
       </form>
     </main>
   )

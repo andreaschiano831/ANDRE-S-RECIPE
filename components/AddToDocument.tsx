@@ -54,7 +54,7 @@ export default function AddToDocument({ recipeIds, dose: initialDose = 1, onClos
     <div className="modal-bg" onClick={(e) => e.target === e.currentTarget && onClose(false)}>
       <div className="modal">
         <h2 className="h2">Aggiungi a documento</h2>
-        <p className="sc muted" style={{ fontSize: '.6rem', margin: '4px 0 14px' }}>{recipeIds.length === 1 ? '1 ricetta' : `${recipeIds.length} ricette`}</p>
+        <p className="muted small" style={{ margin: '4px 0 14px' }}>{recipeIds.length === 1 ? '1 ricetta' : `${recipeIds.length} ricette`}</p>
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
           <span className="label">Dose da stampare</span>
@@ -75,7 +75,7 @@ export default function AddToDocument({ recipeIds, dose: initialDose = 1, onClos
             ))}
             <label className="opt">
               <input type="radio" name="doc" checked={choice === '__new'} onChange={() => setChoice('__new')} />
-              <span style={{ flex: 1 }}><b>+ Nuovo documento</b>
+              <span style={{ flex: 1 }}><b>Nuovo documento</b>
                 <input className="input" style={{ marginTop: 6 }} placeholder="Es. Carta dessert autunno" value={newName}
                   onFocus={() => setChoice('__new')} onChange={(e) => setNewName(e.target.value)} />
               </span>
@@ -85,7 +85,7 @@ export default function AddToDocument({ recipeIds, dose: initialDose = 1, onClos
         {err && <p className="err" style={{ marginTop: 10 }}>{err}</p>}
         <div style={{ display: 'flex', gap: 8, marginTop: 18 }}>
           <button className="btn" style={{ flex: 1 }} onClick={() => onClose(false)}>Annulla</button>
-          <button className="btn btn-gold" style={{ flex: 1 }} disabled={busy || docs === null} onClick={confirm}>{busy ? '…' : 'Aggiungi'}</button>
+          <button className="btn btn-gold" style={{ flex: 1 }} disabled={busy || docs === null} onClick={confirm}>{busy ? <span className="spin" /> : 'Aggiungi'}</button>
         </div>
       </div>
     </div>

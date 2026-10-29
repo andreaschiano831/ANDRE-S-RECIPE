@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation'
-import Header from '@/components/Header'
 import DocumentEditor from '@/components/DocumentEditor'
 import { getSession } from '@/lib/supabase/server'
 import { RECIPE_SELECT, sortParts, type Recipe } from '@/lib/recipes'
@@ -20,7 +19,6 @@ export default async function DocPage({ params }: { params: Promise<{ id: string
     .map((i: any) => ({ id: i.id as string, dose: Number(i.dose), recipe: sortParts(i.recipes as Recipe) }))
   return (
     <>
-      <Header active="documenti" />
       <main className="narrow page">
         <DocumentEditor doc={{ id: doc.id, name: doc.name, one_per_page: doc.one_per_page }} initialItems={items} appName={app?.name ?? 'Ricettario'} />
       </main>

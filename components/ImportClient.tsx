@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
+import { Camera, FileText, FileUp, Sparkles } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { CATEGORIES, draftToPayload, sectionLabel, type Book, type RecipeDraft, type Section } from '@/lib/recipes'
 import DraftFields from './DraftFields'
@@ -52,9 +53,9 @@ function toDraft(r: any, sections: Section[], source: 'ai_image' | 'ai_text'): R
   }
 }
 
-export default function ImportClient({ books, sections, groups, ingredientNames }: { books: Book[]; sections: Section[]; groups: string[]; ingredientNames: string[] }) {
+export default function ImportClient({ books, sections, groups, ingredientNames, initialTab = 'img' }: { books: Book[]; sections: Section[]; groups: string[]; ingredientNames: string[]; initialTab?: 'img' | 'text' }) {
   const { show, node } = useToast()
-  const [tab, setTab] = useState<'img' | 'text'>('img')
+  const [tab, setTab] = useState<'img' | 'text'>(initialTab)
   const [imgs, setImgs] = useState<Img[]>([])
   const [text, setText] = useState('')
   const [over, setOver] = useState(false)
@@ -72,8 +73,22 @@ export default function ImportClient({ books, sections, groups, ingredientNames 
         setImgs((x) => [...x, { id: crypto.randomUUID(), url, name: f.name }])
       } catch (e: any) { show(e.message, 'err') }
     }
-    const txt = files.find((f) => f.type.startsWith('text/') || f.name.endsWith('.txt'))
-    if (txt) { setText(await txt.text()); setTab('text') }
+    const docs = files.filter((f) => !f.type.startsWith('image/') && (/\.(txt|md|docx|doc)$/i.test(f.name) || f.type.startsWith('text/')))
+    const parts: string[] = []
+    for (const f of docs) {
+      try {
+        if (/\.docx$/i.test(f.name)) {
+          const mammoth = await import('mammoth')
+          const { value } = await mammoth.extractRawText({ arrayBuffer: await f.arrayBuffer() })
+          parts.push(value)
+        } else if (/\.doc$/i.test(f.name)) {
+          // il .doc esportato dal vecchio ricettario è HTML: togliamo i tag
+          const d = new DOMParser().parseFromString(await f.text(), 'text/html')
+          parts.push(d.body.innerText || d.body.textContent || '')
+        } else parts.push(await f.text())
+      } catch { show(`Non riesco a leggere ${f.name}`, 'err') }
+    }
+    if (parts.length) { setText((t) => [t.trim(), ...parts.map((x) => x.trim())].filter(Boolean).join('\n\n')); setTab('text') }
   }, [show])
 
   // Incolla uno screenshot direttamente con Ctrl/Cmd+V
@@ -149,8 +164,8 @@ export default function ImportClient({ books, sections, groups, ingredientNames 
       <section className="panel panel-pad" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
           <div className="tabs">
-            <button className={tab === 'img' ? 'on' : ''} onClick={() => setTab('img')}>📷 Screenshot / foto</button>
-            <button className={tab === 'text' ? 'on' : ''} onClick={() => setTab('text')}>📝 Testo</button>
+            <button className={tab === 'img' ? 'on' : ''} onClick={() => setTab('img')}><Camera size={15} /> Screenshot</button>
+            <button className={tab === 'text' ? 'on' : ''} onClick={() => setTab('text')}><FileText size={15} /> Testo o file</button>
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
             {books.length > 1 && (
@@ -170,8 +185,8 @@ export default function ImportClient({ books, sections, groups, ingredientNames 
             <label className={`drop ${over ? 'over' : ''}`}
               onDragOver={(e) => { e.preventDefault(); setOver(true) }} onDragLeave={() => setOver(false)}
               onDrop={(e) => { e.preventDefault(); setOver(false); addFiles(Array.from(e.dataTransfer.files)) }}>
-              <input type="file" accept="image/*" multiple hidden onChange={(e) => { addFiles(Array.from(e.target.files ?? [])); e.target.value = '' }} />
-              <div style={{ fontSize: '2rem' }}>📷</div>
+              <input type="file" accept="image/*,.txt,.docx,.doc" multiple hidden onChange={(e) => { addFiles(Array.from(e.target.files ?? [])); e.target.value = '' }} />
+              <Camera size={30} strokeWidth={1.4} color="var(--accent)" />
               <p className="serif" style={{ fontStyle: 'italic', fontSize: '1.1rem' }}>Tocca per scegliere, trascina qui, o premi Ctrl/⌘+V</p>
               <p className="muted" style={{ fontSize: '.72rem', marginTop: 4 }}>Screenshot di app, foto di quaderni, schede tecniche, pagine di libri</p>
             </label>
@@ -188,12 +203,18 @@ export default function ImportClient({ books, sections, groups, ingredientNames 
             )}
           </>
         ) : (
+          <>
+          <label className="btn btn-sm" style={{ alignSelf: 'flex-start' }}>
+            <FileUp size={15} /> Carica .docx o .txt
+            <input type="file" accept=".txt,.md,.docx,.doc,text/plain" multiple hidden onChange={(e) => { addFiles(Array.from(e.target.files ?? [])); e.target.value = '' }} />
+          </label>
           <textarea className="textarea" rows={10} value={text} onChange={(e) => setText(e.target.value)}
             placeholder={'Incolla qui una o più ricette…\n\nCREMA PASTICCERA\nLatte 1000 g\nZucchero 350 g\n…'} />
+          </>
         )}
 
         <button className="btn btn-gold" disabled={!!busy} onClick={analyse}>
-          {busy ? <><span className="spin" /> {busy}</> : '✨ Analizza con AI'}
+          {busy ? <><span className="spin" /> {busy}</> : <><Sparkles size={16} /> Analizza con AI</>}
         </button>
       </section>
 

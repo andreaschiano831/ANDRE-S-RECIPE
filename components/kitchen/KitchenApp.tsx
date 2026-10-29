@@ -20,6 +20,7 @@ type Props = {
   initialVersion: number
   recipes: KPRecipe[]
   canManage: boolean
+  section: string
 }
 
 type LegacyKitchen = { id: string; name: string; [k: string]: unknown }
@@ -61,6 +62,12 @@ export default function KitchenApp(p: Props) {
     initialData: data,
     initialVersion: version,
     recipes: p.recipes,
+    section: p.section,
+    // la sezione aperta dentro Kitchen Pro si riflette nell'indirizzo (e nella barra laterale dell'app)
+    onSection: (sec: string) => {
+      const u = new URL(window.location.href)
+      if (u.searchParams.get('s') !== sec) { u.searchParams.set('s', sec); window.history.replaceState(window.history.state, '', u) }
+    },
     urls: {
       home: '/cucine',
       settings: `/cucine/${p.kitchen.id}`,
@@ -146,5 +153,11 @@ export default function KitchenApp(p: Props) {
     )
   }
 
-  return <KitchenPro bridge={bridge} />
+  return <KitchenHost bridge={bridge} section={p.section} />
+}
+
+function KitchenHost({ bridge, section }: { bridge: unknown; section: string }) {
+  // un clic sulla barra laterale dell'app cambia sezione senza ricaricare la cucina
+  useEffect(() => { window.dispatchEvent(new CustomEvent('kp-nav', { detail: section })) }, [section])
+  return <div className="kp-host"><KitchenPro bridge={bridge} /></div>
 }

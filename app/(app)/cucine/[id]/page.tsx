@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import Header from '@/components/Header'
 import KitchenSettings from '@/components/KitchenSettings'
 import { getSession } from '@/lib/supabase/server'
 import { loadKitchen } from '@/lib/kitchens'
@@ -19,7 +18,6 @@ export default async function KitchenPage({ params }: { params: Promise<{ id: st
   ])
   return (
     <>
-      <Header active="cucine" />
       <main className="narrow page" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, flexWrap: 'wrap' }}>
           <Link href="/cucine" className="btn btn-ghost btn-sm">‹ Cucine</Link>

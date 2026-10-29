@@ -1,4 +1,5 @@
 'use client'
+import { ArrowDown, ArrowUp, Pencil, X } from 'lucide-react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
@@ -120,21 +121,21 @@ export default function BooksManager({ initialBooks, initialSections, counts }: 
                 ))}
                 <input type="color" value={b.color} onChange={(e) => updateBook(b.id, { color: e.target.value })} style={{ width: 26, height: 26, border: 'none', background: 'none' }} aria-label="Colore personalizzato" />
                 <span style={{ marginLeft: 'auto', display: 'flex', gap: 4 }}>
-                  <button className="icon-btn" disabled={i === 0} onClick={() => moveBook(i, -1)} aria-label="Su">↑</button>
-                  <button className="icon-btn" disabled={i === books.length - 1} onClick={() => moveBook(i, 1)} aria-label="Giù">↓</button>
+                  <button className="icon-btn" disabled={i === 0} onClick={() => moveBook(i, -1)} aria-label="Su"><ArrowUp size={15} /></button>
+                  <button className="icon-btn" disabled={i === books.length - 1} onClick={() => moveBook(i, 1)} aria-label="Giù"><ArrowDown size={15} /></button>
                   <button className="btn btn-sm btn-danger" onClick={() => deleteBook(b)}>Elimina</button>
                 </span>
               </div>
 
               <span className="label" style={{ marginTop: 6 }}>Sezioni</span>
               {secs.map((x, k) => (
-                <div key={x.id} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 10px', background: 'var(--ctrl)', borderRadius: 10 }}>
-                  <span className="serif" style={{ flex: 1, fontStyle: 'italic', fontSize: '1.05rem' }}>{x.name}</span>
+                <div key={x.id} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 10px', background: 'var(--sunk)', borderRadius: 10 }}>
+                  <span className="dish" style={{ flex: 1, fontSize: '1.05rem' }}>{x.name}</span>
                   <span className="muted" style={{ fontSize: '.72rem' }}>{counts[x.id] ?? 0}</span>
-                  <button className="icon-btn" onClick={() => renameSection(x)} aria-label="Rinomina">✎</button>
-                  <button className="icon-btn" disabled={k === 0} onClick={() => moveSection(b.id, k, -1)} aria-label="Su">↑</button>
-                  <button className="icon-btn" disabled={k === secs.length - 1} onClick={() => moveSection(b.id, k, 1)} aria-label="Giù">↓</button>
-                  <button className="icon-btn" onClick={() => deleteSection(x)} aria-label="Elimina">×</button>
+                  <button className="icon-btn" onClick={() => renameSection(x)} aria-label="Rinomina"><Pencil size={14} /></button>
+                  <button className="icon-btn" disabled={k === 0} onClick={() => moveSection(b.id, k, -1)} aria-label="Su"><ArrowUp size={15} /></button>
+                  <button className="icon-btn" disabled={k === secs.length - 1} onClick={() => moveSection(b.id, k, 1)} aria-label="Giù"><ArrowDown size={15} /></button>
+                  <button className="icon-btn" onClick={() => deleteSection(x)} aria-label="Elimina"><X size={15} /></button>
                 </div>
               ))}
               <div style={{ display: 'flex', gap: 6 }}>
