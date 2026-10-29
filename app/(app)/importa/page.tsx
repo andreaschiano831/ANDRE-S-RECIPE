@@ -13,7 +13,7 @@ export default async function ImportPage({ searchParams }: { searchParams: Promi
   if (!data.sections.length) redirect(s.isAdmin ? '/ricettari' : '/')
   return (
     <>
-      <main className="narrow page"><ImportClient {...data} initialTab={tab === 'text' ? 'text' : 'img'} /></main>
+      <main className="narrow page"><ImportClient {...data} initialTab={tab === 'text' || tab === 'link' ? tab : 'img'} isAdmin={s.isAdmin} /></main>
     </>
   )
 }

@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect, useMemo, useState } from 'react'
-import { BookOpen, ChefHat, Home, Menu, Plus, Search, Sparkles, PenLine, Camera, Library, Printer, Settings, Wrench } from 'lucide-react'
+import { BookOpen, ChefHat, Home, Menu, Plus, Search, Sparkles, PenLine, Camera, Library, Printer, Settings, Wrench, Globe } from 'lucide-react'
 import { KITCHEN_SECTIONS } from '@/lib/nav'
 import { APP_ICON, SECTION_ICON } from './icons'
 import CommandPalette from './CommandPalette'
@@ -126,6 +126,7 @@ function MobileBars({ appName, user, kitchens, onSearch }: { appName: string; us
                   <Link href="/ricette/nuova"><PenLine /> Scrivi una ricetta</Link>
                   <Link href="/importa"><Camera /> Da screenshot o foto</Link>
                   <Link href="/importa?tab=text"><Sparkles /> Da testo o file</Link>
+                  <Link href="/importa?tab=link"><Globe /> Da link (ricettari interi)</Link>
                 </div>
               </>
             ) : (

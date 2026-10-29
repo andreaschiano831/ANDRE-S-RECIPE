@@ -1,7 +1,8 @@
 'use client'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
-import { Camera, FileText, FileUp, Sparkles } from 'lucide-react'
+import { Camera, FileText, FileUp, Globe, Sparkles } from 'lucide-react'
+import LinkImport, { type Found } from './LinkImport'
 import { createClient } from '@/lib/supabase/client'
 import { CATEGORIES, draftToPayload, sectionLabel, type Book, type RecipeDraft, type Section } from '@/lib/recipes'
 import DraftFields from './DraftFields'
@@ -31,7 +32,7 @@ function shrink(file: File): Promise<string> {
   })
 }
 
-function toDraft(r: any, sections: Section[], source: 'ai_image' | 'ai_text'): RecipeDraft {
+export function toDraft(r: any, sections: Section[], source: 'ai_image' | 'ai_text'): RecipeDraft {
   const str = (v: any) => (v == null ? '' : String(v))
   const ings = (Array.isArray(r?.ingredients) ? r.ingredients : []).map((i: any) =>
     Array.isArray(i) ? { name: str(i[0]), quantity: str(i[1] ?? ''), unit: str(i[2] || 'g'), note: '' }
@@ -53,9 +54,11 @@ function toDraft(r: any, sections: Section[], source: 'ai_image' | 'ai_text'): R
   }
 }
 
-export default function ImportClient({ books, sections, groups, ingredientNames, initialTab = 'img' }: { books: Book[]; sections: Section[]; groups: string[]; ingredientNames: string[]; initialTab?: 'img' | 'text' }) {
+export default function ImportClient({ books: books0, sections: sections0, groups, ingredientNames, initialTab = 'img', isAdmin = false }: { books: Book[]; sections: Section[]; groups: string[]; ingredientNames: string[]; initialTab?: 'img' | 'text' | 'link'; isAdmin?: boolean }) {
+  const [books, setBooks] = useState(books0)
+  const [sections, setSections] = useState(sections0)
   const { show, node } = useToast()
-  const [tab, setTab] = useState<'img' | 'text'>(initialTab)
+  const [tab, setTab] = useState<'img' | 'text' | 'link'>(initialTab)
   const [imgs, setImgs] = useState<Img[]>([])
   const [text, setText] = useState('')
   const [over, setOver] = useState(false)
@@ -132,6 +135,14 @@ export default function ImportClient({ books, sections, groups, ingredientNames,
     show(`${found.length} ${found.length === 1 ? 'ricetta trovata' : 'ricette trovate'}: controlla e salva`, 'ok')
   }
 
+  function addFound(list: Found[]) {
+    setItems((x) => [...x, ...list.map(({ raw, section_id, source }) => {
+      const draft = toDraft({ ...raw, section_id }, [...sections, { id: section_id } as Section], source === 'manual' ? 'ai_text' : source)
+      draft.section_id = section_id
+      return { key: crypto.randomUUID(), draft, open: false, checked: true }
+    })])
+  }
+
   const patch = (key: string, p: Partial<Item>) => setItems((x) => x.map((it) => (it.key === key ? { ...it, ...p } : it)))
 
   async function saveOne(it: Item): Promise<boolean> {
@@ -158,7 +169,7 @@ export default function ImportClient({ books, sections, groups, ingredientNames,
     <>
       <h1 className="h1">Importa ricette</h1>
       <p className="muted" style={{ margin: '6px 0 18px', fontSize: '.88rem' }}>
-        Carica o incolla screenshot (anche più di uno), oppure incolla il testo. L’AI separa le preparazioni, divide il procedimento in passaggi e tu controlli tutto prima di salvare.
+        Da screenshot, testo, file o link a interi ricettari online. L’AI separa le preparazioni, divide il procedimento in passaggi e tu controlli tutto prima di salvare.
       </p>
 
       <section className="panel panel-pad" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -166,21 +177,24 @@ export default function ImportClient({ books, sections, groups, ingredientNames,
           <div className="tabs">
             <button className={tab === 'img' ? 'on' : ''} onClick={() => setTab('img')}><Camera size={15} /> Screenshot</button>
             <button className={tab === 'text' ? 'on' : ''} onClick={() => setTab('text')}><FileText size={15} /> Testo o file</button>
+            <button className={tab === 'link' ? 'on' : ''} onClick={() => setTab('link')}><Globe size={15} /> Da link</button>
           </div>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-            {books.length > 1 && (
+            {tab !== 'link' && books.length > 1 && (
               <select className="select" style={{ width: 'auto' }} value={bookId} onChange={(e) => { setBookId(e.target.value); setForceSection('') }} aria-label="Ricettario">
                 {books.map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
               </select>
             )}
-            <select className="select" style={{ width: 'auto' }} value={forceSection} onChange={(e) => setForceSection(e.target.value)} aria-label="Sezione">
+            {tab !== 'link' && <select className="select" style={{ width: 'auto' }} value={forceSection} onChange={(e) => setForceSection(e.target.value)} aria-label="Sezione">
               <option value="">Sezione: decide l’AI</option>
               {bookSections.map((x) => <option key={x.id} value={x.id}>Tutte in {x.name}</option>)}
-            </select>
+            </select>}
           </div>
         </div>
 
-        {tab === 'img' ? (
+        {tab === 'link' ? (
+          <LinkImport books={books} sections={sections} isAdmin={isAdmin} onBooks={setBooks} onSections={setSections} onFound={addFound} show={show} />
+        ) : tab === 'img' ? (
           <>
             <label className={`drop ${over ? 'over' : ''}`}
               onDragOver={(e) => { e.preventDefault(); setOver(true) }} onDragLeave={() => setOver(false)}
@@ -213,9 +227,9 @@ export default function ImportClient({ books, sections, groups, ingredientNames,
           </>
         )}
 
-        <button className="btn btn-gold" disabled={!!busy} onClick={analyse}>
+        {tab !== 'link' && <button className="btn btn-gold" disabled={!!busy} onClick={analyse}>
           {busy ? <><span className="spin" /> {busy}</> : <><Sparkles size={16} /> Analizza con AI</>}
-        </button>
+        </button>}
       </section>
 
       {items.length > 0 && (

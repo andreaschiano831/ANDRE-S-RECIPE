@@ -38,6 +38,7 @@ export default function CommandPalette({ onClose, user, kitchens }: {
     const base: Item[] = []
     if (user.canEdit) {
       base.push({ id: 'new', label: 'Nuova ricetta', group: 'Azioni', icon: PenLine, run: go('/ricette/nuova'), keywords: 'aggiungi scrivi crea' })
+      base.push({ id: 'imp-link', label: 'Importa un ricettario da link', group: 'Azioni', icon: Sparkles, run: go('/importa?tab=link'), keywords: 'url sito blog pdf web' })
       base.push({ id: 'imp', label: 'Importa da screenshot o testo', group: 'Azioni', icon: Sparkles, run: go('/importa'), keywords: 'foto ai groq file docx' })
     }
     base.push({ id: 'theme', label: 'Cambia tema', group: 'Azioni', icon: Palette, keywords: 'colori scuro chiaro', run: () => {
