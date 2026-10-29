@@ -1,0 +1,6743 @@
+[
+ {
+  "n": "Crema Frangipane",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Burro",
+    250,
+    "g"
+   ],
+   [
+    "Zucchero",
+    250,
+    "g"
+   ],
+   [
+    "Uova",
+    250,
+    "g"
+   ],
+   [
+    "Farina di mandorle",
+    250,
+    "g"
+   ],
+   [
+    "Farina 00",
+    60,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Pasta Frolla Classica",
+  "c": "Paste",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina",
+    1000,
+    "g"
+   ],
+   [
+    "Zucchero",
+    400,
+    "g"
+   ],
+   [
+    "Tuorli",
+    4,
+    "n°"
+   ],
+   [
+    "Uova",
+    2,
+    "n°"
+   ],
+   [
+    "Burro",
+    500,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Pasta Frolla Vegana",
+  "c": "Paste",
+  "s": "colazioni",
+  "i": [
+   [
+    "Margarina",
+    180,
+    "g"
+   ],
+   [
+    "Farina 00",
+    500,
+    "g"
+   ],
+   [
+    "Zucchero",
+    250,
+    "g"
+   ],
+   [
+    "Acqua",
+    75,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Pasta Frolla al Cacao",
+  "c": "Paste",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina 00",
+    150,
+    "g"
+   ],
+   [
+    "Zucchero",
+    80,
+    "g"
+   ],
+   [
+    "Farina di mandorle",
+    25,
+    "g"
+   ],
+   [
+    "Uova",
+    50,
+    "g"
+   ],
+   [
+    "Burro",
+    90,
+    "g"
+   ],
+   [
+    "Amido di mais",
+    40,
+    "g"
+   ],
+   [
+    "Cacao",
+    20,
+    "g"
+   ],
+   [
+    "Sale",
+    5,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Pasta Frolla Cacao e Caffè",
+  "c": "Paste",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina 00",
+    385,
+    "g"
+   ],
+   [
+    "Burro freddo",
+    230,
+    "g"
+   ],
+   [
+    "Farina di mandorle",
+    45,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    140,
+    "g"
+   ],
+   [
+    "Cacao",
+    15,
+    "g"
+   ],
+   [
+    "Caffè macinato",
+    15,
+    "g"
+   ],
+   [
+    "Sale Maldon",
+    2,
+    "g"
+   ],
+   [
+    "Uova",
+    90,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Pasta Frolla al Cioccolato",
+  "c": "Paste",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina frolla",
+    1050,
+    "g"
+   ],
+   [
+    "Burro",
+    300,
+    "g"
+   ],
+   [
+    "Cioccolato fondente",
+    360,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    300,
+    "g"
+   ],
+   [
+    "Uova",
+    6,
+    "n°"
+   ]
+  ]
+ },
+ {
+  "n": "Pasta Sfoglia all'Italiana",
+  "c": "Paste",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina 00 W280",
+    1250,
+    "g"
+   ],
+   [
+    "Burro 82%",
+    250,
+    "g"
+   ],
+   [
+    "Sale fino",
+    22,
+    "g"
+   ],
+   [
+    "Acqua",
+    550,
+    "g"
+   ],
+   [
+    "Burro sfoglia",
+    1000,
+    "g"
+   ]
+  ],
+  "p": "Pieghe 3/4/3"
+ },
+ {
+  "n": "Pasta Croissant",
+  "c": "Paste",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina",
+    1000,
+    "g"
+   ],
+   [
+    "Sale",
+    20,
+    "g"
+   ],
+   [
+    "Zucchero",
+    100,
+    "g"
+   ],
+   [
+    "Zucchero invertito",
+    15,
+    "g"
+   ],
+   [
+    "Lievito",
+    25,
+    "g"
+   ],
+   [
+    "Acqua fredda",
+    280,
+    "g"
+   ],
+   [
+    "Latte freddo",
+    200,
+    "g"
+   ],
+   [
+    "Burro",
+    250,
+    "g"
+   ],
+   [
+    "Burro sfoglia",
+    500,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Frolla Vegana (Grasso Cocco)",
+  "c": "Paste",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina",
+    1000,
+    "g"
+   ],
+   [
+    "Grasso n1",
+    500,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    330,
+    "g"
+   ],
+   [
+    "Panna vegetale",
+    150,
+    "g"
+   ],
+   [
+    "Acqua",
+    20,
+    "g"
+   ]
+  ],
+  "p": "Grasso n1: 500g grasso di cocco + 170g olio girasole + 170g burro di cacao + 160g acqua + 20g lecitina"
+ },
+ {
+  "n": "Crema Pasticciera",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    1000,
+    "g"
+   ],
+   [
+    "Zucchero",
+    350,
+    "g"
+   ],
+   [
+    "Tuorli",
+    6,
+    "n°"
+   ],
+   [
+    "Farina",
+    80,
+    "g"
+   ],
+   [
+    "Amido",
+    80,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Crema Pasticciera al Cioccolato 70%",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    1000,
+    "g"
+   ],
+   [
+    "Bacca vaniglia",
+    1,
+    "n°"
+   ],
+   [
+    "Zucchero semolato",
+    250,
+    "g"
+   ],
+   [
+    "Tuorli",
+    150,
+    "g"
+   ],
+   [
+    "Amido di riso",
+    40,
+    "g"
+   ],
+   [
+    "Sale",
+    1,
+    "g"
+   ],
+   [
+    "Cioccolato 70%",
+    400,
+    "g"
+   ]
+  ],
+  "p": "Procedere come crema pasticciera classica, fuori dal fuoco aggiungere il cioccolato"
+ },
+ {
+  "n": "Crema Pasticcera Ricca (congelamento)",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    750,
+    "g"
+   ],
+   [
+    "Panna 35%",
+    250,
+    "g"
+   ],
+   [
+    "Vaniglia",
+    2,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    300,
+    "g"
+   ],
+   [
+    "Tuorli",
+    400,
+    "g"
+   ],
+   [
+    "Amido di riso",
+    90,
+    "g"
+   ],
+   [
+    "Sale fino",
+    2,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Pasta Choux",
+  "c": "Paste",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    250,
+    "g"
+   ],
+   [
+    "Acqua",
+    250,
+    "g"
+   ],
+   [
+    "Burro",
+    220,
+    "g"
+   ],
+   [
+    "Farina",
+    275,
+    "g"
+   ],
+   [
+    "Zucchero",
+    10,
+    "g"
+   ],
+   [
+    "Sale",
+    5,
+    "g"
+   ],
+   [
+    "Uova",
+    550,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Craquelin",
+  "c": "Pasticcini",
+  "s": "colazioni",
+  "i": [
+   [
+    "Burro",
+    300,
+    "g"
+   ],
+   [
+    "Zucchero di canna",
+    370,
+    "g"
+   ],
+   [
+    "Farina",
+    370,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Brioche",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina panettone W400",
+    1000,
+    "g"
+   ],
+   [
+    "Burro",
+    200,
+    "g"
+   ],
+   [
+    "Zucchero",
+    150,
+    "g"
+   ],
+   [
+    "Miele",
+    50,
+    "g"
+   ],
+   [
+    "Sale",
+    20,
+    "g"
+   ],
+   [
+    "Acqua",
+    200,
+    "g"
+   ],
+   [
+    "Latte fresco",
+    250,
+    "g"
+   ],
+   [
+    "Lievito",
+    20,
+    "g"
+   ],
+   [
+    "Uova",
+    250,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Brioches Grande",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina Manitoba",
+    1000,
+    "g"
+   ],
+   [
+    "Burro",
+    250,
+    "g"
+   ],
+   [
+    "Zucchero",
+    200,
+    "g"
+   ],
+   [
+    "Latte",
+    500,
+    "g"
+   ],
+   [
+    "Lievito",
+    40,
+    "g"
+   ],
+   [
+    "Uova",
+    200,
+    "g"
+   ],
+   [
+    "Sale",
+    20,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Cornetto",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina 12/13% prot.",
+    1000,
+    "g"
+   ],
+   [
+    "Zucchero",
+    90,
+    "g"
+   ],
+   [
+    "Miele",
+    20,
+    "g"
+   ],
+   [
+    "Acqua",
+    300,
+    "g"
+   ],
+   [
+    "Latte",
+    200,
+    "g"
+   ],
+   [
+    "Lievito",
+    20,
+    "g"
+   ],
+   [
+    "Burro",
+    200,
+    "g"
+   ],
+   [
+    "Sale",
+    20,
+    "g"
+   ],
+   [
+    "Burro sfoglia",
+    500,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ],
+  "p": "Piega a 3 + riposo 30min, piega a 4, stendere e tagliare"
+ },
+ {
+  "n": "Cornetto all'Italiana",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina W300/350",
+    1000,
+    "g"
+   ],
+   [
+    "Lievito",
+    20,
+    "g"
+   ],
+   [
+    "Acqua",
+    360,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    200,
+    "g"
+   ],
+   [
+    "Malto in polvere",
+    20,
+    "g"
+   ],
+   [
+    "Uova intere",
+    250,
+    "g"
+   ],
+   [
+    "Burro 82%",
+    220,
+    "g"
+   ],
+   [
+    "Sale",
+    20,
+    "g"
+   ],
+   [
+    "Burro sfoglia express",
+    500,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ],
+  "p": "Puntare 1h a 26°C poi riposare in frigo a +4°C. 3 pieghe da 3"
+ },
+ {
+  "n": "Cornetto Vegano",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina sfoglia",
+    900,
+    "g"
+   ],
+   [
+    "Farina brioches",
+    200,
+    "g"
+   ],
+   [
+    "Acqua fredda",
+    500,
+    "g"
+   ],
+   [
+    "Margarina",
+    150,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    30,
+    "g"
+   ],
+   [
+    "Zucchero",
+    90,
+    "g"
+   ],
+   [
+    "Miele",
+    10,
+    "g"
+   ],
+   [
+    "Sale",
+    18,
+    "g"
+   ],
+   [
+    "Lievito",
+    20,
+    "g"
+   ],
+   [
+    "Margarina sfoglia",
+    500,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Cornetto Integrale",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina sfoglia",
+    750,
+    "g"
+   ],
+   [
+    "Farina integrale Caputo",
+    250,
+    "g"
+   ],
+   [
+    "Lievito",
+    20,
+    "g"
+   ],
+   [
+    "Zucchero",
+    110,
+    "g"
+   ],
+   [
+    "Acqua",
+    450,
+    "g"
+   ],
+   [
+    "Sale",
+    18,
+    "g"
+   ],
+   [
+    "Tuorli",
+    80,
+    "g"
+   ],
+   [
+    "Burro sfoglia express",
+    500,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Cornetto Fritto",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina nova",
+    1540,
+    "g"
+   ],
+   [
+    "Acqua",
+    220,
+    "g"
+   ],
+   [
+    "Albume",
+    250,
+    "g"
+   ],
+   [
+    "Zucchero",
+    230,
+    "g"
+   ],
+   [
+    "Burro",
+    120,
+    "g"
+   ],
+   [
+    "Lievito di birra",
+    30,
+    "g"
+   ],
+   [
+    "Sale",
+    28,
+    "g"
+   ],
+   [
+    "Latte",
+    250,
+    "g"
+   ],
+   [
+    "Burro sfoglia",
+    500,
+    "g"
+   ]
+  ],
+  "p": "Dare una piega a 3 e una a 4"
+ },
+ {
+  "n": "Cornetto Salato",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina sfoglia",
+    1000,
+    "g"
+   ],
+   [
+    "Acqua",
+    450,
+    "g"
+   ],
+   [
+    "Panna",
+    100,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    40,
+    "g"
+   ],
+   [
+    "Parmigiano",
+    100,
+    "g"
+   ],
+   [
+    "Sale",
+    25,
+    "g"
+   ],
+   [
+    "Lievito",
+    30,
+    "g"
+   ],
+   [
+    "Zucchero",
+    80,
+    "g"
+   ],
+   [
+    "Pepe",
+    null,
+    "q.b."
+   ],
+   [
+    "Malto",
+    5,
+    "g"
+   ],
+   [
+    "Burro sfoglia",
+    500,
+    "g"
+   ]
+  ],
+  "p": "Chiusura + 1 piega a 4 + 1 piega a 3"
+ },
+ {
+  "n": "Croissant più Sfogliato",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina",
+    1000,
+    "g"
+   ],
+   [
+    "Lievito di birra",
+    25,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    100,
+    "g"
+   ],
+   [
+    "Burro",
+    100,
+    "g"
+   ],
+   [
+    "Sale",
+    25,
+    "g"
+   ],
+   [
+    "Acqua",
+    500,
+    "g"
+   ],
+   [
+    "Burro sfoglia",
+    500,
+    "g"
+   ]
+  ],
+  "p": "Piega da 3/4"
+ },
+ {
+  "n": "Pasta Colorata Cornetti",
+  "c": "Paste",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina W330",
+    825,
+    "g"
+   ],
+   [
+    "Burro",
+    90,
+    "g"
+   ],
+   [
+    "Olio girasole",
+    75,
+    "g"
+   ],
+   [
+    "Acqua",
+    390,
+    "g"
+   ],
+   [
+    "Colorante",
+    null,
+    "q.b."
+   ]
+  ],
+  "p": "Far riposare 12 ore prima dell'uso. 5kg pasta cornetto = 1kg pasta colorata. Per cacao: 275g farina + 25g cacao + 30g burro + 27g olio + 140g acqua"
+ },
+ {
+  "n": "Krapfen / Bombolone",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina forte",
+    600,
+    "g"
+   ],
+   [
+    "Farina frolla",
+    150,
+    "g"
+   ],
+   [
+    "Lievito di birra",
+    30,
+    "g"
+   ],
+   [
+    "Miele",
+    15,
+    "g"
+   ],
+   [
+    "Zucchero",
+    50,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    150,
+    "g"
+   ],
+   [
+    "Sale",
+    12,
+    "g"
+   ],
+   [
+    "Burro",
+    150,
+    "g"
+   ],
+   [
+    "Latte",
+    375,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Bombolone / Graffa",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina buonpane",
+    1000,
+    "g"
+   ],
+   [
+    "Patata lessa",
+    500,
+    "g"
+   ],
+   [
+    "Lievito fresco",
+    25,
+    "g"
+   ],
+   [
+    "Latte",
+    200,
+    "g"
+   ],
+   [
+    "Uova",
+    250,
+    "g"
+   ],
+   [
+    "Burro",
+    180,
+    "g"
+   ],
+   [
+    "Sale",
+    18,
+    "g"
+   ],
+   [
+    "Vaniglia e aromi",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Bignè Fritto",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Acqua",
+    250,
+    "g"
+   ],
+   [
+    "Latte",
+    125,
+    "g"
+   ],
+   [
+    "Sale",
+    4,
+    "g"
+   ],
+   [
+    "Burro",
+    125,
+    "g"
+   ],
+   [
+    "Farina",
+    250,
+    "g"
+   ],
+   [
+    "Uova",
+    300,
+    "g"
+   ],
+   [
+    "Zucchero",
+    15,
+    "g"
+   ],
+   [
+    "Baking",
+    4,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Baguette",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Petra 1",
+    650,
+    "g"
+   ],
+   [
+    "Buonpane",
+    150,
+    "g"
+   ],
+   [
+    "Mix cereal",
+    100,
+    "g"
+   ],
+   [
+    "Acqua",
+    540,
+    "g"
+   ],
+   [
+    "Malto",
+    20,
+    "g"
+   ],
+   [
+    "Lievito liquido",
+    200,
+    "g"
+   ],
+   [
+    "Acqua (2ª ripresa)",
+    160,
+    "g"
+   ],
+   [
+    "Noci",
+    150,
+    "g"
+   ],
+   [
+    "Uvetta",
+    50,
+    "g"
+   ]
+  ],
+  "p": "Ferma macchina almeno 30 minuti. Aggiungere lievito liquido e acqua in 3 volte vel. 3"
+ },
+ {
+  "n": "Pane Ticciano",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Lievito madre liquido",
+    1000,
+    "g"
+   ],
+   [
+    "Buonpane",
+    1000,
+    "g"
+   ],
+   [
+    "Farina sfoglia",
+    400,
+    "g"
+   ],
+   [
+    "Petra 5",
+    1000,
+    "g"
+   ],
+   [
+    "Miglioratore",
+    36,
+    "g"
+   ],
+   [
+    "Malto",
+    48,
+    "g"
+   ],
+   [
+    "Sale",
+    75,
+    "g"
+   ],
+   [
+    "Lievito birra",
+    14,
+    "g"
+   ],
+   [
+    "Acqua",
+    1250,
+    "g"
+   ]
+  ],
+  "p": "Impastare farina + 2/3 acqua + lievito madre 10min, aggiungere ultima acqua + sale 7min. 3 pieghe a 30min. Spezzare 225g, lievitare 24h frigo. Infornare 230° 100% umidità 8min, poi 200° 0% umidità 8min"
+ },
+ {
+  "n": "Taralli Ticciano",
+  "c": "Altro",
+  "s": "colazioni",
+  "i": [
+   [
+    "Petra 5",
+    500,
+    "g"
+   ],
+   [
+    "Vino bianco",
+    180,
+    "g"
+   ],
+   [
+    "Olio",
+    175,
+    "g"
+   ],
+   [
+    "Sale",
+    10,
+    "g"
+   ],
+   [
+    "Finocchietto",
+    12.5,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Casatiello",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina",
+    3000,
+    "g"
+   ],
+   [
+    "Farina sfoglia",
+    600,
+    "g"
+   ],
+   [
+    "Sugna",
+    1200,
+    "g"
+   ],
+   [
+    "Sale",
+    120,
+    "g"
+   ],
+   [
+    "Lievito",
+    270,
+    "g"
+   ],
+   [
+    "Zucchero",
+    60,
+    "g"
+   ],
+   [
+    "Uova",
+    6,
+    "n°"
+   ],
+   [
+    "Latte",
+    1800,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Torta Paradiso",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Burro",
+    168,
+    "g"
+   ],
+   [
+    "Zucchero",
+    243,
+    "g"
+   ],
+   [
+    "Uova",
+    112,
+    "g"
+   ],
+   [
+    "Limoncello + aromi + sale",
+    15,
+    "g"
+   ],
+   [
+    "Fecola",
+    75,
+    "g"
+   ],
+   [
+    "Farina di riso",
+    125,
+    "g"
+   ],
+   [
+    "Tuorli",
+    62.5,
+    "g"
+   ],
+   [
+    "Farina di mandorle",
+    150,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Caprese Cioccolato",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Albume",
+    100,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    75,
+    "g"
+   ],
+   [
+    "Farina di mandorle",
+    450,
+    "g"
+   ],
+   [
+    "Burro",
+    300,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    200,
+    "g"
+   ],
+   [
+    "Cacao",
+    50,
+    "g"
+   ],
+   [
+    "Uova intere",
+    5,
+    "n°"
+   ],
+   [
+    "Tuorlo",
+    1,
+    "n°"
+   ]
+  ],
+  "p": "Montare albume con zucchero. Montare burro+zucchero a velo, aggiungere uova poi polveri. Incorporare la meringa"
+ },
+ {
+  "n": "Caprese Limone",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Burro",
+    500,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    500,
+    "g"
+   ],
+   [
+    "Limoncello",
+    50,
+    "g"
+   ],
+   [
+    "Limoni",
+    3,
+    "n°"
+   ],
+   [
+    "Fecola di patate",
+    125,
+    "g"
+   ],
+   [
+    "Farina di mandorle",
+    500,
+    "g"
+   ],
+   [
+    "Uova",
+    5,
+    "n°"
+   ]
+  ],
+  "p": "Montare burro con zucchero, aggiungere uova, polveri, aromi"
+ },
+ {
+  "n": "Torta Camilla",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Burro",
+    160,
+    "g"
+   ],
+   [
+    "Zucchero",
+    300,
+    "g"
+   ],
+   [
+    "Uova",
+    6,
+    "n°"
+   ],
+   [
+    "Baking",
+    30,
+    "g"
+   ],
+   [
+    "Farina di riso",
+    300,
+    "g"
+   ],
+   [
+    "Carote tritate",
+    600,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    50,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Torta Paradiso Grande",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Burro",
+    675,
+    "g"
+   ],
+   [
+    "Zucchero",
+    975,
+    "g"
+   ],
+   [
+    "Uova",
+    450,
+    "g"
+   ],
+   [
+    "Tuorli",
+    250,
+    "g"
+   ],
+   [
+    "Farina di riso (1)",
+    300,
+    "g"
+   ],
+   [
+    "Farina di riso (2)",
+    515,
+    "g"
+   ],
+   [
+    "Farina di mandorle",
+    600,
+    "g"
+   ],
+   [
+    "Limoni",
+    5,
+    "n°"
+   ],
+   [
+    "Limoncello",
+    60,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Ciambellone",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Acqua",
+    200,
+    "g"
+   ],
+   [
+    "Burro",
+    400,
+    "g"
+   ],
+   [
+    "Sale",
+    20,
+    "g"
+   ],
+   [
+    "Farina",
+    600,
+    "g"
+   ],
+   [
+    "Uova",
+    11,
+    "n°"
+   ],
+   [
+    "Zucchero a velo",
+    600,
+    "g"
+   ],
+   [
+    "Baking",
+    30,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Ciambellone Gocce Cioccolato",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Uova",
+    8,
+    "n°"
+   ],
+   [
+    "Zucchero",
+    450,
+    "g"
+   ],
+   [
+    "Olio",
+    240,
+    "g"
+   ],
+   [
+    "Yogurt bianco",
+    360,
+    "g"
+   ],
+   [
+    "Farina",
+    600,
+    "g"
+   ],
+   [
+    "Baking",
+    30,
+    "g"
+   ],
+   [
+    "Sale",
+    4,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Pancake",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    1000,
+    "g"
+   ],
+   [
+    "Zucchero",
+    120,
+    "g"
+   ],
+   [
+    "Olio di semi",
+    120,
+    "g"
+   ],
+   [
+    "Farina 00",
+    800,
+    "g"
+   ],
+   [
+    "Baking",
+    20,
+    "g"
+   ],
+   [
+    "Sale",
+    5,
+    "g"
+   ],
+   [
+    "Uova",
+    8,
+    "n°"
+   ]
+  ]
+ },
+ {
+  "n": "Plumcake al Limone",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Tuorli",
+    420,
+    "g"
+   ],
+   [
+    "Zucchero",
+    600,
+    "g"
+   ],
+   [
+    "Farina",
+    360,
+    "g"
+   ],
+   [
+    "Baking",
+    10,
+    "g"
+   ],
+   [
+    "Panna",
+    300,
+    "g"
+   ],
+   [
+    "Burro fuso",
+    175,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Migliaccio",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    500,
+    "g"
+   ],
+   [
+    "Acqua",
+    400,
+    "g"
+   ],
+   [
+    "Burro",
+    50,
+    "g"
+   ],
+   [
+    "Semolino",
+    180,
+    "g"
+   ],
+   [
+    "Uova",
+    4,
+    "n°"
+   ],
+   [
+    "Zucchero",
+    250,
+    "g"
+   ],
+   [
+    "Ricotta",
+    250,
+    "g"
+   ],
+   [
+    "Aromi arancia e limone",
+    null,
+    "q.b."
+   ]
+  ],
+  "p": "Bollire latte, acqua, aromi e burro, aggiungere semolino. Mescolare zucchero+uova+ricotta, unire crema semolino. Forno ventilato 165° per 1h"
+ },
+ {
+  "n": "Financier",
+  "c": "Pasticcini",
+  "s": "colazioni",
+  "i": [
+   [
+    "Zucchero a velo",
+    1000,
+    "g"
+   ],
+   [
+    "Albume",
+    625,
+    "g"
+   ],
+   [
+    "Albumina",
+    2,
+    "g"
+   ],
+   [
+    "Farina di mandorle",
+    250,
+    "g"
+   ],
+   [
+    "Farina di nocciole",
+    250,
+    "g"
+   ],
+   [
+    "Farina celiaca",
+    125,
+    "g"
+   ],
+   [
+    "Cacao",
+    125,
+    "g"
+   ],
+   [
+    "Burro nocciola",
+    500,
+    "g"
+   ],
+   [
+    "Sale",
+    10,
+    "g"
+   ],
+   [
+    "Cioccolato fondente 70%",
+    200,
+    "g"
+   ]
+  ],
+  "p": "Montare albume, albumina e zucchero a velo. Sciogliere burro nocciola e cioccolato. Incorporare farine con marisa, aggiungere burro e cioccolato sciolti"
+ },
+ {
+  "n": "Sablé al Caffè",
+  "c": "Pasticcini",
+  "s": "colazioni",
+  "i": [
+   [
+    "Burro",
+    360,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    280,
+    "g"
+   ],
+   [
+    "Farina",
+    720,
+    "g"
+   ],
+   [
+    "Sale",
+    5,
+    "g"
+   ],
+   [
+    "Uova",
+    2,
+    "n°"
+   ],
+   [
+    "Caffè solubile",
+    10,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Lemon Tarte",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Succo di limone",
+    270,
+    "g"
+   ],
+   [
+    "Agar agar",
+    5,
+    "g"
+   ],
+   [
+    "Zucchero",
+    270,
+    "g"
+   ],
+   [
+    "Uova intere",
+    270,
+    "g"
+   ],
+   [
+    "Burro",
+    350,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Cremoso Caffè e Cioccolato",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Tuorli",
+    500,
+    "g"
+   ],
+   [
+    "Latte",
+    1000,
+    "g"
+   ],
+   [
+    "Panna",
+    1000,
+    "g"
+   ],
+   [
+    "Cioccolato fondente",
+    1400,
+    "g"
+   ],
+   [
+    "Chicchi di caffè",
+    300,
+    "g"
+   ],
+   [
+    "Caffè solubile",
+    80,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Cremoso Frutta (Ruby)",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Purée di frutta",
+    250,
+    "g"
+   ],
+   [
+    "Panna",
+    500,
+    "g"
+   ],
+   [
+    "Burro di cacao",
+    120,
+    "g"
+   ],
+   [
+    "Cioccolato ruby",
+    350,
+    "g"
+   ],
+   [
+    "Glucosio",
+    40,
+    "g"
+   ],
+   [
+    "Gelatina in fogli",
+    5,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Cremoso Cioccolato Fondente",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    250,
+    "g"
+   ],
+   [
+    "Panna",
+    250,
+    "g"
+   ],
+   [
+    "Cioccolato fondente",
+    300,
+    "g"
+   ],
+   [
+    "Zucchero",
+    90,
+    "g"
+   ],
+   [
+    "Tuorli",
+    90,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Cremoso Caramello",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Zucchero",
+    220,
+    "g"
+   ],
+   [
+    "Acqua caramello",
+    50,
+    "g"
+   ],
+   [
+    "Acqua (x sciogliere)",
+    100,
+    "g"
+   ],
+   [
+    "Panna",
+    625,
+    "g"
+   ],
+   [
+    "Cioccolato bianco",
+    330,
+    "g"
+   ],
+   [
+    "Gelatina",
+    4,
+    "g"
+   ],
+   [
+    "Burro di cacao",
+    50,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Crema Montata Nocciola",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Panna",
+    500,
+    "g"
+   ],
+   [
+    "Zucchero",
+    100,
+    "g"
+   ],
+   [
+    "Sale",
+    1.5,
+    "g"
+   ],
+   [
+    "Tuorli",
+    80,
+    "g"
+   ],
+   [
+    "Pasta nocciola",
+    100,
+    "g"
+   ],
+   [
+    "Gelatina",
+    4,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Flan al Cioccolato",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    700,
+    "g"
+   ],
+   [
+    "Cioccolato fondente",
+    150,
+    "g"
+   ],
+   [
+    "Amido di mais",
+    55,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    150,
+    "g"
+   ],
+   [
+    "Panna",
+    155,
+    "g"
+   ],
+   [
+    "Tuorli",
+    150,
+    "g"
+   ],
+   [
+    "Burro",
+    90,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Flan Limone",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    500,
+    "g"
+   ],
+   [
+    "Succo di limone ridotto",
+    150,
+    "g"
+   ],
+   [
+    "Amido di mais",
+    60,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    150,
+    "g"
+   ],
+   [
+    "Tuorli",
+    150,
+    "g"
+   ],
+   [
+    "Panna",
+    160,
+    "g"
+   ],
+   [
+    "Burro",
+    90,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Crema Pasticcera al Riso",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    1000,
+    "g"
+   ],
+   [
+    "Zucchero",
+    280,
+    "g"
+   ],
+   [
+    "Tuorli",
+    300,
+    "g"
+   ],
+   [
+    "Farina di riso",
+    80,
+    "g"
+   ],
+   [
+    "Maizena",
+    80,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Cremoso al Latte di Bufala",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    200,
+    "g"
+   ],
+   [
+    "Glucosio",
+    10,
+    "g"
+   ],
+   [
+    "Panna",
+    400,
+    "g"
+   ],
+   [
+    "Cioccolato bianco",
+    375,
+    "g"
+   ],
+   [
+    "Gelatina in fogli",
+    6,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Glassa Lucida",
+  "c": "Altro",
+  "s": "colazioni",
+  "i": [
+   [
+    "Acqua",
+    300,
+    "g"
+   ],
+   [
+    "Destrosio",
+    200,
+    "g"
+   ],
+   [
+    "Zucchero",
+    300,
+    "g"
+   ],
+   [
+    "Latte condensato",
+    250,
+    "g"
+   ],
+   [
+    "Gelatina",
+    10,
+    "g"
+   ],
+   [
+    "Cioccolato bianco",
+    300,
+    "g"
+   ],
+   [
+    "Burro di cacao",
+    140,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Glassa Panbrioche / Panettone",
+  "c": "Altro",
+  "s": "colazioni",
+  "i": [
+   [
+    "Zucchero",
+    1500,
+    "g"
+   ],
+   [
+    "Farina di mandorle",
+    412,
+    "g"
+   ],
+   [
+    "Farina di nocciole",
+    150,
+    "g"
+   ],
+   [
+    "Albume",
+    405,
+    "g"
+   ],
+   [
+    "Maizena",
+    75,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Lucido Croissant",
+  "c": "Altro",
+  "s": "colazioni",
+  "i": [
+   [
+    "Zucchero",
+    350,
+    "g"
+   ],
+   [
+    "Acqua",
+    250,
+    "g"
+   ],
+   [
+    "Glucosio",
+    50,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Cornetti — Doratura",
+  "c": "Altro",
+  "s": "colazioni",
+  "i": [
+   [
+    "Albume",
+    125,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    300,
+    "g"
+   ],
+   [
+    "Panna",
+    75,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Marmellata Mela Verde, Finocchi e Lime",
+  "c": "Marmellate",
+  "s": "colazioni",
+  "i": [
+   [
+    "Finocchi",
+    325,
+    "g"
+   ],
+   [
+    "Mela verde a cubetti",
+    750,
+    "g"
+   ],
+   [
+    "Zucchero",
+    500,
+    "g"
+   ],
+   [
+    "Buccia di lime",
+    5,
+    "g"
+   ],
+   [
+    "Succo di lime",
+    35,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Marmellata Arance, Carote e Cannella",
+  "c": "Marmellate",
+  "s": "colazioni",
+  "i": [
+   [
+    "Carote grattugiate",
+    150,
+    "g"
+   ],
+   [
+    "Arancia a vivo",
+    90,
+    "g"
+   ],
+   [
+    "Succo di arancia",
+    30,
+    "g"
+   ],
+   [
+    "Zucchero",
+    100,
+    "g"
+   ],
+   [
+    "Cannella",
+    2,
+    "bastoncini"
+   ]
+  ]
+ },
+ {
+  "n": "Marmellata di Limoni",
+  "c": "Marmellate",
+  "s": "colazioni",
+  "i": [
+   [
+    "Limoni",
+    6,
+    "n°"
+   ],
+   [
+    "Zucchero",
+    200,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Compotte di Mela",
+  "c": "Marmellate",
+  "s": "colazioni",
+  "i": [
+   [
+    "Mele",
+    3000,
+    "g"
+   ],
+   [
+    "Zucchero di canna",
+    300,
+    "g"
+   ],
+   [
+    "Burro",
+    150,
+    "g"
+   ],
+   [
+    "Vaniglia",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Crostata Carruba — Frolla",
+  "c": "Paste",
+  "s": "colazioni",
+  "i": [
+   [
+    "Margarina",
+    180,
+    "g"
+   ],
+   [
+    "Farina frolla",
+    450,
+    "g"
+   ],
+   [
+    "Zucchero",
+    250,
+    "g"
+   ],
+   [
+    "Acqua",
+    75,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Crostata Carruba — Marmellata Arancia",
+  "c": "Marmellate",
+  "s": "colazioni",
+  "i": [
+   [
+    "Succo d'arancia",
+    400,
+    "g"
+   ],
+   [
+    "Arance a vivo",
+    200,
+    "g"
+   ],
+   [
+    "Zucchero",
+    80,
+    "g"
+   ],
+   [
+    "Pectina NH",
+    6,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Madeleine Arancia e Corbezzoli",
+  "c": "Pasticcini",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina",
+    540,
+    "g"
+   ],
+   [
+    "Burro",
+    450,
+    "g"
+   ],
+   [
+    "Zucchero",
+    420,
+    "g"
+   ],
+   [
+    "Latte",
+    150,
+    "g"
+   ],
+   [
+    "Uova",
+    9,
+    "n°"
+   ],
+   [
+    "Buccia d'arancia",
+    2,
+    "n°"
+   ],
+   [
+    "Bacca vaniglia",
+    1,
+    "n°"
+   ],
+   [
+    "Olio semi",
+    45,
+    "g"
+   ],
+   [
+    "Baking",
+    3,
+    "g"
+   ],
+   [
+    "Marmellata corbezzoli",
+    150,
+    "g"
+   ]
+  ],
+  "p": "Per 60 madeleine"
+ },
+ {
+  "n": "Cannoli — Pasta",
+  "c": "Pasticcini",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina frolla",
+    1000,
+    "g"
+   ],
+   [
+    "Farina sfoglia",
+    500,
+    "g"
+   ],
+   [
+    "Zucchero",
+    220,
+    "g"
+   ],
+   [
+    "Burro",
+    150,
+    "g"
+   ],
+   [
+    "Sale",
+    20,
+    "g"
+   ],
+   [
+    "Miele",
+    16,
+    "g"
+   ],
+   [
+    "Cacao",
+    14,
+    "g"
+   ],
+   [
+    "Marsala",
+    480,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Cannoli — Ricotta",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Ricotta",
+    1000,
+    "g"
+   ],
+   [
+    "Zucchero",
+    400,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Sfogliatella Frolla — Ripieno",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Acqua",
+    500,
+    "g"
+   ],
+   [
+    "Sale",
+    10,
+    "g"
+   ],
+   [
+    "Semola",
+    175,
+    "g"
+   ],
+   [
+    "Vaniglia",
+    null,
+    "q.b."
+   ],
+   [
+    "Cannella",
+    null,
+    "q.b."
+   ],
+   [
+    "Zucchero",
+    400,
+    "g"
+   ],
+   [
+    "Ricotta",
+    500,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Ripieno Sfogliatella Grande",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Acqua",
+    750,
+    "g"
+   ],
+   [
+    "Sale",
+    15,
+    "g"
+   ],
+   [
+    "Semolino",
+    240,
+    "g"
+   ],
+   [
+    "Ricotta",
+    450,
+    "g"
+   ],
+   [
+    "Zucchero",
+    300,
+    "g"
+   ],
+   [
+    "Arancia candita",
+    300,
+    "g"
+   ],
+   [
+    "Uova",
+    2,
+    "n°"
+   ]
+  ]
+ },
+ {
+  "n": "Cannelé",
+  "c": "Pasticcini",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    1000,
+    "g"
+   ],
+   [
+    "Uova",
+    200,
+    "g"
+   ],
+   [
+    "Tuorli",
+    80,
+    "g"
+   ],
+   [
+    "Zucchero",
+    500,
+    "g"
+   ],
+   [
+    "Farina",
+    200,
+    "g"
+   ],
+   [
+    "Burro",
+    100,
+    "g"
+   ],
+   [
+    "Rum",
+    100,
+    "g"
+   ]
+  ],
+  "p": "Bollire latte+zucchero+burro, infusionare vaniglia. Mescolare farina+sale, unire liquido a 45°. Aggiungere uova+tuorli poi rum. Riposare almeno 1 giorno. Stampo grande: 70g, 180° 45min. Stampo piccolo: 30g, 190° 35min vent. 3"
+ },
+ {
+  "n": "Panettone — Primo Impasto",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina W360",
+    3200,
+    "g"
+   ],
+   [
+    "Zucchero",
+    1000,
+    "g"
+   ],
+   [
+    "Burro",
+    1000,
+    "g"
+   ],
+   [
+    "Acqua",
+    1650,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    550,
+    "g"
+   ],
+   [
+    "Lievito madre",
+    800,
+    "g"
+   ],
+   [
+    "Malto",
+    40,
+    "g"
+   ],
+   [
+    "Sale",
+    6,
+    "g"
+   ]
+  ],
+  "p": "Sciogliere zucchero in acqua calda 1h prima. Unire malto e lievito, asciugare, aggiungere tuorlo a filo, sale, burro. Stufa 26° per 10/12 ore"
+ },
+ {
+  "n": "Panettone — Secondo Impasto",
+  "c": "Lievitati",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina 440W",
+    800,
+    "g"
+   ],
+   [
+    "Zucchero",
+    650,
+    "g"
+   ],
+   [
+    "Zucchero invertito",
+    150,
+    "g"
+   ],
+   [
+    "Miele",
+    200,
+    "g"
+   ],
+   [
+    "Pasta mandarino",
+    150,
+    "g"
+   ],
+   [
+    "Bucce agrumi",
+    8,
+    "n°"
+   ],
+   [
+    "Sale",
+    78,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    1650,
+    "g"
+   ],
+   [
+    "Acqua",
+    800,
+    "g"
+   ],
+   [
+    "Burro",
+    2400,
+    "g"
+   ],
+   [
+    "Uvetta",
+    2000,
+    "g"
+   ],
+   [
+    "Cubetti arancia",
+    2000,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Torrone Mandorle 2025",
+  "c": "Altro",
+  "s": "colazioni",
+  "i": [
+   [
+    "Acqua",
+    400,
+    "g"
+   ],
+   [
+    "Zucchero",
+    1500,
+    "g"
+   ],
+   [
+    "Glucosio",
+    150,
+    "g"
+   ],
+   [
+    "Miele acacia",
+    1000,
+    "g"
+   ],
+   [
+    "Albume",
+    250,
+    "g"
+   ],
+   [
+    "Zucchero (2)",
+    50,
+    "g"
+   ],
+   [
+    "Frutta a guscio",
+    1500,
+    "g"
+   ]
+  ],
+  "p": "Cuocere a 150° acqua+glucosio+zucchero. A 125° iniziare a cuocere il miele a 120°. Montare albumi con zucchero. Versare miele a filo poi zucchero cotto. Far asciugare. A 55° usare foglia e inserire frutta tostata a 50°"
+ },
+ {
+  "n": "Torrone Albicocca",
+  "c": "Altro",
+  "s": "colazioni",
+  "i": [
+   [
+    "Acqua",
+    100,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    300,
+    "g"
+   ],
+   [
+    "Glucosio",
+    200,
+    "g"
+   ],
+   [
+    "Miele",
+    500,
+    "g"
+   ],
+   [
+    "Albume",
+    140,
+    "g"
+   ],
+   [
+    "Zucchero (2)",
+    30,
+    "g"
+   ],
+   [
+    "Mandorle",
+    500,
+    "g"
+   ],
+   [
+    "Pinoli",
+    150,
+    "g"
+   ],
+   [
+    "Albicocche secche",
+    300,
+    "g"
+   ]
+  ],
+  "p": "Cuocere a 160° acqua+zucchero+glucosio. Cuocere miele a 120°. Versare a filo su albume+zucchero. Procedere come Torrone 2025"
+ },
+ {
+  "n": "Crema di Riso",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    1000,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    150,
+    "g"
+   ],
+   [
+    "Vaniglia",
+    2,
+    "g"
+   ],
+   [
+    "Burro",
+    50,
+    "g"
+   ],
+   [
+    "Riso vialone nano",
+    300,
+    "g"
+   ],
+   [
+    "Tuorli",
+    180,
+    "g"
+   ],
+   [
+    "Crema pasticciera",
+    600,
+    "g"
+   ]
+  ],
+  "p": "Bollire latte+zucchero+aromi+burro, unire riso e cuocere 10/14 min. Raffreddare a temperatura ambiente. A freddo aggiungere tuorli e crema"
+ },
+ {
+  "n": "Barretta Proteica",
+  "c": "Altro",
+  "s": "colazioni",
+  "i": [
+   [
+    "Granola mista",
+    260,
+    "g"
+   ],
+   [
+    "Uva sultanina",
+    50,
+    "g"
+   ],
+   [
+    "Miele",
+    120,
+    "g"
+   ],
+   [
+    "Albume",
+    60,
+    "g"
+   ],
+   [
+    "Sciroppo d'acero",
+    20,
+    "g"
+   ],
+   [
+    "Farina farro",
+    60,
+    "g"
+   ]
+  ],
+  "p": "Per 8 barrette"
+ },
+ {
+  "n": "Zeppola San Giuseppe",
+  "c": "Pasticcini",
+  "s": "colazioni",
+  "i": [
+   [
+    "Acqua",
+    250,
+    "g"
+   ],
+   [
+    "Farina",
+    150,
+    "g"
+   ],
+   [
+    "Burro",
+    55,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    1,
+    "n°"
+   ],
+   [
+    "Uova",
+    3,
+    "n°"
+   ],
+   [
+    "Sale fino",
+    2,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Pastel de Nata — Pasta",
+  "c": "Paste",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina",
+    1400,
+    "g"
+   ],
+   [
+    "Sale",
+    27,
+    "g"
+   ],
+   [
+    "Acqua",
+    700,
+    "g"
+   ],
+   [
+    "Burro sfoglia",
+    1000,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Pastel de Nata — Almívar",
+  "c": "Altro",
+  "s": "colazioni",
+  "i": [
+   [
+    "Acqua",
+    600,
+    "g"
+   ],
+   [
+    "Zucchero",
+    1000,
+    "g"
+   ],
+   [
+    "Bucce di limone",
+    2,
+    "n°"
+   ],
+   [
+    "Cannella",
+    2,
+    "bastoncini"
+   ]
+  ]
+ },
+ {
+  "n": "Pastel de Nata — Crema",
+  "c": "Creme",
+  "s": "colazioni",
+  "i": [
+   [
+    "Latte",
+    1000,
+    "g"
+   ],
+   [
+    "Almívar",
+    1000,
+    "g"
+   ],
+   [
+    "Farina",
+    100,
+    "g"
+   ],
+   [
+    "Maizena",
+    50,
+    "g"
+   ],
+   [
+    "Tuorli",
+    160,
+    "g"
+   ],
+   [
+    "Uova intere",
+    2,
+    "n°"
+   ]
+  ]
+ },
+ {
+  "n": "Glassa Rossa",
+  "c": "Altro",
+  "s": "colazioni",
+  "i": [
+   [
+    "Acqua",
+    125,
+    "g"
+   ],
+   [
+    "Zucchero",
+    250,
+    "g"
+   ],
+   [
+    "Glucosio",
+    250,
+    "g"
+   ],
+   [
+    "Latte condensato",
+    155,
+    "g"
+   ],
+   [
+    "Gelatina",
+    16,
+    "g"
+   ],
+   [
+    "Burro cacao",
+    115,
+    "g"
+   ],
+   [
+    "Colorante rosso",
+    40,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Brownies Cioccolato",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Burro morbido",
+    700,
+    "g"
+   ],
+   [
+    "Zucchero",
+    800,
+    "g"
+   ],
+   [
+    "Uova",
+    12,
+    "n°"
+   ],
+   [
+    "Farina frolla",
+    370,
+    "g"
+   ],
+   [
+    "Cacao",
+    60,
+    "g"
+   ],
+   [
+    "Cioccolato fondente",
+    1000,
+    "g"
+   ],
+   [
+    "Farina di mandorle",
+    250,
+    "g"
+   ],
+   [
+    "Sale",
+    2,
+    "g"
+   ],
+   [
+    "Rhum",
+    30,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Sbriciolona Classica",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina frolla",
+    400,
+    "g"
+   ],
+   [
+    "Zucchero",
+    150,
+    "g"
+   ],
+   [
+    "Burro",
+    120,
+    "g"
+   ],
+   [
+    "Uova",
+    100,
+    "g"
+   ],
+   [
+    "Baking",
+    14,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Sbriciolona Nocciola e Cioccolato",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Farina di nocciole",
+    400,
+    "g"
+   ],
+   [
+    "Burro",
+    3300,
+    "g"
+   ],
+   [
+    "Albume",
+    230,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    2300,
+    "g"
+   ],
+   [
+    "Farina biscotto",
+    3750,
+    "g"
+   ],
+   [
+    "Farina mais gialla",
+    1400,
+    "g"
+   ],
+   [
+    "Baking",
+    80,
+    "g"
+   ],
+   [
+    "Gocce di cioccolato",
+    2300,
+    "g"
+   ],
+   [
+    "Nocciole tostate",
+    2000,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Pavlova — Meringa Svizzera",
+  "c": "Torte",
+  "s": "colazioni",
+  "i": [
+   [
+    "Albumi",
+    120,
+    "g"
+   ],
+   [
+    "Zucchero",
+    240,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Rocher Limoncello e Caffè",
+  "c": "Creme",
+  "s": "fine-dining",
+  "piatto": "Benvenuti Stanze",
+  "i": [
+   [
+    "Caffè",
+    220,
+    "g"
+   ],
+   [
+    "Limoncello",
+    140,
+    "g"
+   ],
+   [
+    "Zucchero",
+    100,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    180,
+    "g"
+   ],
+   [
+    "Burro",
+    360,
+    "g"
+   ],
+   [
+    "Gelatina",
+    4,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Glassa Rocher",
+  "c": "Altro",
+  "s": "fine-dining",
+  "piatto": "Benvenuti Stanze",
+  "i": [
+   [
+    "Cioccolato Jivara",
+    140,
+    "g"
+   ],
+   [
+    "Burro di cacao",
+    80,
+    "g"
+   ],
+   [
+    "Granella di nocciola",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Sablé Diamant",
+  "c": "Pasticcini",
+  "s": "fine-dining",
+  "piatto": "Benvenuti Stanze",
+  "i": [
+   [
+    "Burro",
+    300,
+    "g"
+   ],
+   [
+    "Zucchero",
+    120,
+    "g"
+   ],
+   [
+    "Farina frolla",
+    300,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    null,
+    "q.b."
+   ]
+  ],
+  "p": "Ammorbidire burro con zucchero, aggiungere farina. Formare salamini, abbattere, spennellare acqua+zucchero, tagliare. Cuocere 175° 6/7 min"
+ },
+ {
+  "n": "Limoni Marinati",
+  "c": "Altro",
+  "s": "fine-dining",
+  "piatto": "Benvenuti Stanze",
+  "i": [
+   [
+    "Limoni",
+    12,
+    "n°"
+   ],
+   [
+    "Sale",
+    225,
+    "g"
+   ],
+   [
+    "Zucchero",
+    150,
+    "g"
+   ],
+   [
+    "Acqua",
+    2000,
+    "g"
+   ],
+   [
+    "Zucchero sciroppo",
+    1000,
+    "g"
+   ]
+  ],
+  "p": "Incidere limoni alla base, inserire sale e zucchero, mettere in busta sottovuoto. Fare sciroppo e versare sulle buste. Cuocere vapore 100° 1h20min. Frullare e mettere in sac à poche"
+ },
+ {
+  "n": "Meringa Italiana",
+  "c": "Creme",
+  "s": "fine-dining",
+  "piatto": "Benvenuti Stanze",
+  "i": [
+   [
+    "Albume",
+    300,
+    "g"
+   ],
+   [
+    "Zucchero",
+    150,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Paris Brest — Pasta Choux",
+  "c": "Paste",
+  "s": "fine-dining",
+  "piatto": "Paris Brest",
+  "i": [
+   [
+    "Latte",
+    250,
+    "g"
+   ],
+   [
+    "Acqua",
+    250,
+    "g"
+   ],
+   [
+    "Sale",
+    5,
+    "g"
+   ],
+   [
+    "Zucchero",
+    10,
+    "g"
+   ],
+   [
+    "Burro",
+    220,
+    "g"
+   ],
+   [
+    "Farina",
+    275,
+    "g"
+   ],
+   [
+    "Uova",
+    500,
+    "g"
+   ]
+  ],
+  "p": "Cuoci 260° 20min forno in pausa, poi 160° 8min"
+ },
+ {
+  "n": "Paris Brest — Cremoso Nocciola",
+  "c": "Creme",
+  "s": "fine-dining",
+  "piatto": "Paris Brest",
+  "i": [
+   [
+    "Panna",
+    500,
+    "g"
+   ],
+   [
+    "Zucchero",
+    100,
+    "g"
+   ],
+   [
+    "Sale",
+    1.5,
+    "g"
+   ],
+   [
+    "Tuorli",
+    80,
+    "g"
+   ],
+   [
+    "Pasta nocciola",
+    100,
+    "g"
+   ],
+   [
+    "Gelatina",
+    2,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Paris Brest — Gianduja Pane e Olio",
+  "c": "Altro",
+  "s": "fine-dining",
+  "piatto": "Paris Brest",
+  "i": [
+   [
+    "Cioccolato fondente 70%",
+    600,
+    "g"
+   ],
+   [
+    "Sale",
+    3,
+    "g"
+   ],
+   [
+    "Pralinato mandorle",
+    180,
+    "g"
+   ],
+   [
+    "Olio d'oliva",
+    140,
+    "g"
+   ],
+   [
+    "Feuilletine",
+    140,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Macaron Pesca — Massa",
+  "c": "Pasticcini",
+  "s": "fine-dining",
+  "piatto": "Macaron Pesca",
+  "i": [
+   [
+    "Zucchero a velo",
+    281,
+    "g"
+   ],
+   [
+    "Farina mandorle",
+    281,
+    "g"
+   ],
+   [
+    "Albume (1)",
+    101,
+    "g"
+   ],
+   [
+    "Colorante giallo",
+    0.5,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    258,
+    "g"
+   ],
+   [
+    "Acqua",
+    90,
+    "g"
+   ],
+   [
+    "Albume (2)",
+    101,
+    "g"
+   ]
+  ],
+  "p": "Cuocere zucchero+acqua a 110°C, versare sugli albumi parzialmente montati. Unire in 3 volte alla massa di polveri+albume"
+ },
+ {
+  "n": "Macaron Pesca — Cremoso",
+  "c": "Creme",
+  "s": "fine-dining",
+  "piatto": "Macaron Pesca",
+  "i": [
+   [
+    "Purée pesca",
+    100,
+    "g"
+   ],
+   [
+    "Cioccolato bianco",
+    150,
+    "g"
+   ],
+   [
+    "Gelatina",
+    4.5,
+    "g"
+   ],
+   [
+    "Cioccolato bianco (2)",
+    200,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Macaron Pesca — Caviale",
+  "c": "Altro",
+  "s": "fine-dining",
+  "piatto": "Macaron Pesca",
+  "i": [
+   [
+    "Purée pesca",
+    200,
+    "g"
+   ],
+   [
+    "Acqua",
+    50,
+    "g"
+   ],
+   [
+    "Zucchero",
+    20,
+    "g"
+   ],
+   [
+    "Agar agar",
+    3,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Mousse Tiramisù",
+  "c": "Creme",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Tuorli",
+    48,
+    "n°"
+   ],
+   [
+    "Zucchero",
+    1250,
+    "g"
+   ],
+   [
+    "Mascarpone",
+    3000,
+    "g"
+   ],
+   [
+    "Panna fresca",
+    3000,
+    "g"
+   ]
+  ],
+  "p": "Bollire zucchero+acqua a 130°. Montare tuorli, aggiungere zucchero caldo. Poi mascarpone e panna montata"
+ },
+ {
+  "n": "Pralinet d'Or",
+  "c": "Altro",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Panna fresca",
+    500,
+    "g"
+   ],
+   [
+    "Bacche vaniglia",
+    2,
+    "n°"
+   ],
+   [
+    "Zucchero invertito",
+    75,
+    "g"
+   ],
+   [
+    "Cioccolato fondente",
+    625,
+    "g"
+   ],
+   [
+    "Burro",
+    125,
+    "g"
+   ]
+  ],
+  "p": "Portare panna+zucchero+vaniglia a 85°. Ganache in 3 volte, aggiungere burro. Riposare in quadro, tagliare, rivestire di cioccolato temperato"
+ },
+ {
+  "n": "Base Sorbetto",
+  "c": "Basi",
+  "s": "gelateria",
+  "i": [
+   [
+    "Acqua",
+    4550,
+    "g"
+   ],
+   [
+    "Trealosio",
+    2400,
+    "g"
+   ],
+   [
+    "Glucosio",
+    1100,
+    "g"
+   ],
+   [
+    "Prosorbet",
+    200,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Sorbetto Limone",
+  "c": "Sorbetti",
+  "s": "gelateria",
+  "i": [
+   [
+    "Acqua",
+    450,
+    "g"
+   ],
+   [
+    "Zucchero",
+    200,
+    "g"
+   ],
+   [
+    "Succo di limone",
+    150,
+    "g"
+   ],
+   [
+    "Prosorbet Frio",
+    80,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Sorbetto Fragola",
+  "c": "Sorbetti",
+  "s": "gelateria",
+  "i": [
+   [
+    "Purée fragola",
+    1000,
+    "g"
+   ],
+   [
+    "Base sorbetto 31°Brix",
+    null,
+    "q.b."
+   ],
+   [
+    "Aceto balsamico",
+    null,
+    "10%"
+   ]
+  ]
+ },
+ {
+  "n": "Sorbetto Mela Verde",
+  "c": "Sorbetti",
+  "s": "gelateria",
+  "i": [
+   [
+    "Purée mela verde",
+    1000,
+    "g"
+   ],
+   [
+    "Base sorbetto 31°Brix",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Sorbetto Passion Fruit e Zenzero",
+  "c": "Sorbetti",
+  "s": "gelateria",
+  "i": [
+   [
+    "Purée passion fruit",
+    1000,
+    "g"
+   ],
+   [
+    "Purée albicocca",
+    500,
+    "g"
+   ],
+   [
+    "Acqua",
+    1000,
+    "g"
+   ],
+   [
+    "Zenzero centrifugato",
+    125,
+    "g"
+   ],
+   [
+    "Zucchero",
+    600,
+    "g"
+   ],
+   [
+    "Procrema",
+    250,
+    "g"
+   ],
+   [
+    "Destrosio",
+    150,
+    "g"
+   ],
+   [
+    "Zucchero invertito",
+    200,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Sorbetto Albicocca",
+  "c": "Sorbetti",
+  "s": "gelateria",
+  "i": [
+   [
+    "Purée albicocca",
+    1000,
+    "g"
+   ],
+   [
+    "Base sorbetto 31°Brix",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Gelato Pistacchio",
+  "c": "Gelati",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte",
+    3000,
+    "g"
+   ],
+   [
+    "Panna",
+    3000,
+    "g"
+   ],
+   [
+    "Zucchero",
+    1000,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    150,
+    "g"
+   ],
+   [
+    "Gellan",
+    10,
+    "g"
+   ],
+   [
+    "Procrema",
+    750,
+    "g"
+   ],
+   [
+    "Pasta pistacchio",
+    600,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Gelato Cioccolato",
+  "c": "Gelati",
+  "s": "gelateria",
+  "i": [
+   [
+    "Acqua",
+    5000,
+    "g"
+   ],
+   [
+    "Cioccolato fondente",
+    1500,
+    "g"
+   ],
+   [
+    "Prosorbet",
+    500,
+    "g"
+   ],
+   [
+    "Destrosio",
+    250,
+    "g"
+   ],
+   [
+    "Sale",
+    20,
+    "g"
+   ],
+   [
+    "Zucchero di canna",
+    900,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Gelato Vaniglia",
+  "c": "Gelati",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte",
+    3500,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    100,
+    "g"
+   ],
+   [
+    "Procrema",
+    650,
+    "g"
+   ],
+   [
+    "Gellan",
+    10,
+    "g"
+   ],
+   [
+    "Zucchero",
+    800,
+    "g"
+   ],
+   [
+    "Tuorli",
+    700,
+    "g"
+   ],
+   [
+    "Panna fredda",
+    1500,
+    "g"
+   ],
+   [
+    "Bacche vaniglia",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Gelato Caffè",
+  "c": "Gelati",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte",
+    500,
+    "g"
+   ],
+   [
+    "Panna",
+    250,
+    "g"
+   ],
+   [
+    "Zucchero",
+    125,
+    "g"
+   ],
+   [
+    "Tuorli",
+    110,
+    "g"
+   ],
+   [
+    "Procrema",
+    80,
+    "g"
+   ],
+   [
+    "Gellan",
+    5,
+    "g"
+   ],
+   [
+    "Chicchi di caffè",
+    220,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Gelato Nocciola",
+  "c": "Gelati",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte",
+    3000,
+    "g"
+   ],
+   [
+    "Panna",
+    3000,
+    "g"
+   ],
+   [
+    "Zucchero",
+    1000,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    150,
+    "g"
+   ],
+   [
+    "Gellan",
+    10,
+    "g"
+   ],
+   [
+    "Procrema",
+    750,
+    "g"
+   ],
+   [
+    "Pasta nocciola",
+    600,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Gelato Mascarpone",
+  "c": "Gelati",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte fresco",
+    2432,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    136,
+    "g"
+   ],
+   [
+    "Zucchero",
+    551,
+    "g"
+   ],
+   [
+    "Destrosio",
+    130,
+    "g"
+   ],
+   [
+    "Sciroppo glucosio 25DE",
+    69,
+    "g"
+   ],
+   [
+    "Neutro 5",
+    20,
+    "g"
+   ],
+   [
+    "Mascarpone",
+    672,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Gelato Crema di Caffè",
+  "c": "Gelati",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte",
+    1750,
+    "g"
+   ],
+   [
+    "Panna",
+    960,
+    "g"
+   ],
+   [
+    "Caffè espresso",
+    350,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    280,
+    "g"
+   ],
+   [
+    "Zucchero",
+    480,
+    "g"
+   ],
+   [
+    "Destrosio",
+    120,
+    "g"
+   ],
+   [
+    "Sciroppo glucosio 25DE",
+    40,
+    "g"
+   ],
+   [
+    "Neutro 5",
+    20,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Gelato Zabaione",
+  "c": "Gelati",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte fresco",
+    1295,
+    "g"
+   ],
+   [
+    "Panna",
+    327,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    123,
+    "g"
+   ],
+   [
+    "Zucchero",
+    408,
+    "g"
+   ],
+   [
+    "Inulina",
+    388,
+    "g"
+   ],
+   [
+    "Sciroppo di glucosio",
+    61,
+    "g"
+   ],
+   [
+    "Neutro 5",
+    12,
+    "g"
+   ],
+   [
+    "Tuorlo fresco",
+    816,
+    "g"
+   ],
+   [
+    "Marsala",
+    570,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Gelato Cacao (Carpigiani)",
+  "c": "Gelati",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte",
+    2108,
+    "g"
+   ],
+   [
+    "Panna 35%",
+    720,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    120,
+    "g"
+   ],
+   [
+    "Zucchero",
+    510,
+    "g"
+   ],
+   [
+    "Destrosio",
+    200,
+    "g"
+   ],
+   [
+    "Sciroppo glucosio DE",
+    48,
+    "g"
+   ],
+   [
+    "Neutro 5",
+    20,
+    "g"
+   ],
+   [
+    "Cacao in polvere",
+    320,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Base Bianca Carpigiani",
+  "c": "Basi",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte intero",
+    2250,
+    "g"
+   ],
+   [
+    "Panna",
+    920,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    140,
+    "g"
+   ],
+   [
+    "Zucchero",
+    427,
+    "g"
+   ],
+   [
+    "Destrosio",
+    176,
+    "g"
+   ],
+   [
+    "Sciroppo glucosio 25DE",
+    65,
+    "g"
+   ],
+   [
+    "Neutro 5",
+    20,
+    "g"
+   ]
+  ],
+  "p": "Per stracciatella: aggiungere 70g cioccolato fuso per kg di miscela all'estrazione"
+ },
+ {
+  "n": "Base Gialla Carpigiani",
+  "c": "Basi",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte fresco",
+    2148,
+    "g"
+   ],
+   [
+    "Panna",
+    560,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    120,
+    "g"
+   ],
+   [
+    "Zucchero",
+    560,
+    "g"
+   ],
+   [
+    "Destrosio",
+    116,
+    "g"
+   ],
+   [
+    "Sciroppo glucosio 25DE",
+    84,
+    "g"
+   ],
+   [
+    "Neutro 5",
+    12,
+    "g"
+   ],
+   [
+    "Tuorlo fresco",
+    400,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Base Frutta Secca Carpigiani",
+  "c": "Basi",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte",
+    2520,
+    "g"
+   ],
+   [
+    "Panna",
+    60,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    180,
+    "g"
+   ],
+   [
+    "Zucchero",
+    564,
+    "g"
+   ],
+   [
+    "Destrosio",
+    92,
+    "g"
+   ],
+   [
+    "Sciroppo glucosio 25DE",
+    84,
+    "g"
+   ],
+   [
+    "Neutro 5",
+    20,
+    "g"
+   ],
+   [
+    "Pasta frutta a guscio",
+    480,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Sciroppo Sorbetti Carpigiani",
+  "c": "Basi",
+  "s": "gelateria",
+  "i": [
+   [
+    "Acqua",
+    1976,
+    "g"
+   ],
+   [
+    "Zucchero",
+    1200,
+    "g"
+   ],
+   [
+    "Destrosio",
+    336,
+    "g"
+   ],
+   [
+    "Sciroppo glucosio 25DE",
+    464,
+    "g"
+   ],
+   [
+    "Neutro 5",
+    24,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Sorbetto Limone Carpigiani",
+  "c": "Sorbetti",
+  "s": "gelateria",
+  "i": [
+   [
+    "Succo di limone",
+    560,
+    "g"
+   ],
+   [
+    "Sciroppo per sorbetti",
+    2452,
+    "g"
+   ],
+   [
+    "Acido citrico",
+    30,
+    "g"
+   ],
+   [
+    "Inulina",
+    260,
+    "g"
+   ],
+   [
+    "Acqua",
+    728,
+    "g"
+   ],
+   [
+    "Zest limone",
+    30,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Base Sorbetto 61°Brix Pacojet",
+  "c": "Basi",
+  "s": "gelateria",
+  "i": [
+   [
+    "Acqua",
+    1000,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    1250,
+    "g"
+   ],
+   [
+    "Destrosio",
+    400,
+    "g"
+   ],
+   [
+    "Neutro",
+    10,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Sorbetto Limone Pacojet",
+  "c": "Sorbetti",
+  "s": "gelateria",
+  "i": [
+   [
+    "Sciroppo 61°Brix",
+    400,
+    "g"
+   ],
+   [
+    "Acqua",
+    400,
+    "g"
+   ],
+   [
+    "Succo di limone",
+    150,
+    "g"
+   ],
+   [
+    "Zest limone",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Gelato Cioccolato Pacojet",
+  "c": "Gelati",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte fresco",
+    900,
+    "g"
+   ],
+   [
+    "Panna",
+    100,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    45,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    25,
+    "g"
+   ],
+   [
+    "Zucchero invertito",
+    100,
+    "g"
+   ],
+   [
+    "Neutro",
+    3,
+    "g"
+   ],
+   [
+    "Cioccolato fondente",
+    230,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Granita al Caffè",
+  "c": "Granite",
+  "s": "gelateria",
+  "i": [
+   [
+    "Caffè espresso lungo",
+    1000,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    250,
+    "g"
+   ]
+  ],
+  "p": "Mescolare caffè e zucchero fino a scioglimento. Mantecare o granitare. Servire a -7°/-10°C"
+ },
+ {
+  "n": "Granita Liquirizia",
+  "c": "Granite",
+  "s": "gelateria",
+  "i": [
+   [
+    "Acqua",
+    1000,
+    "g"
+   ],
+   [
+    "Zucchero",
+    300,
+    "g"
+   ],
+   [
+    "Liquirizia",
+    30,
+    "g"
+   ]
+  ],
+  "p": "Far bollire, mettere in infusione e congelare sottovuoto"
+ },
+ {
+  "n": "Sorbetto Cioccolato",
+  "c": "Sorbetti",
+  "s": "gelateria",
+  "i": [
+   [
+    "Acqua",
+    800,
+    "g"
+   ],
+   [
+    "Zucchero",
+    200,
+    "g"
+   ],
+   [
+    "Cacao",
+    100,
+    "g"
+   ],
+   [
+    "Cioccolato fondente",
+    250,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Semifreddo Torroncino",
+  "c": "Semifreddi",
+  "s": "gelateria",
+  "i": [
+   [
+    "Albume",
+    150,
+    "g"
+   ],
+   [
+    "Zucchero",
+    250,
+    "g"
+   ],
+   [
+    "Panna fresca",
+    1000,
+    "g"
+   ],
+   [
+    "Gelatina",
+    8,
+    "g"
+   ],
+   [
+    "Pasta torroncino",
+    null,
+    "q.b."
+   ],
+   [
+    "Granella nocciole",
+    null,
+    "q.b."
+   ]
+  ],
+  "p": "Montare albume a meringa. Semimontare panna con gelatina sciolta. Unire pasta torroncino e granella"
+ },
+ {
+  "n": "Gelato Foglie di Fico e Noci",
+  "c": "Gelati",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte intero",
+    750,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    20,
+    "g"
+   ],
+   [
+    "Zucchero",
+    130,
+    "g"
+   ],
+   [
+    "Zucchero invertito",
+    110,
+    "g"
+   ],
+   [
+    "Glucosio",
+    70,
+    "g"
+   ],
+   [
+    "Stabilizzante",
+    6,
+    "g"
+   ],
+   [
+    "Gellan",
+    3,
+    "g"
+   ],
+   [
+    "Panna",
+    270,
+    "g"
+   ]
+  ],
+  "p": "Portare tutto a bollore e mixare il gellan"
+ },
+ {
+  "n": "Sablé Noci (x Gelato Fico)",
+  "c": "Pasticcini",
+  "s": "gelateria",
+  "i": [
+   [
+    "Farina",
+    473,
+    "g"
+   ],
+   [
+    "Polvere di noci",
+    75,
+    "g"
+   ],
+   [
+    "Burro",
+    200,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    180,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    100,
+    "g"
+   ],
+   [
+    "Sale",
+    8,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Gelato Limone e Bufala",
+  "c": "Gelati",
+  "s": "gelateria",
+  "i": [
+   [
+    "Latte",
+    2250,
+    "g"
+   ],
+   [
+    "Panna",
+    750,
+    "g"
+   ],
+   [
+    "Buccia di limone",
+    100,
+    "g"
+   ],
+   [
+    "Procrema",
+    300,
+    "g"
+   ],
+   [
+    "Glucosio in polvere",
+    300,
+    "g"
+   ],
+   [
+    "Succo limone",
+    1100,
+    "g"
+   ],
+   [
+    "Zucchero",
+    1100,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Maltodestrina Olio Papaloya",
+  "c": "Altro",
+  "s": "gelateria",
+  "i": [
+   [
+    "Maltosec",
+    100,
+    "g"
+   ],
+   [
+    "Olio papaloia",
+    36,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Sorbetto Mandarino e Sesamo Nero",
+  "c": "Sorbetti",
+  "s": "gelateria",
+  "i": [
+   [
+    "Purée mandarino",
+    1000,
+    "g"
+   ],
+   [
+    "Base sorbetto 31°Brix",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Crumble Sesamo Nero",
+  "c": "Altro",
+  "s": "gelateria",
+  "i": [
+   [
+    "Burro",
+    300,
+    "g"
+   ],
+   [
+    "Zucchero di canna",
+    200,
+    "g"
+   ],
+   [
+    "Pasta di sesamo nero",
+    100,
+    "g"
+   ],
+   [
+    "Farina",
+    500,
+    "g"
+   ],
+   [
+    "Sale",
+    3,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Sorbetto Fragoline",
+  "c": "Sorbetti",
+  "s": "gelateria",
+  "i": [
+   [
+    "Purée fragoline",
+    1000,
+    "g"
+   ],
+   [
+    "Base sorbetto 31°Brix",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Gel Maraschino",
+  "c": "Altro",
+  "s": "gelateria",
+  "i": [
+   [
+    "Glassage Valrhona",
+    300,
+    "g"
+   ],
+   [
+    "Maraschino",
+    90,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Cremoso Vaniglia",
+  "c": "Creme",
+  "s": "torte",
+  "i": [
+   [
+    "Acqua",
+    200,
+    "g"
+   ],
+   [
+    "Zucchero invertito",
+    20,
+    "g"
+   ],
+   [
+    "Gelatina",
+    8,
+    "g"
+   ],
+   [
+    "Cioccolato bianco",
+    250,
+    "g"
+   ],
+   [
+    "Bacca vaniglia",
+    1,
+    "n°"
+   ],
+   [
+    "Panna fresca",
+    400,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Interiore Lampone",
+  "c": "Gelatine",
+  "s": "torte",
+  "i": [
+   [
+    "Purée lampone",
+    300,
+    "g"
+   ],
+   [
+    "Zucchero",
+    45,
+    "g"
+   ],
+   [
+    "Gelatina",
+    4,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Mousse Cioccolato al Latte",
+  "c": "Mousse",
+  "s": "torte",
+  "i": [
+   [
+    "Latte",
+    130,
+    "g"
+   ],
+   [
+    "Panna",
+    150,
+    "g"
+   ],
+   [
+    "Zucchero",
+    50,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    40,
+    "g"
+   ],
+   [
+    "Cioccolato al latte",
+    560,
+    "g"
+   ],
+   [
+    "Panna semimontata",
+    450,
+    "g"
+   ],
+   [
+    "Gelatina",
+    2,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Ganache al Caffè (Torte)",
+  "c": "Creme",
+  "s": "torte",
+  "i": [
+   [
+    "Caffè espresso",
+    125,
+    "g"
+   ],
+   [
+    "Panna",
+    125,
+    "g"
+   ],
+   [
+    "Cioccolato al latte",
+    450,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Mousse al Mango",
+  "c": "Mousse",
+  "s": "torte",
+  "i": [
+   [
+    "Purée mango",
+    200,
+    "g"
+   ],
+   [
+    "Purée passion fruit",
+    150,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    80,
+    "g"
+   ],
+   [
+    "Cioccolato Dulcey",
+    400,
+    "g"
+   ],
+   [
+    "Gelatina",
+    8,
+    "g"
+   ],
+   [
+    "Panna semimontata",
+    600,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Gelatina Albicocca",
+  "c": "Gelatine",
+  "s": "torte",
+  "i": [
+   [
+    "Purée albicocca",
+    300,
+    "g"
+   ],
+   [
+    "Zucchero",
+    45,
+    "g"
+   ],
+   [
+    "Gelatina",
+    4,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Mousse Caffè",
+  "c": "Mousse",
+  "s": "torte",
+  "i": [
+   [
+    "Panna",
+    500,
+    "g"
+   ],
+   [
+    "Gelatina",
+    4,
+    "g"
+   ],
+   [
+    "Nescaffè",
+    15,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    38,
+    "g"
+   ],
+   [
+    "Zucchero",
+    25,
+    "g"
+   ],
+   [
+    "Acqua",
+    5,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Ganache Fondente per Mousse",
+  "c": "Creme",
+  "s": "torte",
+  "i": [
+   [
+    "Cioccolato fondente 54%",
+    222,
+    "g"
+   ],
+   [
+    "Panna fresca",
+    205,
+    "g"
+   ],
+   [
+    "Acqua",
+    68,
+    "g"
+   ],
+   [
+    "Zucchero",
+    55,
+    "g"
+   ],
+   [
+    "Cacao",
+    23,
+    "g"
+   ],
+   [
+    "Panna acida",
+    23,
+    "g"
+   ],
+   [
+    "Panna semimontata",
+    390,
+    "g"
+   ]
+  ],
+  "p": "Una volta raffreddata aggiungere la panna semimontata. Senza glassa aggiungere 8g gelatina"
+ },
+ {
+  "n": "Glassa Neutra",
+  "c": "Glasse",
+  "s": "torte",
+  "i": [
+   [
+    "Acqua",
+    315,
+    "g"
+   ],
+   [
+    "Zucchero",
+    155,
+    "g"
+   ],
+   [
+    "Destrosio",
+    135,
+    "g"
+   ],
+   [
+    "Glucosio",
+    70,
+    "g"
+   ],
+   [
+    "Zucchero (2)",
+    45,
+    "g"
+   ],
+   [
+    "Pectina NH",
+    10,
+    "g"
+   ]
+  ],
+  "p": "A 40° unire zucchero e pectina NH"
+ },
+ {
+  "n": "Glassa Cioccolato",
+  "c": "Glasse",
+  "s": "torte",
+  "i": [
+   [
+    "Glucosio",
+    40,
+    "g"
+   ],
+   [
+    "Destrosio",
+    120,
+    "g"
+   ],
+   [
+    "Acqua",
+    40,
+    "g"
+   ],
+   [
+    "Panna",
+    180,
+    "g"
+   ],
+   [
+    "Zucchero",
+    350,
+    "g"
+   ],
+   [
+    "Latte in polvere",
+    20,
+    "g"
+   ],
+   [
+    "Cacao",
+    140,
+    "g"
+   ],
+   [
+    "Gelatina",
+    21,
+    "g"
+   ],
+   [
+    "Glassa neutra",
+    357,
+    "g"
+   ]
+  ],
+  "p": "Arrivare a 100°, aggiungere cacao, gelatina e glassa neutra"
+ },
+ {
+  "n": "Biscuit al Cioccolato",
+  "c": "Biscotti",
+  "s": "torte",
+  "i": [
+   [
+    "Tuorli",
+    150,
+    "g"
+   ],
+   [
+    "Zucchero (1)",
+    13,
+    "g"
+   ],
+   [
+    "Albume",
+    270,
+    "g"
+   ],
+   [
+    "Zucchero (2)",
+    100,
+    "g"
+   ],
+   [
+    "Farina",
+    140,
+    "g"
+   ],
+   [
+    "Cacao",
+    45,
+    "g"
+   ],
+   [
+    "Baking",
+    15,
+    "g"
+   ],
+   [
+    "Farina di mandorle",
+    35,
+    "g"
+   ],
+   [
+    "Olio",
+    140,
+    "g"
+   ],
+   [
+    "Latte",
+    50,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Dacquoise",
+  "c": "Biscotti",
+  "s": "torte",
+  "i": [
+   [
+    "Farina nocciole",
+    250,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    250,
+    "g"
+   ],
+   [
+    "Albume",
+    250,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    42,
+    "g"
+   ]
+  ],
+  "p": "Montare albume con zucchero semolato in 3 volte. Incorporare polveri. Cuocere 200°"
+ },
+ {
+  "n": "Namelaka a Frutta",
+  "c": "Creme",
+  "s": "torte",
+  "i": [
+   [
+    "Polpa",
+    584,
+    "g"
+   ],
+   [
+    "Glucosio",
+    26,
+    "g"
+   ],
+   [
+    "Gelatina",
+    13,
+    "g"
+   ],
+   [
+    "Acqua gelatina",
+    65,
+    "g"
+   ],
+   [
+    "Cioccolato bianco",
+    962,
+    "g"
+   ],
+   [
+    "Panna fresca",
+    1040,
+    "g"
+   ]
+  ],
+  "p": "Riscaldare polpa+glucosio, aggiungere gelatina, versare sul cioccolato, aggiungere panna. Riposare 12h poi montare. Per cocco: 800g polpa cocco + 20g Malibu"
+ },
+ {
+  "n": "Namelaka Mascarpone",
+  "c": "Creme",
+  "s": "torte",
+  "i": [
+   [
+    "Latte",
+    200,
+    "g"
+   ],
+   [
+    "Gelatina",
+    8,
+    "g"
+   ],
+   [
+    "Acqua gelatina",
+    45,
+    "g"
+   ],
+   [
+    "Cioccolato bianco",
+    300,
+    "g"
+   ],
+   [
+    "Mascarpone",
+    400,
+    "g"
+   ],
+   [
+    "Vaniglia",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Frangipane",
+  "c": "Creme",
+  "s": "torte",
+  "i": [
+   [
+    "Burro",
+    200,
+    "g"
+   ],
+   [
+    "Farina mandorle",
+    300,
+    "g"
+   ],
+   [
+    "Uova",
+    200,
+    "g"
+   ],
+   [
+    "Amido di mais",
+    100,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ],
+  "p": "Mettere tutto in planetaria, aggiungere uova a filo"
+ },
+ {
+  "n": "Bavarese al Cioccolato",
+  "c": "Mousse",
+  "s": "torte",
+  "i": [
+   [
+    "Cioccolato",
+    250,
+    "g"
+   ],
+   [
+    "Panna montata",
+    500,
+    "g"
+   ],
+   [
+    "Zucchero",
+    150,
+    "g"
+   ],
+   [
+    "Tuorli",
+    3,
+    "n°"
+   ],
+   [
+    "Colla di pesce",
+    4,
+    "g"
+   ],
+   [
+    "Vaniglia",
+    null,
+    "q.b."
+   ],
+   [
+    "Latte",
+    500,
+    "g"
+   ]
+  ],
+  "p": "Fare crema inglese, aggiungere colla di pesce e cioccolato. A 34° incorporare panna montata"
+ },
+ {
+  "n": "Pralinato in Grani",
+  "c": "Altro",
+  "s": "torte",
+  "i": [
+   [
+    "Nocciole tostate",
+    300,
+    "g"
+   ],
+   [
+    "Zucchero",
+    150,
+    "g"
+   ],
+   [
+    "Acqua",
+    48,
+    "g"
+   ],
+   [
+    "Sale Maldon",
+    6,
+    "g"
+   ]
+  ],
+  "p": "Portare a 110°, stendere su silpat"
+ },
+ {
+  "n": "Pralinato Feuilletine",
+  "c": "Altro",
+  "s": "torte",
+  "i": [
+   [
+    "Pralinato Valrhona",
+    100,
+    "g"
+   ],
+   [
+    "Cioccolato fondente",
+    100,
+    "g"
+   ],
+   [
+    "Pasta nocciola",
+    100,
+    "g"
+   ],
+   [
+    "Pralinato in grani",
+    300,
+    "g"
+   ],
+   [
+    "Feuilletine",
+    200,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Tortino Cioccolato",
+  "c": "Torte",
+  "s": "torte",
+  "i": [
+   [
+    "Cioccolato",
+    400,
+    "g"
+   ],
+   [
+    "Burro",
+    370,
+    "g"
+   ],
+   [
+    "Uova",
+    10,
+    "n°"
+   ],
+   [
+    "Zucchero",
+    400,
+    "g"
+   ],
+   [
+    "Farina",
+    160,
+    "g"
+   ]
+  ],
+  "p": "Sciogliere cioccolato+burro, versare su uova+zucchero montati, aggiungere farina"
+ },
+ {
+  "n": "Semifreddo Yogurt",
+  "c": "Semifreddi",
+  "s": "torte",
+  "i": [
+   [
+    "Albume",
+    150,
+    "g"
+   ],
+   [
+    "Zucchero",
+    250,
+    "g"
+   ],
+   [
+    "Panna fresca",
+    1100,
+    "g"
+   ],
+   [
+    "Yogurt liofilizzato",
+    null,
+    "q.b."
+   ],
+   [
+    "Gelatina",
+    10,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Cheesecake Yogurt",
+  "c": "Torte",
+  "s": "torte",
+  "i": [
+   [
+    "Yogurt",
+    1100,
+    "g"
+   ],
+   [
+    "Panna fresca",
+    1600,
+    "g"
+   ],
+   [
+    "Zucchero",
+    140,
+    "g"
+   ],
+   [
+    "Gelatina",
+    14,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    350,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Ganache Pistacchio",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Panna fresca",
+    450,
+    "g"
+   ],
+   [
+    "Cioccolato bianco Ivoire",
+    450,
+    "g"
+   ],
+   [
+    "Pasta pistacchio",
+    70,
+    "g"
+   ]
+  ],
+  "p": "Bollire panna + pasta pistacchio, versare sul cioccolato in 3 riprese"
+ },
+ {
+  "n": "Ganache Olio Oliva e Mandarino",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Panna fresca",
+    200,
+    "g"
+   ],
+   [
+    "Olio d'oliva al mandarino",
+    300,
+    "g"
+   ],
+   [
+    "Cioccolato bianco Ivoire",
+    450,
+    "g"
+   ]
+  ],
+  "p": "Bollire panna, versare sul cioccolato sciolto in 3 riprese. Sopra i 50° aggiungere olio con minipimer"
+ },
+ {
+  "n": "Ganache Olio Oliva e Vaniglia",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Panna fresca",
+    240,
+    "g"
+   ],
+   [
+    "Bacca vaniglia",
+    1,
+    "n°"
+   ],
+   [
+    "Olio extra vergine",
+    360,
+    "g"
+   ],
+   [
+    "Cioccolato bianco Ivoire",
+    540,
+    "g"
+   ]
+  ],
+  "p": "Bollire panna con vaniglia, versare sul cioccolato sciolto in 3 volte, aggiungere olio con minipimer"
+ },
+ {
+  "n": "Ganache Tartufo Nero",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Panna fresca",
+    400,
+    "g"
+   ],
+   [
+    "Tartufo nero",
+    40,
+    "g"
+   ],
+   [
+    "Cioccolato Ivoire",
+    500,
+    "g"
+   ]
+  ],
+  "p": "Bollire panna, versare sul tartufo e frullare 2 min. Versare panna sul cioccolato sciolto in 3 volte"
+ },
+ {
+  "n": "Ganache Mango",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Zucchero invertito",
+    40,
+    "g"
+   ],
+   [
+    "Purée mango",
+    250,
+    "g"
+   ],
+   [
+    "Cioccolato bianco Ivoire",
+    515,
+    "g"
+   ],
+   [
+    "Burro non salato",
+    25,
+    "g"
+   ]
+  ],
+  "p": "Sciogliere cioccolato. Riscaldare purée+zucchero invertito a 85-90°. Versare in 3 riprese. A 35° aggiungere burro"
+ },
+ {
+  "n": "Ganache Cioccolato Latte e Passion",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Panna fresca",
+    150,
+    "g"
+   ],
+   [
+    "Zucchero invertito",
+    50,
+    "g"
+   ],
+   [
+    "Cioccolato al latte",
+    500,
+    "g"
+   ],
+   [
+    "Burro",
+    40,
+    "g"
+   ],
+   [
+    "Purée passion fruit",
+    55,
+    "g"
+   ]
+  ],
+  "p": "Bollire panna+zucchero, versare su cioccolato a 35°. Aggiungere burro e purée, mixare"
+ },
+ {
+  "n": "Ganache Whisky",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Panna",
+    600,
+    "g"
+   ],
+   [
+    "Whisky",
+    50,
+    "g"
+   ],
+   [
+    "Zucchero invertito",
+    60,
+    "g"
+   ],
+   [
+    "Cioccolato 70%",
+    60,
+    "g"
+   ],
+   [
+    "Cioccolato al latte",
+    600,
+    "g"
+   ],
+   [
+    "Burro",
+    115,
+    "g"
+   ]
+  ],
+  "p": "Riscaldare panna+zucchero, versare su cioccolato+whisky a 30°, aggiungere burro e mixare"
+ },
+ {
+  "n": "Ganache Limone (Bonbon)",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Panna",
+    150,
+    "g"
+   ],
+   [
+    "Succo di limone",
+    70,
+    "g"
+   ],
+   [
+    "Cioccolato bianco",
+    330,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Ganache Nocciola e Tartufo",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Panna",
+    410,
+    "g"
+   ],
+   [
+    "Isomalto",
+    100,
+    "g"
+   ],
+   [
+    "Cioccolato 70%",
+    180,
+    "g"
+   ],
+   [
+    "Burro al tartufo",
+    65,
+    "g"
+   ],
+   [
+    "Tartufo grattugiato",
+    25,
+    "g"
+   ],
+   [
+    "Pasta nocciola tostata",
+    150,
+    "g"
+   ]
+  ],
+  "p": "Riscaldare panna, infusionare tartufo 20 min, mixare. Versare sul cioccolato+pasta nocciola. A 30° aggiungere burro"
+ },
+ {
+  "n": "Ganache Basilico e Olio",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Panna",
+    186,
+    "g"
+   ],
+   [
+    "Basilico fresco",
+    30,
+    "g"
+   ],
+   [
+    "Cioccolato bianco",
+    200,
+    "g"
+   ],
+   [
+    "Olio oliva",
+    200,
+    "g"
+   ]
+  ],
+  "p": "Infusionare panna 15 min, pesarne 150g, riscaldare e versare sul cioccolato. Emulsionare poi olio a filo come maionese"
+ },
+ {
+  "n": "Truffe al Mandarino",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Panna fresca",
+    1600,
+    "g"
+   ],
+   [
+    "Zucchero invertito",
+    160,
+    "g"
+   ],
+   [
+    "Sorbitolo",
+    120,
+    "g"
+   ],
+   [
+    "Cioccolato 60%",
+    2180,
+    "g"
+   ],
+   [
+    "Liquore mandarino-arancia",
+    300,
+    "g"
+   ]
+  ],
+  "p": "Bollire panna+zuccheri, versare sul cioccolato. Aggiungere liquore"
+ },
+ {
+  "n": "Truffe Classiche",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Cioccolato 70%",
+    500,
+    "g"
+   ],
+   [
+    "Panna fresca",
+    400,
+    "g"
+   ],
+   [
+    "Zucchero invertito",
+    20,
+    "g"
+   ],
+   [
+    "Glucosio",
+    50,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Gianduja Mandorla e Yuzu",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Cioccolato bianco",
+    800,
+    "g"
+   ],
+   [
+    "Cioccolato Inspiration Yuzu",
+    1000,
+    "g"
+   ],
+   [
+    "Pasta mandorla tostata",
+    600,
+    "g"
+   ],
+   [
+    "Burro di cacao",
+    20,
+    "g"
+   ],
+   [
+    "Burro",
+    100,
+    "g"
+   ],
+   [
+    "Sale",
+    5,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Ganache Tè Verde",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Panna",
+    500,
+    "g"
+   ],
+   [
+    "Zucchero invertito",
+    50,
+    "g"
+   ],
+   [
+    "Cioccolato Leche",
+    550,
+    "g"
+   ],
+   [
+    "Burro",
+    40,
+    "g"
+   ],
+   [
+    "Tè verde",
+    36,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Ganache Vaniglia",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Panna",
+    300,
+    "g"
+   ],
+   [
+    "Bacche vaniglia",
+    2,
+    "n°"
+   ],
+   [
+    "Cioccolato bianco",
+    300,
+    "g"
+   ],
+   [
+    "Burro",
+    150,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Ganache Lampone",
+  "c": "Ganache",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Purée lampone",
+    220,
+    "g"
+   ],
+   [
+    "Panna",
+    60,
+    "g"
+   ],
+   [
+    "Cioccolato Inspiration Lampone",
+    400,
+    "g"
+   ],
+   [
+    "Isomalto",
+    40,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Cioccolato Soffiato",
+  "c": "Altro",
+  "s": "fine-dining",
+  "piatto": "Cioccolatini",
+  "i": [
+   [
+    "Cioccolato fondente",
+    90,
+    "g"
+   ],
+   [
+    "Cioccolato al latte",
+    235,
+    "g"
+   ],
+   [
+    "Olio semi",
+    50,
+    "g"
+   ]
+  ],
+  "p": "Temperare cioccolato, aggiungere olio, mettere in sifone con 2 cariche. Sifonare in placchetta su ghiaccio, chiudere sottovuoto a 75/100. Riposare 45 min e aprire"
+ },
+ {
+  "n": "Guminola Pera e Yuzu",
+  "c": "Pasticcini",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Purée yuzu",
+    70,
+    "g"
+   ],
+   [
+    "Purée pera",
+    120,
+    "g"
+   ],
+   [
+    "Zucchero (1)",
+    14,
+    "g"
+   ],
+   [
+    "Pectina Jaune",
+    8,
+    "g"
+   ],
+   [
+    "Zucchero (2)",
+    160,
+    "g"
+   ],
+   [
+    "Glucosio liquido",
+    25,
+    "g"
+   ]
+  ],
+  "p": "Cuocere a 108°, estirare in placche, raffreddare e tagliare"
+ },
+ {
+  "n": "Marshmallow Fragola e Cocco",
+  "c": "Pasticcini",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Zucchero",
+    325,
+    "g"
+   ],
+   [
+    "Purée fragola",
+    135,
+    "g"
+   ],
+   [
+    "Zucchero invertito (1)",
+    105,
+    "g"
+   ],
+   [
+    "Gelatina",
+    26,
+    "g"
+   ],
+   [
+    "Zucchero invertito (2)",
+    150,
+    "g"
+   ]
+  ],
+  "p": "Cuocere purée+zucchero+primo zucchero invertito a 110°. Versare a filo sul secondo zucchero invertito a 45° + gelatina. Stendere, raffreddare, tagliare, impanare in cocco rapé"
+ },
+ {
+  "n": "Cantucci",
+  "c": "Pasticcini",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Zucchero",
+    800,
+    "g"
+   ],
+   [
+    "Uova",
+    6,
+    "n°"
+   ],
+   [
+    "Mandorle",
+    700,
+    "g"
+   ],
+   [
+    "Ammoniaca",
+    0.4,
+    "g"
+   ],
+   [
+    "Burro",
+    100,
+    "g"
+   ],
+   [
+    "Farina",
+    1000,
+    "g"
+   ],
+   [
+    "Lievito chimico",
+    15,
+    "g"
+   ]
+  ],
+  "p": "Cuocere 175° 25 min, tagliare e seccare 130° 20 min"
+ },
+ {
+  "n": "Baci di Dama",
+  "c": "Pasticcini",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Burro",
+    500,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    500,
+    "g"
+   ],
+   [
+    "Sale",
+    3,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    55,
+    "g"
+   ],
+   [
+    "Polvere di mandorle",
+    500,
+    "g"
+   ],
+   [
+    "Farina frolla",
+    550,
+    "g"
+   ]
+  ],
+  "p": "Impastare, stendere 1.5cm tra carte forno, frigo 12h. Tagliare cilindri 1.5cm Ø, formare palline, frigo 2h. Cottura 160° ventilato o 170°-185° statico, 18-20 min"
+ },
+ {
+  "n": "Macaron Bianchi",
+  "c": "Pasticcini",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Farina di mandorle",
+    300,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    300,
+    "g"
+   ],
+   [
+    "Albume liquido",
+    110,
+    "g"
+   ],
+   [
+    "Acqua",
+    100,
+    "g"
+   ],
+   [
+    "Zucchero semolato (sciroppo)",
+    300,
+    "g"
+   ],
+   [
+    "Albume (meringa)",
+    110,
+    "g"
+   ],
+   [
+    "Zucchero semolato (meringa)",
+    30,
+    "g"
+   ]
+  ],
+  "p": "Cuocere zucchero+acqua a 110°, versare sugli albumi semimontati con i 30g zucchero. A 50° unire alla massa polveri+albume in 3 volte. Cuocere forno ventilato 140°"
+ },
+ {
+  "n": "Amaretti al Mandarino",
+  "c": "Pasticcini",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Mandorle",
+    1350,
+    "g"
+   ],
+   [
+    "Sale fino",
+    4,
+    "g"
+   ],
+   [
+    "Buccia agrumi",
+    250,
+    "g"
+   ],
+   [
+    "Zucchero semolato",
+    1000,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    250,
+    "g"
+   ]
+  ],
+  "p": "Frullare nel cutter fino a 80°. Formare palline, bucare e riempire di marmellata. Cuocere ventilato 200° 6 min valvola chiusa"
+ },
+ {
+  "n": "Frollino Olio Nocciola",
+  "c": "Pasticcini",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Olio extra",
+    142,
+    "g"
+   ],
+   [
+    "Burro di cacao",
+    70,
+    "g"
+   ],
+   [
+    "Zucchero moscovado",
+    180,
+    "g"
+   ],
+   [
+    "Sale",
+    2,
+    "g"
+   ],
+   [
+    "Farina frolla",
+    355,
+    "g"
+   ],
+   [
+    "Tuorlo",
+    45,
+    "g"
+   ],
+   [
+    "Farina nocciole",
+    115,
+    "g"
+   ]
+  ],
+  "p": "Sciogliere burro di cacao a 36°, unire olio, stendere su marmo fino a cristallizzazione. Aggiungere aromi+sale, mescolare in planetaria, inserire farina+zucchero+nocciole poi tuorlo. Temp. finale 22°"
+ },
+ {
+  "n": "Pizzicotto Limone",
+  "c": "Pasticcini",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Farina di mandorle",
+    500,
+    "g"
+   ],
+   [
+    "Zucchero",
+    500,
+    "g"
+   ],
+   [
+    "Zest di limone",
+    3,
+    "n°"
+   ],
+   [
+    "Limoncello",
+    40,
+    "g"
+   ],
+   [
+    "Albume",
+    140,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Macine",
+  "c": "Pasticcini",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Farina frolla",
+    500,
+    "g"
+   ],
+   [
+    "Fecola di patate",
+    50,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    140,
+    "g"
+   ],
+   [
+    "Uova",
+    2,
+    "n°"
+   ],
+   [
+    "Burro a freddo",
+    200,
+    "g"
+   ],
+   [
+    "Fava tonka",
+    null,
+    "q.b."
+   ],
+   [
+    "Baking",
+    5,
+    "g"
+   ],
+   [
+    "Panna fresca",
+    40,
+    "g"
+   ]
+  ]
+ },
+ {
+  "n": "Frolla Montata",
+  "c": "Paste",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Burro",
+    200,
+    "g"
+   ],
+   [
+    "Zucchero a velo",
+    75,
+    "g"
+   ],
+   [
+    "Uova",
+    75,
+    "g"
+   ],
+   [
+    "Farina di nocciole",
+    50,
+    "g"
+   ],
+   [
+    "Farina",
+    250,
+    "g"
+   ],
+   [
+    "Baking",
+    2,
+    "g"
+   ],
+   [
+    "Aromi",
+    null,
+    "q.b."
+   ]
+  ]
+ },
+ {
+  "n": "Pâte de Fruit",
+  "c": "Pasticcini",
+  "s": "fine-dining",
+  "i": [
+   [
+    "Purée frutta",
+    1342,
+    "g"
+   ],
+   [
+    "Zucchero (1)",
+    1452,
+    "g"
+   ],
+   [
+    "Glucosio",
+    340,
+    "g"
+   ],
+   [
+    "Pectina",
+    40,
+    "g"
+   ],
+   [
+    "Zucchero (2)",
+    146,
+    "g"
+   ],
+   [
+    "Acido citrico",
+    10,
+    "g"
+   ],
+   [
+    "Acqua",
+    8,
+    "g"
+   ]
+  ],
+  "p": "Scaldare purée+zucchero(1)+glucosio a 45-50°. Aggiungere pectina+zucchero(2). Portare a 75°Brix. Togliere dal fuoco, aggiungere acido premiscelato con acqua. Versare negli stampi"
+ }
+]

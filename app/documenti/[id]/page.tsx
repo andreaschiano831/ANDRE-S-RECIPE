@@ -1,0 +1,29 @@
+import { notFound } from 'next/navigation'
+import Header from '@/components/Header'
+import DocumentEditor from '@/components/DocumentEditor'
+import { getSession } from '@/lib/supabase/server'
+import { RECIPE_SELECT, sortParts, type Recipe } from '@/lib/recipes'
+
+export const dynamic = 'force-dynamic'
+
+export default async function DocPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const s = (await getSession())!
+  const { data: doc } = await s.supabase.from('print_documents')
+    .select(`id, name, one_per_page, print_document_items(id, position, dose, recipes(${RECIPE_SELECT}))`)
+    .eq('id', id).maybeSingle()
+  if (!doc) notFound()
+  const { data: app } = await s.supabase.from('app_settings').select('name').eq('id', 1).maybeSingle()
+  const items = ((doc as any).print_document_items ?? [])
+    .filter((i: any) => i.recipes)
+    .sort((a: any, b: any) => a.position - b.position)
+    .map((i: any) => ({ id: i.id as string, dose: Number(i.dose), recipe: sortParts(i.recipes as Recipe) }))
+  return (
+    <>
+      <Header active="documenti" />
+      <main className="narrow page">
+        <DocumentEditor doc={{ id: doc.id, name: doc.name, one_per_page: doc.one_per_page }} initialItems={items} appName={app?.name ?? 'Ricettario'} />
+      </main>
+    </>
+  )
+}

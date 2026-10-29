@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Esporta dati Kitchen Pro</title>
+<style>
+  body{font-family:Georgia,serif;background:#F2EDE4;color:#151210;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;padding:20px}
+  .box{background:#fff;border-radius:16px;padding:28px;max-width:420px;box-shadow:0 8px 30px rgba(0,0,0,.08);text-align:center}
+  h1{font-style:italic;font-weight:400}
+  button{background:#8B1E2F;color:#fff;border:none;border-radius:10px;padding:12px 22px;font-size:16px;cursor:pointer}
+  p{color:#7A7168;font-size:14px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>Esporta i dati di Kitchen Pro</h1>
+  <p id="info"></p>
+  <button id="go">Scarica il file</button>
+  <p>Poi apri la nuova app → Cucina → la tua cucina → «Importa da file» e carica questo file.</p>
+</div>
+<script>
+  // Copia TUTTO ciò che Kitchen Pro ha salvato in questo browser (giacenze, MEP, HACCP, food cost…)
+  var storage = {};
+  for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); storage[k] = localStorage.getItem(k); }
+  var n = 0; try { n = JSON.parse(storage['kitchen-pro-v4'] || '{}').kitchens.length; } catch (e) {}
+  document.getElementById('info').textContent = n ? ('Trovate ' + n + ' cucine su questo dispositivo.') : 'Nessun dato di Kitchen Pro trovato in questo browser.';
+  document.getElementById('go').onclick = function () {
+    var blob = new Blob([JSON.stringify({ app: 'kitchen-pro', exportedAt: new Date().toISOString(), storage: storage })], { type: 'application/json' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = 'kitchen-pro-' + new Date().toISOString().slice(0, 10) + '.json'; a.click();
+  };
+</script>
+</body>
+</html>
