@@ -87,12 +87,12 @@ function beep() {
 }
 const mmss = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
 
-export default function RecipeView({ recipe, bookName, sectionName, backHref, canEdit }: {
-  recipe: Recipe; bookName: string; sectionName: string; backHref: string; canEdit: boolean
+export default function RecipeView({ recipe, bookName, sectionName, backHref, canEdit, initialDose = 1 }: {
+  recipe: Recipe; bookName: string; sectionName: string; backHref: string; canEdit: boolean; initialDose?: number
 }) {
   const router = useRouter()
   const { show, node } = useToast()
-  const [dose, setDose] = useState(1)
+  const [dose, setDose] = useState(initialDose)
   const [weighed, setWeighed] = useState<Set<number>>(new Set())
   const [doneSteps, setDoneSteps] = useState<Set<number>>(new Set())
   const [docOpen, setDocOpen] = useState(false)

@@ -5,6 +5,11 @@ import {
   useState, useEffect, useCallback, useRef, useMemo,
   useReducer, createContext, useContext,
 } from "react";
+import PiattiView from "./hub/Piatti";
+import LineaView from "./hub/Linea";
+import PreparazioniHub from "./hub/Preparazioni";
+import FoodCostView from "./hub/FoodCost";
+import Panoramica from "./hub/Panoramica";
 
 /* ════ useIsMobile — JS-based reactive, mai window.innerWidth diretto ════ */
 function useIsMobile(bp=768) {
@@ -195,6 +200,7 @@ function ensureKitchen(k) {
     wasteLog:[], tickets:[],
     service:null,
     piatti:[], calendarNotes:[],
+    listino:[], servizioPiano:{coperti:40, perPiatto:{}}, fcTarget:30,
     externalAppUrl:"",
     ...k
   };
@@ -391,6 +397,22 @@ function reducer(state, action) {
       return { ...state, kitchens: mapK(action.kitchenId, k=>({...k, calendarNotes:[action.note,...(k.calendarNotes||[])]}))};
     case "CALENDAR_NOTE_REMOVE":
       return { ...state, kitchens: mapK(action.kitchenId, k=>({...k, calendarNotes:(k.calendarNotes||[]).filter(n=>n.id!==action.id)}))};
+    /* ── LISTINO PREZZI, PIANO DI SERVIZIO ──────────── */
+    case "LISTINO_UPSERT":
+      return { ...state, kitchens: mapK(action.kitchenId, k=>{
+        const list = k.listino||[];
+        const has = list.some(x=>x.id===action.item.id);
+        return {...k, listino: has ? list.map(x=>x.id===action.item.id?{...x,...action.item}:x) : [action.item, ...list]};
+      })};
+    case "LISTINO_REMOVE":
+      return { ...state, kitchens: mapK(action.kitchenId, k=>({...k, listino:(k.listino||[]).filter(x=>x.id!==action.id)}))};
+    case "KITCHEN_PATCH": {
+      const allowed = ["servizioPiano","fcTarget"];
+      const patch = Object.fromEntries(Object.entries(action.patch||{}).filter(([key])=>allowed.includes(key)));
+      return { ...state, kitchens: mapK(action.kitchenId, k=>({...k, ...patch}))};
+    }
+    case "WASTE_REMOVE":
+      return { ...state, kitchens: mapK(action.kitchenId, k=>({...k, wasteLog:(k.wasteLog||[]).filter(x=>x.id!==action.id)}))};
     case "KITCHEN_SET_EXTERNAL_URL":
       return { ...state, kitchens: mapK(action.kitchenId, k=>({...k, externalAppUrl:action.url}))};
     default: return state;
@@ -529,6 +551,7 @@ function KitchenProvider({ children }) {
           insertedAt:item.insertedAt||nowISO(),insertedDate:item.insertedDate||todayDate(),
           expiresAt:item.expiresAt,lot:item.lot,notes:item.notes,category:item.category,
           parLevel:item.parLevel, partita:item.partita||undefined,
+          recipeId:item.recipeId||undefined, prezzoUnitario:item.prezzoUnitario||undefined,
         }});
       },
       adjustItem: (id, delta) => { const k=kid(); if(k)dispatch({type:"ITEM_ADJUST",kitchenId:k,id,delta:Number(delta)||0}); },
@@ -560,6 +583,12 @@ function KitchenProvider({ children }) {
           createdAt:nowISO(),
         }});
       },
+      prepAddFull: (prep) => { const k=kid(); if(!k||!(prep.nome||"").trim()) return;
+        dispatch({type:"PREP_ADD", kitchenId:k, prep:{
+          categoriaKey:prep.partita||"antipasti", reparto:prep.partita||"antipasti", partita:prep.partita||"antipasti",
+          station:prep.partita||"antipasti", turno:"mattina", status:"da_fare", destinazione:null, svoltaIl:null, smistataIl:null,
+          scadeIl:null, note:null, ...prep, id:genId(), nome:prep.nome.trim(), createdAt:nowISO(),
+        }}); },
       prepUpdate: (id, patch) => { const k=kid(); if(k)dispatch({type:"PREP_UPDATE",kitchenId:k,id,patch}); },
       prepRemove: (id) => { const k=kid(); if(k)dispatch({type:"PREP_REMOVE",kitchenId:k,id}); },
       prepStatus: (id, status) => { const k=kid(); if(k)dispatch({type:"PREP_STATUS",kitchenId:k,id,status}); },
@@ -604,6 +633,11 @@ function KitchenProvider({ children }) {
       piattoToggleActive: (id) => { const k=kid(); if(k)dispatch({type:"PIATTO_TOGGLE_ACTIVE",kitchenId:k,id}); },
       addCalendarNote: (note) => { const k=kid(); if(k)dispatch({type:"CALENDAR_NOTE_ADD",kitchenId:k,note:{...note,id:genId(),createdAt:nowISO()}}); },
       removeCalendarNote: (id) => { const k=kid(); if(k)dispatch({type:"CALENDAR_NOTE_REMOVE",kitchenId:k,id}); },
+      listinoUpsert: (item) => { const k=kid(); if(k)dispatch({type:"LISTINO_UPSERT",kitchenId:k,item:{...item,id:item.id||genId(),aggiornatoIl:nowISO()}}); },
+      listinoRemove: (id) => { const k=kid(); if(k)dispatch({type:"LISTINO_REMOVE",kitchenId:k,id}); },
+      kitchenPatch: (patch) => { const k=kid(); if(k)dispatch({type:"KITCHEN_PATCH",kitchenId:k,patch}); },
+      wasteRemove: (id) => { const k=kid(); if(k)dispatch({type:"WASTE_REMOVE",kitchenId:k,id}); },
+      canEdit: () => { const k=curKitchen(); const m=k?.members.find(x=>x.id===state.selectedMemberId)||k?.members[0]; return CAN_EDIT.includes(m?.role||"admin"); },
       setExternalAppUrl: (url) => { const k=kid(); if(k)dispatch({type:"KITCHEN_SET_EXTERNAL_URL",kitchenId:k,url}); },
     };
   }, [state]);
@@ -611,7 +645,8 @@ function KitchenProvider({ children }) {
 
   return <KCtx.Provider value={api}>{children}</KCtx.Provider>;
 }
-const useK = () => useContext(KCtx);
+export const useK = () => useContext(KCtx);
+export const getBridge = () => BRIDGE;
 
 /* ════════════════════════════════════════════════════════
    TOAST
@@ -641,7 +676,7 @@ function ToastProvider({ children }) {
     </ToastCtx.Provider>
   );
 }
-const useToast = () => useContext(ToastCtx);
+export const useToast = () => useContext(ToastCtx);
 
 /* ════════════════════════════════════════════════════════
    SPEECH HOOK
@@ -6757,7 +6792,7 @@ function ServizioViewFull({ t }) {
         </button>
       </div>
       {/* PIATTI TAB */}
-      {servTab==="piatti" && <PiattiManager t={t} copertiServizio={parseInt(coperti)||30}/>}
+      {servTab==="piatti" && <PiattiView/>}
       {/* CALENDARIO TAB */}
       {servTab==="calendario" && <SmartCalendario t={t}/>}
       {/* LIVE TAB */}
@@ -8498,9 +8533,11 @@ const NAV = [
 ];
 
 const SECTION_TITLE = {
-  dashboard:    "Command Center",
-  giacenze:     "Giacenze & Inventario",
-  preparazioni: "Preparazioni & MEP",
+  dashboard:    "Panoramica",
+  piatti:       "Piatti",
+  linea:        "Linea",
+  giacenze:     "Magazzino",
+  preparazioni: "Preparazioni",
   servizio:     "Servizio Live",
   spesa:        "Lista della Spesa",
   economato:    "Economato",
@@ -9419,16 +9456,19 @@ function KitchenProInner() {
           overflow:"auto",
         }} key={section}>
           <div style={{animation:ready?"cardIn 0.45s cubic-bezier(0.4,0,0.2,1) both":"none",width:"100%",minWidth:0}}>
-            {section==="dashboard"    && <DashboardView t={t}/>}
+            {section==="dashboard"    && <Panoramica/>}
+            {section==="dashboard"    && <details style={{marginTop:24}}><summary style={{cursor:"pointer",color:t.inkMuted,fontSize:14,padding:"8px 0"}}>Indicatori del magazzino</summary><div style={{marginTop:12}}><DashboardView t={t}/></div></details>}
+            {section==="piatti"       && <PiattiView/>}
+            {section==="linea"        && <LineaView/>}
             {section==="giacenze"     && <InventoryView t={t}/>}
-            {section==="preparazioni" && <PrepMepView t={t}/>}
-            {section==="preparazioni" && isMobile && <QuickPrepFAB t={t}/>}
+            {section==="preparazioni" && <PreparazioniHub legacy={<PrepMepView t={t}/>}/>}
+            {false && section==="preparazioni" && isMobile && <QuickPrepFAB t={t}/>}
             {section==="spesa"        && <SpesaView t={t}/>}
             {section==="economato"    && <EconomatoView t={t}/>}
             {section==="servizio"     && <ServizioViewFull t={t}/>}
             {section==="haccp"        && <HaccpViewFull t={t}/>}
             {section==="spttp"        && <SpttpView t={t}/>}
-            {section==="foodcost"     && <FoodCostViewFull t={t}/>}
+            {section==="foodcost"     && <FoodCostView/>}
             {section==="brigata"      && <BrigataBridgeView t={t}/>}
             {section==="settings"     && <SettingsView t={t}/>}
           </div>

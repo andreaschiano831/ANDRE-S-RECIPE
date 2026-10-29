@@ -6,8 +6,9 @@ import { RECIPE_SELECT, sortParts, type Recipe } from '@/lib/recipes'
 
 export const dynamic = 'force-dynamic'
 
-export default async function RecipePage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
+export default async function RecipePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ dose?: string }> }) {
+  const [{ id }, { dose }] = await Promise.all([params, searchParams])
+  const d = parseFloat(String(dose ?? '').replace(',', '.'))
   const s = (await getSession())!
   const [{ data }, { books, sections }] = await Promise.all([
     s.supabase.from('recipes').select(RECIPE_SELECT).eq('id', id).maybeSingle(),
@@ -19,6 +20,6 @@ export default async function RecipePage({ params }: { params: Promise<{ id: str
   const book = books.find((b) => b.id === sec?.book_id)
   return (
     <RecipeView recipe={recipe} bookName={books.length > 1 ? book?.name ?? '' : ''} sectionName={sec?.name ?? ''}
-      backHref={`/ricette?ricettario=${book?.id ?? ''}&sezione=${sec?.id ?? ''}`} canEdit={s.canEdit} />
+      backHref={`/ricette?ricettario=${book?.id ?? ''}&sezione=${sec?.id ?? ''}`} canEdit={s.canEdit} initialDose={d > 0 && d <= 100 ? d : 1} />
   )
 }
