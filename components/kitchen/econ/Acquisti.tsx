@@ -1,5 +1,6 @@
 'use client'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useEnav } from './nav'
 import { FileUp, Loader2, Plus, Search, Trash2 } from 'lucide-react'
 import { Drawer, askAI, shrinkImage, useHub } from '../hub/ui'
 import { norm, type ListinoItem } from '../hub/model'
@@ -31,13 +32,17 @@ export default function Acquisti({ p }: { p: Period }) {
   const [f, setF] = useState<'periodo' | 'dapagare' | 'tutte'>('periodo')
   const [q, setQ] = useState('')
   const file = useRef<HTMLInputElement>(null)
+  const nav = useEnav()
+  // file scelti dal pulsante rapido "Carica fattura"
+  useEffect(() => { if (nav.files?.length) { const f = nav.files; nav.clearFiles?.(); onFiles(f) } }, [nav.files]) // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (nav.intent === 'dapagare') { setF('dapagare'); nav.clearIntent?.() } }, [nav.intent]) // eslint-disable-line react-hooks/exhaustive-deps
   const all = fatture(recs)
   const inPeriod = all.filter((r) => new Date(r.at) >= p.from && new Date(r.at) <= p.to)
   const acq = acquisti(inPeriod)
   const list = (f === 'periodo' ? inPeriod : f === 'dapagare' ? all.filter((r) => !r.data.pagata && r.data.totale > 0) : all)
     .filter((r) => !q || norm(`${r.data.fornitore} ${r.data.numero} ${r.data.righe.map((x) => x.nome).join(' ')}`).includes(norm(q)))
 
-  async function onFiles(files: FileList) {
+  async function onFiles(files: FileList | File[]) {
     const out: Fattura[] = []
     for (const file of Array.from(files)) {
       setBusy(`Leggo ${file.name}…`)

@@ -3,6 +3,7 @@ import { AlertTriangle, ArrowRight, CheckCircle2, ClipboardCheck, Droplets, Pack
 import { useHub } from '../hub/ui'
 import { useHaccp } from './store'
 import { useNav, type Tab } from './nav'
+import { MC, mc } from '../quick/Quick'
 import { useCompleteTask, dueLabel, dueTone } from './Scadenze'
 import { abbState, daysTo, fmtTime, isToday, num, sanifDue, unitState, type AbbData, type EtiData, type NcData, type OlioData, type Rec, type RicData, type SanifData, type TempData } from './model'
 
@@ -41,15 +42,15 @@ export default function Oggi() {
   const ricNc = o.ric.filter((r) => r.data.esito === 'non_conforme').length
   const due = o.tasks.filter((x) => x.d <= 30)
 
-  const areas: { tab: Tab; icon: React.ReactNode; value: string; sub: string; title: string; tone: 'ok' | 'warn' | 'danger' | '' }[] = [
-    { tab: 'temp', icon: <Thermometer />, value: `${tDone}/${o.units.length}`, sub: 'rilevate oggi', title: 'Temperature', tone: o.units.some((x) => x.status === 'alarm') ? 'danger' : tDone < o.units.length ? 'warn' : 'ok' },
-    { tab: 'sanif', icon: <SprayCan />, value: `${sPct}%`, sub: `${sDone} su ${o.sanif.length} fatte`, title: 'Sanificazione', tone: sPct === 100 ? 'ok' : 'warn' },
-    { tab: 'merci', icon: <PackageCheck />, value: String(o.ric.length), sub: ricNc ? `${ricNc} non conformi` : 'consegne in 30 giorni', title: 'Ricevimento merci', tone: ricNc ? 'warn' : '' },
-    { tab: 'abb', icon: <Snowflake />, value: String(o.abbLive.length), sub: o.abbLive.length ? 'in corso' : `${o.abb.filter((r) => isToday(r.at)).length} oggi`, title: 'Abbattimenti', tone: o.abbLive.some((r) => abbState(r.data).over) ? 'danger' : o.abbLive.length ? 'warn' : '' },
-    { tab: 'eti', icon: <Tag />, value: String(o.eti.length), sub: 'stampate oggi', title: 'Etichette', tone: '' },
-    { tab: 'olio', icon: <Droplets />, value: `${fDone}/${o.fryers.length}`, sub: 'controllate oggi', title: 'Olio frittura', tone: o.fryers.some((x) => x.today?.data.caso === 3 && !x.today.data.cambio) ? 'danger' : fDone < o.fryers.length ? 'warn' : 'ok' },
-    { tab: 'nc', icon: <ShieldAlert />, value: String(o.nc.length), sub: 'aperte', title: 'Non conformità', tone: o.nc.length ? 'danger' : 'ok' },
-    { tab: 'scad', icon: <CalendarClock />, value: String(due.length), sub: 'entro 30 giorni', title: 'Scadenze', tone: o.tasks.some((x) => x.d < 0) ? 'danger' : due.some((x) => x.d <= 7) ? 'warn' : '' },
+  const areas: { tab: Tab; icon: React.ReactNode; value: string; sub: string; title: string; tone: 'ok' | 'warn' | 'danger' | ''; color?: string }[] = [
+    { color: MC.blu, tab: 'temp', icon: <Thermometer />, value: `${tDone}/${o.units.length}`, sub: 'rilevate oggi', title: 'Temperature', tone: o.units.some((x) => x.status === 'alarm') ? 'danger' : tDone < o.units.length ? 'warn' : 'ok' },
+    { color: MC.verde, tab: 'sanif', icon: <SprayCan />, value: `${sPct}%`, sub: `${sDone} su ${o.sanif.length} fatte`, title: 'Sanificazione', tone: sPct === 100 ? 'ok' : 'warn' },
+    { color: MC.arancio, tab: 'merci', icon: <PackageCheck />, value: String(o.ric.length), sub: ricNc ? `${ricNc} non conformi` : 'consegne in 30 giorni', title: 'Ricevimento merci', tone: ricNc ? 'warn' : '' },
+    { color: MC.viola, tab: 'abb', icon: <Snowflake />, value: String(o.abbLive.length), sub: o.abbLive.length ? 'in corso' : `${o.abb.filter((r) => isToday(r.at)).length} oggi`, title: 'Abbattimenti', tone: o.abbLive.some((r) => abbState(r.data).over) ? 'danger' : o.abbLive.length ? 'warn' : '' },
+    { color: MC.rosso, tab: 'eti', icon: <Tag />, value: String(o.eti.length), sub: 'stampate oggi', title: 'Etichette', tone: '' },
+    { color: MC.oro, tab: 'olio', icon: <Droplets />, value: `${fDone}/${o.fryers.length}`, sub: 'controllate oggi', title: 'Olio frittura', tone: o.fryers.some((x) => x.today?.data.caso === 3 && !x.today.data.cambio) ? 'danger' : fDone < o.fryers.length ? 'warn' : 'ok' },
+    { color: MC.rosa, tab: 'nc', icon: <ShieldAlert />, value: String(o.nc.length), sub: 'aperte', title: 'Non conformità', tone: o.nc.length ? 'danger' : 'ok' },
+    { color: MC.teal, tab: 'scad', icon: <CalendarClock />, value: String(due.length), sub: 'entro 30 giorni', title: 'Scadenze', tone: o.tasks.some((x) => x.d < 0) ? 'danger' : due.some((x) => x.d <= 7) ? 'warn' : '' },
   ]
 
   const todo: { key: string; text: string; sub: string; action: string; run: () => void }[] = [
@@ -75,8 +76,10 @@ export default function Oggi() {
 
       <div className="hz-areas">
         {areas.map((a) => (
-          <button key={a.tab} className={`hz-area ${a.tone}`} onClick={() => nav.go(a.tab)}>
+          <button key={a.tab} className={`hz-area ${a.tone}`} style={mc(a.color!)} onClick={() => nav.go(a.tab)}>
             <span className="hz-area-ic">{a.icon}</span>
+            {a.tone && a.tone !== 'ok' && <span className={`hz-area-flag ${a.tone}`}>{a.tone === 'danger' ? 'Allarme' : 'Da fare'}</span>}
+            {a.tone === 'ok' && <span className="hz-area-flag ok">OK</span>}
             <b>{a.value}</b><small>{a.sub}</small>
             <span className="hz-area-t">{a.title}</span>
           </button>

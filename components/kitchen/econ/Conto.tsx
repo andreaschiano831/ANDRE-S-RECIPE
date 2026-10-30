@@ -1,5 +1,6 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useEnav } from './nav'
 import { Plus, Trash2 } from 'lucide-react'
 import { Drawer, useHub } from '../hub/ui'
 import { useEcon } from './store'
@@ -13,6 +14,8 @@ export default function Conto() {
   const [year, setYear] = useState(now.getFullYear())
   const [edit, setEdit] = useState<{ c: Costo; rec?: ERec<Costo> } | null>(null)
   const cs = costi(recs)
+  const nav = useEnav()
+  useEffect(() => { if (nav.intent === 'costo') { setEdit({ c: { mese: monthKey(), voce: '', categoria: 'personale', importo: 0, ricorrente: true } }); nav.clearIntent?.() } }, [nav.intent]) // eslint-disable-line react-hooks/exhaustive-deps
   const months = MESI.map((_, i) => `${year}-${String(i + 1).padStart(2, '0')}`)
   const curM = monthKey()
   const rows = months.map((m) => {

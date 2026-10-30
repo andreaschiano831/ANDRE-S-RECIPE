@@ -67,7 +67,11 @@ export function HBars({ rows, fmt = eur0, max }: { rows: { label: string; value:
   )
 }
 
-export function Kpi({ label, value, sub, tone, onClick }: { label: string; value: string; sub?: React.ReactNode; tone?: 'ok' | 'warn' | 'danger' | ''; onClick?: () => void }) {
+export function Kpi({ label, value, sub, tone, onClick, icon, color }: { label: string; value: string; sub?: React.ReactNode; tone?: 'ok' | 'warn' | 'danger' | ''; onClick?: () => void; icon?: React.ReactNode; color?: string }) {
   const C = onClick ? 'button' : 'div'
-  return <C className={`ec-kpi ${tone || ''}`} onClick={onClick}><span>{label}</span><b>{value}</b>{sub && <small>{sub}</small>}</C>
+  return (
+    <C className={`ec-kpi ${tone || ''} ${color ? 'tinted' : ''}`} style={color ? ({ ['--c' as any]: color } as React.CSSProperties) : undefined} onClick={onClick}>
+      <span className="ec-kpi-l">{label}{icon && <i className="ec-kpi-ic">{icon}</i>}</span><b>{value}</b>{sub && <small>{sub}</small>}
+    </C>
+  )
 }

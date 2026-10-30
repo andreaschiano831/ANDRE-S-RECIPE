@@ -8,6 +8,8 @@ export type Nav = {
   openNc: (prefill?: Partial<NcData> & { id?: string }) => void
   openEtichetta: (prefill?: Partial<EtiData>) => void
   openTemp: (unitId: string) => void
+  intent?: string | null
+  clearIntent?: () => void
 }
 export const NavCtx = createContext<Nav>({ go: () => {}, openNc: () => {}, openEtichetta: () => {}, openTemp: () => {} })
 export const useNav = () => useContext(NavCtx)

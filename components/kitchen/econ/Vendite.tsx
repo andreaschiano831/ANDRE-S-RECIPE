@@ -1,5 +1,6 @@
 'use client'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useEnav } from './nav'
 import { CalendarCheck, Plus, Trash2 } from 'lucide-react'
 import { Drawer, Stepper, useHub } from '../hub/ui'
 import { piattoCost, type Piatto, type RecipeCost } from '../hub/model'
@@ -27,6 +28,12 @@ export default function Vendite({ p }: { p: Period }) {
   const cache = useMemo(() => new Map<string, RecipeCost>(), [ctx])
   const costOf = (id?: string | null) => { const pt = piatti.find((x) => x.id === id); if (!pt) return null; const c = piattoCost(pt, ctx, cache); return c.complete ? r2(c.cost) : null }
   const bs = buckets(p)
+  const nav = useEnav()
+  useEffect(() => {
+    if (nav.intent === 'chiudi' && aperto.righe.length) setClose(newDay(aperto.righe, 'servizio'))
+    else if (nav.intent === 'chiudi' || nav.intent === 'nuova') setClose(newDay([], 'manuale'))
+    if (nav.intent) nav.clearIntent?.()
+  }, [nav.intent]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const me = useMemo(() => {
     const m = new Map<string, { nome: string; qta: number; ricavo: number; costo: number; conCosto: boolean }>()

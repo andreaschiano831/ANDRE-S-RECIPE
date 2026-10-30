@@ -1,5 +1,5 @@
 'use client'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Camera, Check, Loader2, PackagePlus, Plus, Trash2, X } from 'lucide-react'
 import { Drawer, askAI, shrinkImage, useHub } from '../hub/ui'
 import { useHaccp } from './store'
@@ -52,6 +52,8 @@ function RicForm({ onDone, initial, recId }: { onDone: () => void; initial?: Ric
   const [load, setLoad] = useState(!initial)
   const [busy, setBusy] = useState('')
   const file = useRef<HTMLInputElement>(null)
+  const navI = useNav()
+  useEffect(() => { if (navI.intent === 'merci-foto' && !initial) { navI.clearIntent?.(); try { file.current?.click() } catch {} } }, [navI.intent]) // eslint-disable-line react-hooks/exhaustive-deps
   const fornitori = useMemo(() => [...new Set([...recs.filter((r) => r.kind === 'ricevimento').map((r) => r.data.fornitore), ...listino.map((l) => l.fornitore || '')].filter(Boolean))].sort(), [recs, listino])
   const max = catMax(d.categoria)
   const t = parseNum(tempTxt)

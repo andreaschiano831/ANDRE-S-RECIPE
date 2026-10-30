@@ -1,6 +1,7 @@
 'use client'
 import { useMemo, useState } from 'react'
-import { ArrowUpRight, FileUp, ReceiptText, Store, Wallet } from 'lucide-react'
+import { ArrowUpRight, Boxes, Coins, FileUp, PiggyBank, ReceiptText, ShoppingCart, Store, Target, UtensilsCrossed, Wallet } from 'lucide-react'
+import { MC } from '../quick/Quick'
 import { useHub } from '../hub/ui'
 import { priceFor, toBase, type RecipeCost, type StockItem, type Ctx } from '../hub/model'
 import { useEcon } from './store'
@@ -65,12 +66,12 @@ export default function Panoramica({ p }: { p: Period }) {
       </div>
 
       <div className="ec-kpis">
-        <Kpi label="Ricavi" value={eur0(ric.incasso)} sub={ric.coperti ? `${ric.coperti} coperti · scontrino medio ${eur2(ric.incasso / ric.coperti)}` : `${vs.length} giornate registrate`} onClick={() => nav.go('vendite')} />
-        <Kpi label={`Acquisti ${cat === 'tutto' ? '' : CAT_LABEL[cat].toLowerCase()}`} value={eur0(acqSel)} sub={`${fs.length} fatture · IVA esclusa`} onClick={() => nav.go('acquisti')} />
-        <Kpi label="Food cost reale" value={pct(fcReale)} tone={fcReale == null ? '' : fcReale <= target ? 'ok' : fcReale <= target + 5 ? 'warn' : 'danger'} sub={`acquisti food su ricavi · obiettivo ${target}%`} />
-        <Kpi label="Food cost teorico" value={pct(ric.fcTeorico)} sub={ric.fcTeorico != null && fcReale != null ? `scarto ${pct(fcReale - ric.fcTeorico)}: sprechi, porzioni, scorte` : 'dalle ricette dei piatti venduti'} onClick={() => nav.go('foodcost')} />
-        <Kpi label="Margine sulle materie" value={eur0(ric.incasso - acq.tot)} tone={ric.incasso ? (ric.incasso - acq.tot >= 0 ? 'ok' : 'danger') : ''} sub={bevPct != null ? `beverage cost ${pct(bevPct)}` : 'ricavi meno acquisti'} />
-        <Kpi label="Valore magazzino" value={eur0(sv.tot)} sub={`oggi · sprechi nel periodo ${eur0(sprechi)}`} onClick={() => nav.go('magazzino')} />
+        <Kpi icon={<Coins />} color={MC.blu} label="Ricavi" value={eur0(ric.incasso)} sub={ric.coperti ? `${ric.coperti} coperti · scontrino medio ${eur2(ric.incasso / ric.coperti)}` : `${vs.length} giornate registrate`} onClick={() => nav.go('vendite')} />
+        <Kpi icon={<ShoppingCart />} color={MC.arancio} label={`Acquisti ${cat === 'tutto' ? '' : CAT_LABEL[cat].toLowerCase()}`} value={eur0(acqSel)} sub={`${fs.length} fatture · IVA esclusa`} onClick={() => nav.go('acquisti')} />
+        <Kpi icon={<Target />} color={MC.verde} label="Food cost reale" value={pct(fcReale)} tone={fcReale == null ? '' : fcReale <= target ? 'ok' : fcReale <= target + 5 ? 'warn' : 'danger'} sub={`acquisti food su ricavi · obiettivo ${target}%`} />
+        <Kpi icon={<UtensilsCrossed />} color={MC.viola} label="Food cost teorico" value={pct(ric.fcTeorico)} sub={ric.fcTeorico != null && fcReale != null ? `scarto ${pct(fcReale - ric.fcTeorico)}: sprechi, porzioni, scorte` : 'dalle ricette dei piatti venduti'} onClick={() => nav.go('foodcost')} />
+        <Kpi icon={<PiggyBank />} color={MC.teal} label="Margine sulle materie" value={eur0(ric.incasso - acq.tot)} tone={ric.incasso ? (ric.incasso - acq.tot >= 0 ? 'ok' : 'danger') : ''} sub={bevPct != null ? `beverage cost ${pct(bevPct)}` : 'ricavi meno acquisti'} />
+        <Kpi icon={<Boxes />} color={MC.oro} label="Valore magazzino" value={eur0(sv.tot)} sub={`oggi · sprechi nel periodo ${eur0(sprechi)}`} onClick={() => nav.go('magazzino')} />
       </div>
 
       <section className="panel ec-panel">

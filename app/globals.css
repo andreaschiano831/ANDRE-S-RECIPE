@@ -954,3 +954,75 @@ button.ec-kpi{cursor:pointer;transition:border-color .15s,transform .15s}button.
 .ec-pl tr.cur td{background:var(--sunk)}.ec-pl tr.tot td{font-weight:600;border-top:2px solid var(--line-2)}
 .ec-open{overflow:hidden;border-color:var(--accent)}
 @media(max-width:640px){.ec-kpis{grid-template-columns:1fr 1fr}.ec-kpi b{font-size:1.45rem}.ec-hbar{grid-template-columns:minmax(90px,38%) 1fr auto}}
+
+/* ── AZIONI RAPIDE, STRUMENTI, ASSISTENTE (HACCP e conti) ── */
+.qk-head-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.qk-head-btns{display:flex;gap:8px;margin-left:auto}
+.qk-status{display:flex;align-items:center;gap:10px;text-align:left;padding:8px 14px 8px 12px;border-radius:14px;background:var(--card);border:1px solid var(--line);min-width:0;max-width:100%}
+.qk-status span{display:flex;flex-direction:column;min-width:0}.qk-status b{font-weight:600;font-size:.9rem}.qk-status small{font-size:.76rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qk-status.ok{background:var(--ok-soft);border-color:transparent}.qk-status.ok svg,.qk-status.ok b{color:var(--ok)}
+.qk-status.warn{background:var(--warn-soft);border-color:transparent}.qk-status.warn svg,.qk-status.warn b{color:var(--warn)}
+.qk-status.danger{background:var(--danger-soft);border-color:transparent}.qk-status.danger svg,.qk-status.danger b{color:var(--danger)}
+.qk-ask{background:linear-gradient(135deg,var(--accent-soft),var(--card));border-color:color-mix(in srgb,var(--accent) 40%,transparent);color:var(--accent-ink)}
+.qk-panic{background:var(--danger);border-color:var(--danger);color:#fff;border-radius:999px;padding-inline:14px}
+.qk-panic:hover{background:color-mix(in srgb,var(--danger) 85%,#000);color:#fff;border-color:transparent}
+.qk-bar{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:none;scroll-snap-type:x proximity}
+.qk-bar::-webkit-scrollbar{display:none}
+.qk-act{--c:var(--accent);flex:1 0 150px;max-width:220px;display:flex;align-items:center;gap:10px;text-align:left;padding:10px 12px;border-radius:16px;scroll-snap-align:start;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--c) 11%,var(--card)),var(--card) 70%);border:1px solid color-mix(in srgb,var(--c) 22%,var(--line));transition:transform .15s,box-shadow .15s,border-color .15s}
+.qk-act:hover{transform:translateY(-2px);box-shadow:0 12px 24px -16px var(--c);border-color:color-mix(in srgb,var(--c) 50%,transparent)}
+.qk-act:active{transform:scale(.97)}
+.qk-ic{width:38px;height:38px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--c);color:#fff;box-shadow:0 6px 14px -8px var(--c)}
+.qk-ic svg{width:19px;height:19px}
+.qk-tx{display:flex;flex-direction:column;min-width:0}.qk-tx b{font-weight:600;font-size:.9rem;line-height:1.2}.qk-tx small{font-size:.74rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qk-act.hot{border-color:color-mix(in srgb,var(--c) 55%,transparent)}
+.qk-act.hot .qk-tx small{color:color-mix(in srgb,var(--c) 80%,var(--ink));font-weight:500}
+.qk-act.hot .qk-ic{position:relative}.qk-act.hot .qk-ic::after{content:"";position:absolute;top:-3px;right:-3px;width:10px;height:10px;border-radius:50%;background:var(--danger);border:2px solid var(--card)}
+@media(max-width:640px){.qk-act{flex:0 0 152px}}
+.qk-tabs button .qk-tab-ic{display:inline-flex;width:22px;height:22px;border-radius:7px;align-items:center;justify-content:center;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c)}
+.qk-tabs button .qk-tab-ic svg{width:13px;height:13px;opacity:1}
+.qk-tabs button.on .qk-tab-ic{background:var(--c);color:#fff}
+.qk-tabs button.on{border-bottom-color:var(--c)}
+/* pannello strumenti */
+.qk-bg{position:fixed;inset:0;z-index:170;background:rgba(15,17,28,.45);backdrop-filter:blur(4px);display:flex;align-items:flex-start;justify-content:center;padding:8vh 16px 16px;animation:fade .15s}
+.qk-panel{width:min(760px,100%);max-height:84vh;display:flex;flex-direction:column;background:var(--card);border-radius:20px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5);overflow:hidden;animation:cmdIn .18s cubic-bezier(.2,.8,.2,1)}
+.qk-head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);color:var(--muted)}
+.qk-head input{flex:1;border:none;background:transparent;outline:none;font-size:1.02rem;color:var(--ink)}
+.qk-body{overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:18px}
+.qk-body section{display:flex;flex-direction:column;gap:8px}
+.qk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.qk-tile{--c:var(--accent);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:14px 8px 12px;border-radius:14px;border:1px solid transparent;transition:background .12s,border-color .12s}
+.qk-tile b{font-weight:500;font-size:.86rem;line-height:1.2}.qk-tile small{font-size:.72rem;color:var(--muted);line-height:1.25}
+.qk-tile.hi,.qk-tile:hover{background:color-mix(in srgb,var(--c) 9%,var(--card));border-color:color-mix(in srgb,var(--c) 25%,transparent)}
+.qk-tile .qk-ic{width:44px;height:44px;border-radius:50%}
+/* scelta frigo */
+.qk-units{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.qk-unit{--c:var(--accent);display:flex;flex-direction:column;gap:2px;text-align:left;padding:14px;border-radius:16px;border:1.5px solid var(--line);background:var(--card)}
+.qk-unit b{font-weight:600}.qk-unit small{font-size:.76rem;color:var(--muted)}
+.qk-unit-v{font-family:var(--f-display);font-size:1.8rem;line-height:1.1;font-variant-numeric:lining-nums}
+.qk-unit.todo{border-color:color-mix(in srgb,var(--c) 50%,transparent);background:color-mix(in srgb,var(--c) 7%,var(--card))}
+.qk-unit.alarm{border-color:var(--danger);background:var(--danger-soft)}.qk-unit.alarm .qk-unit-v{color:var(--danger)}
+/* assistente */
+.qk-sugg{display:flex;flex-direction:column;gap:8px}
+.qk-sug{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--card);font-size:.9rem}
+.qk-sug:hover{border-color:var(--accent)}
+.qk-chat{display:flex;flex-direction:column;gap:10px}
+.qk-msg{max-width:92%;padding:11px 14px;border-radius:16px;font-size:.92rem;line-height:1.5;display:flex;flex-direction:column;gap:8px}
+.qk-msg p{white-space:pre-wrap;margin:0}
+.qk-msg.user{align-self:flex-end;background:var(--ink);color:var(--paper);border-bottom-right-radius:5px}
+.qk-msg.ai{align-self:flex-start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:5px}
+.qk-ask-in{display:flex;gap:8px}.qk-ask-in .input{flex:1}
+@media(max-width:640px){.qk-head-btns{width:100%}.qk-head-btns .btn{flex:1}.qk-status{width:100%}}
+
+/* aree colorate (Oggi HACCP) e KPI con icona */
+.hz-area{--c:var(--accent);background:linear-gradient(165deg,color-mix(in srgb,var(--c) 10%,var(--card)),var(--card) 65%)}
+.hz-area .hz-area-ic{background:var(--c);color:#fff;box-shadow:0 6px 14px -8px var(--c)}
+.hz-area .hz-area-t,.hz-area.ok .hz-area-t,.hz-area.warn .hz-area-t{background:var(--c);color:#fff;border-color:transparent}
+.hz-area.danger{border-color:var(--danger)}.hz-area.danger .hz-area-t{background:var(--danger)}.hz-area.danger .hz-area-ic{background:var(--danger);color:#fff}
+.hz-area-flag{position:absolute;top:12px;right:12px;font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--sunk);color:var(--ink-2)}
+.hz-area-flag.ok{background:var(--ok-soft);color:var(--ok)}.hz-area-flag.warn{background:var(--warn-soft);color:var(--warn)}.hz-area-flag.danger{background:var(--danger);color:#fff}
+.ec-kpi.tinted{background:linear-gradient(165deg,color-mix(in srgb,var(--c) 9%,var(--card)),var(--card) 60%);border-top-color:var(--c)}
+.ec-kpi.tinted.ok{border-top-color:var(--ok)}.ec-kpi.tinted.warn{border-top-color:var(--warn)}.ec-kpi.tinted.danger{border-top-color:var(--danger)}
+.ec-kpi-l{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ec-kpi-ic{width:30px;height:30px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--c) 15%,transparent);color:var(--c);flex-shrink:0}
+.ec-kpi-ic svg{width:16px;height:16px}

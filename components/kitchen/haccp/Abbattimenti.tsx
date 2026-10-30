@@ -18,6 +18,8 @@ export default function Abbattimenti() {
   const [nuovo, setNuovo] = useState(false)
   const [fine, setFine] = useState<Rec<AbbData> | null>(null)
   const [after, setAfter] = useState<Rec<AbbData> | null>(null)
+  const nav = useNav()
+  useEffect(() => { if (nav.intent === 'abb-new') { setNuovo(true); nav.clearIntent?.() } }, [nav.intent]) // eslint-disable-line react-hooks/exhaustive-deps
   const all = recs.filter((r) => r.kind === 'abbattimento') as Rec<AbbData>[]
   const live = all.filter((r) => !r.data.fine)
   const done = all.filter((r) => r.data.fine)
