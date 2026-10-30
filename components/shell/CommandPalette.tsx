@@ -53,6 +53,7 @@ export default function CommandPalette({ onClose, user, kitchens }: {
       { id: 'n-home', label: 'Home', group: 'Vai a', icon: APP_ICON.home, run: go('/') },
       { id: 'n-ric', label: 'Ricette', group: 'Vai a', icon: APP_ICON.ricette, run: go('/ricette') },
       { id: 'n-doc', label: 'Stampa e documenti', group: 'Vai a', icon: APP_ICON.documenti, run: go('/documenti') },
+      { id: 'n-lib-ebook', label: 'Biblioteca (ebook)', group: 'Vai a', icon: APP_ICON.biblioteca, run: go('/biblioteca'), keywords: 'libri epub pdf leggere kindle' },
       { id: 'n-set', label: 'Impostazioni', group: 'Vai a', icon: APP_ICON.impostazioni, run: go('/impostazioni') },
       { id: 'n-cuc', label: 'Cucine', group: 'Vai a', icon: ChefHat, run: go('/cucine') },
     )

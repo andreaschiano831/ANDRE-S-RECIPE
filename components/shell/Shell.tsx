@@ -45,6 +45,7 @@ function Nav({ appName, tagline, user, kitchens, onSearch }: { appName: string; 
           {link('/ricette', 'Ricette', APP_ICON.ricette, pathname.startsWith('/ricette'))}
           {user.canEdit && link('/importa', 'Importa con AI', APP_ICON.importa)}
           {user.isAdmin && link('/ricettari', 'Ricettari', APP_ICON.ricettari)}
+          {link('/biblioteca', 'Biblioteca', APP_ICON.biblioteca)}
           {link('/documenti', 'Stampa', APP_ICON.documenti)}
           {user.canEdit && link('/strumenti', 'Strumenti', APP_ICON.strumenti)}
         </div>
@@ -94,6 +95,7 @@ function MobileBars({ appName, user, kitchens, onSearch }: { appName: string; us
     if (pathname.startsWith('/ricette')) return 'Ricette'
     if (pathname.startsWith('/importa')) return 'Importa'
     if (pathname.startsWith('/documenti')) return 'Stampa'
+    if (pathname.startsWith('/biblioteca')) return 'Biblioteca'
     if (pathname.startsWith('/ricettari')) return 'Ricettari'
     if (pathname.startsWith('/impostazioni')) return 'Impostazioni'
     if (pathname.startsWith('/cucine')) return 'Cucina'
@@ -146,6 +148,7 @@ function MobileBars({ appName, user, kitchens, onSearch }: { appName: string; us
                 <p className="label" style={{ margin: '0 2px 8px' }}>Ricettario e app</p>
                 <div className="sheet-grid">
                   {user.isAdmin && <Link href="/ricettari"><Library /> Ricettari</Link>}
+                  <Link href="/biblioteca"><APP_ICON.biblioteca /> Biblioteca</Link>
                   <Link href="/documenti"><Printer /> Stampa</Link>
                   {user.canEdit && <Link href="/strumenti"><Wrench /> Strumenti</Link>}
                   <Link href="/cucine"><ChefHat /> Cucine</Link>

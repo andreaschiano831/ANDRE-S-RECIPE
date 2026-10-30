@@ -104,6 +104,14 @@ export default function ImportClient({ books: books0, sections: sections0, group
     if (parts.length) { setText((t) => [t.trim(), ...parts.map((x) => x.trim())].filter(Boolean).join('\n\n')); setTab('text') }
   }, [show])
 
+  // testo mandato dalla biblioteca («Ricetta» su una selezione)
+  useEffect(() => {
+    try {
+      const t = sessionStorage.getItem('rc_import_text')
+      if (t) { sessionStorage.removeItem('rc_import_text'); setText(t); setTab('text') }
+    } catch {}
+  }, [])
+
   // Incolla uno screenshot direttamente con Ctrl/Cmd+V
   useEffect(() => {
     const onPaste = (e: ClipboardEvent) => {
