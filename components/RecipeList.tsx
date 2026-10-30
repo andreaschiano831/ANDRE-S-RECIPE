@@ -2,15 +2,18 @@
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { CheckSquare, ChefHat, FilePlus2, FolderInput, LayoutGrid, List, ListOrdered, Plus, Search, ShoppingBasket, Trash2, X } from 'lucide-react'
+import { BookOpenText, CheckSquare, ChefHat, FilePlus2, Minus, Printer, ExternalLink, FolderInput, LayoutGrid, List, ListOrdered, Plus, Rows3, Search, ShoppingBasket, Trash2, X } from 'lucide-react'
 import type { Book, Section } from '@/lib/recipes'
 import { createClient } from '@/lib/supabase/client'
 import AddToDocument from './AddToDocument'
+import RecipeSheet, { type SheetRecipe } from './RecipeSheet'
 import { useToast } from './useToast'
 
 export type ListItem = {
   id: string; section_id: string; book_id: string; name: string; category: string; dish_group: string | null
   created_at: string; source: string; ingredients: string[]; steps: number
+  yield_note?: string | null; notes?: string | null
+  ing: SheetRecipe['ingredients']; stepList: SheetRecipe['steps']
 }
 
 type Sort = 'az' | 'za' | 'new' | 'group'
@@ -27,7 +30,9 @@ export default function RecipeList({ items: initialItems, books, sections, initi
   const [cat, setCat] = useState('Tutte')
   const [q, setQ] = useState(initialQ)
   const [sort, setSort] = useState<Sort>('group')
-  const [view, setView] = useState<'grid' | 'list'>('grid')
+  const [view, setView] = useState<'sheets' | 'grid' | 'list'>('sheets')
+  const [dose, setDose] = useState(1)
+  const [printOne, setPrintOne] = useState<string | null>(null)
   const [selecting, setSelecting] = useState(false)
   const [sel, setSel] = useState<string[]>([])
   const [docOpen, setDocOpen] = useState(false)
@@ -37,7 +42,7 @@ export default function RecipeList({ items: initialItems, books, sections, initi
   useEffect(() => {
     try {
       const s = localStorage.getItem('rc_sort') as Sort; if (s) setSort(s)
-      const v = localStorage.getItem('rc_view') as 'grid' | 'list'; if (v) setView(v)
+      const v = localStorage.getItem('rc_view') as 'sheets' | 'grid' | 'list'; if (v) setView(v)
     } catch {}
   }, [])
   const persist = (k: string, v: string) => { try { localStorage.setItem(k, v) } catch {} }
@@ -144,6 +149,21 @@ export default function RecipeList({ items: initialItems, books, sections, initi
     )
   }
 
+  const sheet = (r: ListItem, n: number) => (
+    <div key={r.id} onClick={selecting ? () => toggle(r.id) : undefined} style={selecting ? { cursor: 'pointer' } : undefined}>
+      <RecipeSheet n={n} dose={dose} selected={selecting && sel.includes(r.id)}
+        r={{ name: r.name, category: r.category, dish_group: r.dish_group, section: sec === 'tutte' ? secById.get(r.section_id)?.name : null, yield_note: r.yield_note, notes: r.notes, ingredients: r.ing, steps: r.stepList }}
+        onTitle={selecting ? undefined : () => router.push(`/ricette/${r.id}${dose !== 1 ? `?dose=${dose}` : ''}`)}
+        actions={selecting ? undefined : <>
+          <Link className="btn" href={`/ricette/${r.id}/cucina?dose=${dose}`}><ChefHat /> Cucina</Link>
+          <button className="btn" onClick={() => setPrintOne(r.id)}><Printer /> Stampa</button>
+          <Link className="btn" href={`/ricette/${r.id}${dose !== 1 ? `?dose=${dose}` : ''}`} aria-label="Apri"><ExternalLink /></Link>
+        </>} />
+    </div>
+  )
+  const DOSES = [0.25, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20]
+  const stepDose = (d: number) => { let i = 0; DOSES.forEach((x, k) => { if (Math.abs(x - dose) < Math.abs(DOSES[i] - dose)) i = k }); setDose(DOSES[Math.max(0, Math.min(DOSES.length - 1, i + d))]) }
+
   const currentBook = books.find((b) => b.id === book)
 
   return (
@@ -190,7 +210,16 @@ export default function RecipeList({ items: initialItems, books, sections, initi
           <option value="za">Z → A</option>
           <option value="new">Più recenti</option>
         </select>
+        {view === 'sheets' && (
+          <span className="dose-global" aria-label="Dosi">
+            <span>Dosi</span>
+            <button onClick={() => stepDose(-1)} aria-label="Meno"><Minus size={14} /></button>
+            <b>{dose === 1 ? '1' : `×${String(dose).replace('.', ',')}`}</b>
+            <button onClick={() => stepDose(1)} aria-label="Più"><Plus size={14} /></button>
+          </span>
+        )}
         <div className="seg" role="group" aria-label="Vista">
+          <button className={view === 'sheets' ? 'on' : ''} onClick={() => { setView('sheets'); persist('rc_view', 'sheets') }} aria-label="Schede complete"><Rows3 size={16} /></button>
           <button className={view === 'grid' ? 'on' : ''} onClick={() => { setView('grid'); persist('rc_view', 'grid') }} aria-label="Griglia"><LayoutGrid size={16} /></button>
           <button className={view === 'list' ? 'on' : ''} onClick={() => { setView('list'); persist('rc_view', 'list') }} aria-label="Elenco"><List size={16} /></button>
         </div>
@@ -214,7 +243,16 @@ export default function RecipeList({ items: initialItems, books, sections, initi
             : q && <button className="btn btn-sm" onClick={() => { setQ(''); setCat('Tutte') }}>Azzera la ricerca</button>}
         </div>
       ) : (
-        <div className={`rgrid ${view === 'list' ? 'list' : ''}`}>
+        view === 'sheets' ? (
+          <div className="stack" style={{ gap: 18 }}>
+            {(groups ?? [['', filtered] as [string, ListItem[]]]).map(([g, list]) => (
+              <section key={g || '_'}>
+                {(groups && (groups.length > 1 || g)) && <div className="group-hd" style={{ marginBottom: 12 }}><span>{g || 'Senza gruppo'}</span><small>{list.length}</small></div>}
+                <div className="rsheets">{list.map((r) => sheet(r, filtered.indexOf(r) + 1))}</div>
+              </section>
+            ))}
+          </div>
+        ) : <div className={`rgrid ${view === 'list' ? 'list' : ''}`}>
           {groups
             ? groups.map(([g, list]) => (
                 <div key={g || '_'} style={{ display: 'contents' }}>
@@ -235,6 +273,7 @@ export default function RecipeList({ items: initialItems, books, sections, initi
           {canEdit && <button className="btn btn-sm" disabled={!sel.length} onClick={bulkDelete}><Trash2 size={15} /> Elimina</button>}
         </div>
       )}
+      {printOne && <AddToDocument recipeIds={[printOne]} dose={dose} onClose={() => setPrintOne(null)} />}
       {docOpen && <AddToDocument recipeIds={sel} onClose={(done) => { setDocOpen(false); if (done) { setSelecting(false); setSel([]) } }} />}
       {moveOpen && (
         <div className="modal-bg" onClick={(e) => e.target === e.currentTarget && setMoveOpen(false)}>

@@ -1,8 +1,8 @@
 'use client'
 import { useMemo, useRef, useState } from 'react'
-import { Camera, Check, ExternalLink, Plus, RefreshCw, Trash2, X } from 'lucide-react'
+import { Camera, Check, ClipboardList, ExternalLink, Play, Plus, RefreshCw, Trash2, X } from 'lucide-react'
 import { askAI, Drawer, ItemCombo, recipeUrl, shrinkImage, Stepper, useHub, type Pick } from './ui'
-import { bestMatch, componentiOf, fmtQty, lineaItems, nameScore, PARTITE, partitaLabel, toBase, type KRecipe, type Piatto, type StockItem } from './model'
+import { bestMatch, componentiOf, fabbisogno, fmtQty, fromBase, lineaItems, nameScore, PARTITE, partitaLabel, recipeWeight, round, toBase, type KRecipe, type Need, type Piatto, type Prep, type StockItem } from './model'
 
 const LINEA_SYSTEM = `Sei l'assistente di una brigata di cucina professionale.
 Ricevi la foto della LINEA di una partita (bacinelle gastronorm, vaschette, contenitori, squeeze, teglie) oppure la foto di un foglio con l'elenco della mise en place.
@@ -26,10 +26,42 @@ export default function LineaView() {
   const [scan, setScan] = useState(false)
   const pick = (p: string) => { setPartita(p); try { localStorage.setItem('kp-linea-partita', p) } catch {} }
 
+  // preparazioni aperte e mancanze del servizio, per partita: la linea si riempie da qui
+  const preps: Prep[] = (k.preparazioni || []).filter((p: Prep) => p.status === 'da_fare' || p.status === 'in_corso')
+  const prepPart = (p: Prep) => p.partita || p.reparto || p.categoriaKey || ''
+  const coperti: number = k.servizioPiano?.coperti ?? 40
+  const needs: (Need & { partita: string })[] = useMemo(() => {
+    const ns = fabbisogno(piatti, (p) => k.servizioPiano?.perPiatto?.[p.id] ?? coperti, k, recipes)
+    return ns.filter((n) => n.missing > 0).map((n) => {
+      const p = piatti.find((x) => n.piatti.includes(x.nome))
+      const inLinea = linea.find((s) => (n.recipeId && s.recipeId === n.recipeId) || nameScore(s.name, n.nome) >= 0.85)
+      return { ...n, partita: inLinea?.partita || CAT_TO_PARTITA[p?.categoria || ''] || 'antipasti' }
+    })
+  }, [piatti, k, recipes, coperti, linea])
   const groups = useMemo(() => {
     const keys = partita === 'tutte' ? [...PARTITE.map((p) => p.key), ''] : [partita]
-    return keys.map((key) => ({ key, items: linea.filter((s) => (s.partita || '') === key) })).filter((g) => g.items.length || g.key === partita)
-  }, [linea, partita])
+    return keys.map((key) => ({
+      key, items: linea.filter((s) => (s.partita || '') === key),
+      preps: preps.filter((p) => prepPart(p) === key), needs: needs.filter((n) => n.partita === key),
+    })).filter((g) => g.items.length || g.preps.length || g.needs.length || g.key === partita)
+  }, [linea, partita, preps, needs])
+
+  function prepFor(nome: string, recipeId: string | null | undefined, part: string, base?: { q: number; dim: 'm' | 'pz' }) {
+    const r = recipeId ? recipes.find((x) => x.id === recipeId) : null
+    const w = r ? recipeWeight(r) : 0
+    const q = base ? fromBase(base.q, base.dim) : w ? fromBase(w, 'm') : { qty: 1, unit: 'pz' }
+    api.prepAddFull({ nome, quantita: q.qty, unitaMisura: q.unit, recipeId: recipeId ?? null, partita: part || 'antipasti', note: 'Per la linea' })
+    toast(`${nome}: ${q.qty} ${q.unit} da preparare`, 'success')
+  }
+  /** preparazione finita: va direttamente in linea (si somma a quello che c'è già) */
+  function doneToLinea(p: Prep) {
+    const part = prepPart(p) || 'antipasti'
+    const same = linea.find((s) => s.partita === part && s.unit === p.unitaMisura && ((p.recipeId && s.recipeId === p.recipeId) || s.name === p.nome))
+    if (same) api.itemUpdate(same.id, { quantity: round(same.quantity + p.quantita, 3), expiresAt: new Date(Date.now() + 2 * 864e5).toISOString() })
+    else api.stockAdd({ name: p.nome, quantity: p.quantita, unit: p.unitaMisura, location: 'counter', partita: part, recipeId: p.recipeId, expiresAt: new Date(Date.now() + 2 * 864e5).toISOString(), notes: 'Da preparazione' })
+    api.prepStatus(p.id, 'svolta'); api.prepUpdate(p.id, { destinazione: 'linea' })
+    toast(`${p.nome} in linea ${partitaLabel(part)}`, 'success')
+  }
 
   // in quali piatti si usa una preparazione e per quante porzioni basta
   function uses(s: StockItem) {
@@ -72,7 +104,7 @@ export default function LineaView() {
         </div>
       )}
 
-      {!linea.length ? (
+      {!linea.length && !preps.length && !needs.length ? (
         <div className="panel empty">
           <Camera size={30} strokeWidth={1.3} />
           <span className="dish">La linea è vuota</span>
@@ -84,8 +116,26 @@ export default function LineaView() {
           <div className="panel-head">
             <span className="dot" style={{ background: PARTITE.find((p) => p.key === g.key)?.color ?? 'var(--faint)' }} />
             <h3 className="h2" style={{ fontSize: '1.2rem', flex: 1 }}>{g.key ? partitaLabel(g.key) : 'Senza partita'}</h3>
-            <span className="small muted">{g.items.length} in linea</span>
+            <span className="small muted">{g.items.length} in linea{g.preps.length ? ` · ${g.preps.length} in preparazione` : ''}</span>
           </div>
+          {(g.needs.length > 0 || g.preps.length > 0) && (
+            <div style={{ background: 'var(--sunk)', borderBottom: '1px solid var(--line)' }}>
+              <p className="label row" style={{ padding: '10px 16px 4px', gap: 6 }}><ClipboardList size={14} /> Da preparare per la linea</p>
+              {g.needs.filter((n) => !g.preps.some((p) => (n.recipeId && p.recipeId === n.recipeId) || nameScore(p.nome, n.nome) >= 0.9)).map((n) => (
+                <div key={n.key} className="trow" style={{ borderTop: 'none' }}>
+                  <span className="nm"><b>{n.nome}</b><small>mancano {fmtQty(n.missing, n.dim)} per {coperti} coperti · {n.piatti.join(', ')}</small></span>
+                  {canEdit && <button className="btn btn-sm" onClick={() => prepFor(n.nome, n.recipeId, g.key, { q: n.missing, dim: n.dim })}><Plus /> Prepara</button>}
+                </div>
+              ))}
+              {g.preps.map((p) => (
+                <div key={p.id} className="trow" style={{ borderTop: 'none' }}>
+                  <span className="nm"><b>{p.nome}</b><small>{p.quantita} {p.unitaMisura} · {p.status === 'in_corso' ? 'in corso' : 'da fare'}</small></span>
+                  {canEdit && p.status === 'da_fare' && <button className="btn btn-sm" onClick={() => api.prepStatus(p.id, 'in_corso')}><Play /> Inizia</button>}
+                  {canEdit && <button className="btn btn-gold btn-sm" onClick={() => doneToLinea(p)}><Check /> Fatta, in linea</button>}
+                </div>
+              ))}
+            </div>
+          )}
           {!g.items.length && <p className="trow muted small">Niente in linea per questa partita.</p>}
           {g.items.map((s) => {
             const u = uses(s)
@@ -102,6 +152,7 @@ export default function LineaView() {
                 </div>
                 {h != null && <span className={`chip ${h < 0 ? 'chip-danger' : h < 24 ? 'chip-warn' : ''}`}>{h < 0 ? 'scaduta' : h < 24 ? `scade tra ${Math.max(1, Math.round(h))} h` : `${Math.round(h / 24)} gg`}</span>}
                 {canEdit ? <Stepper value={s.quantity} step={step} unit={s.unit} onChange={(v) => (v <= 0 ? api.removeItem(s.id) : api.itemUpdate(s.id, { quantity: v }))} /> : <span className="tnum">{s.quantity} {s.unit}</span>}
+                {canEdit && <button className="icon-btn" title="Prepara ancora" onClick={() => prepFor(s.name, s.recipeId, s.partita || g.key)} aria-label={`Prepara ancora ${s.name}`}><ClipboardList size={15} /></button>}
                 {canEdit && <button className="icon-btn" onClick={() => api.removeItem(s.id)} aria-label={`Togli ${s.name}`}><Trash2 size={15} /></button>}
               </div>
             )

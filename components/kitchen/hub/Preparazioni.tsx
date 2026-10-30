@@ -2,7 +2,7 @@
 import { useMemo, useState } from 'react'
 import { Check, ChevronDown, ChevronUp, ExternalLink, Play, Plus, Trash2, Wand2 } from 'lucide-react'
 import { Drawer, ItemCombo, recipeUrl, Stepper, useHub, type Pick } from './ui'
-import { fabbisogno, fmtQty, fromBase, PARTITE, partitaLabel, recipeWeight, round, toBase, type Need, type Piatto, type Prep } from './model'
+import { fabbisogno, fmtQty, fromBase, lineaFor, lineaItems, PARTITE, partitaLabel, recipeWeight, round, toBase, type Need, type Piatto, type Prep } from './model'
 
 const CAT_TO_PARTITA: Record<string, string> = { antipasto: 'antipasti', primo: 'primi', secondo: 'secondi', dessert: 'pasticceria', buffet: 'buffet', speciale: 'antipasti' }
 const today = () => new Date().toISOString().slice(0, 10)
@@ -123,13 +123,14 @@ function Piano() {
 }
 
 function PrepCard({ p, onDone }: { p: Prep; onDone: () => void }) {
-  const { api, recipes, canEdit } = useHub()
+  const { api, k, recipes, canEdit } = useHub()
   const [open, setOpen] = useState(false)
   const r = p.recipeId ? recipes.find((x) => x.id === p.recipeId) : null
   const w = r ? recipeWeight(r) : 0
   const b = toBase(p.quantita, p.unitaMisura)
   const dose = r && w && b?.dim === 'm' ? b.q / w : null
   const part = p.partita || p.reparto || p.categoriaKey
+  const inLinea = lineaFor({ recipeId: p.recipeId, nome: p.nome }, lineaItems(k))
   const step = p.unitaMisura === 'kg' || p.unitaMisura === 'l' ? 0.5 : p.unitaMisura === 'g' || p.unitaMisura === 'ml' ? 100 : 1
   return (
     <div className="pcard">
@@ -150,6 +151,7 @@ function PrepCard({ p, onDone }: { p: Prep; onDone: () => void }) {
           </select>
         ) : <span className="chip">{partitaLabel(part)}</span>}
         {p.destinazione && <span className="chip chip-ok">in {p.destinazione}</span>}
+        {inLinea.items.length > 0 && <span className="chip">in linea {fmtQty(inLinea.q, inLinea.dim || 'm')}</span>}
         {p.note && <span>{p.note}</span>}
       </div>
       {r && dose && (

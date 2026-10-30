@@ -6,6 +6,7 @@ import LinkImport, { type Found } from './LinkImport'
 import { createClient } from '@/lib/supabase/client'
 import { CATEGORIES, draftToPayload, sectionLabel, type Book, type RecipeDraft, type Section } from '@/lib/recipes'
 import DraftFields from './DraftFields'
+import RecipeSheet, { type SheetRecipe } from './RecipeSheet'
 import { useToast } from './useToast'
 
 type Img = { id: string; url: string; name: string }
@@ -30,6 +31,15 @@ function shrink(file: File): Promise<string> {
     img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Immagine non leggibile')) }
     img.src = url
   })
+}
+
+function draftToSheet(d: RecipeDraft, section: string): SheetRecipe {
+  const n = (v: string) => { const x = parseFloat(String(v).replace(',', '.')); return isFinite(x) ? x : null }
+  return {
+    name: d.name, category: d.category, dish_group: d.dish_group, section, yield_note: d.yield_note, notes: d.notes,
+    ingredients: d.ingredients.filter((i) => i.name.trim()).map((i) => ({ name: i.name, quantity: n(i.quantity), unit: i.unit, note: i.note })),
+    steps: d.steps.filter((s) => s.body.trim()).map((s) => ({ body: s.body, duration_min: n(s.duration_min), temperature: s.temperature })),
+  }
 }
 
 export function toDraft(r: any, sections: Section[], source: 'ai_image' | 'ai_text'): RecipeDraft {
@@ -143,6 +153,7 @@ export default function ImportClient({ books: books0, sections: sections0, group
     })])
   }
 
+  const [saved, setSaved] = useState<{ id: string; name: string }[]>([])
   const patch = (key: string, p: Partial<Item>) => setItems((x) => x.map((it) => (it.key === key ? { ...it, ...p } : it)))
 
   async function saveOne(it: Item): Promise<boolean> {
@@ -150,7 +161,8 @@ export default function ImportClient({ books: books0, sections: sections0, group
     if (!payload.name || !payload.ingredients.length) { patch(it.key, { error: 'Servono nome e almeno un ingrediente', open: true }); return false }
     const { data, error } = await createClient().rpc('save_recipe', { payload })
     if (error) { patch(it.key, { error: error.message, open: true }); return false }
-    patch(it.key, { savedId: data as string, error: undefined, open: false, checked: false })
+    setSaved((x) => [...x, { id: data as string, name: it.draft.name }])
+    setItems((x) => x.filter((y) => y.key !== it.key))
     return true
   }
   async function saveSelected() {
@@ -232,49 +244,53 @@ export default function ImportClient({ books: books0, sections: sections0, group
         </button>}
       </section>
 
+      {saved.length > 0 && (
+        <section className="panel panel-pad" style={{ marginTop: 22, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div className="row">
+            <b style={{ flex: 1 }}>{saved.length} {saved.length === 1 ? 'ricetta salvata' : 'ricette salvate'} nel ricettario</b>
+            <Link href="/ricette" className="btn btn-sm">Vai alle ricette</Link>
+            <button className="btn btn-ghost btn-sm" onClick={() => setSaved([])}>Nascondi</button>
+          </div>
+          <div className="pills">{saved.slice(-12).map((x) => <Link key={x.id} href={`/ricette/${x.id}`} className="pill">{x.name}</Link>)}</div>
+        </section>
+      )}
+
       {items.length > 0 && (
         <section style={{ marginTop: 26 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, gap: 8, flexWrap: 'wrap' }}>
-            <h2 className="h2">Da controllare · {items.length}</h2>
-            <button className="btn btn-ghost btn-sm" onClick={() => setItems((x) => x.filter((i) => !i.savedId))}>Togli le salvate</button>
+          <div className="row" style={{ marginBottom: 12 }}>
+            <h2 className="h2" style={{ flex: 1 }}>Anteprima · {items.length} da controllare</h2>
+            <button className="btn btn-ghost btn-sm" onClick={() => setItems((x) => x.map((i) => ({ ...i, checked: !x.every((y) => y.checked) })))}>{items.every((i) => i.checked) ? 'Deseleziona tutte' : 'Seleziona tutte'}</button>
+            <button className="btn btn-ghost btn-sm" onClick={() => { if (confirm('Togliere tutte le ricette dalla lista? Non verranno salvate.')) setItems([]) }}>Svuota la lista</button>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div className="rsheets">
             {items.map((it) => (
-              <div key={it.key} className="panel" style={{ overflow: 'hidden', opacity: it.savedId ? 0.7 : 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 16px' }}>
-                  {!it.savedId && <input type="checkbox" checked={it.checked} onChange={(e) => patch(it.key, { checked: e.target.checked })} style={{ width: 18, height: 18, accentColor: 'var(--gold2)' }} />}
-                  <div style={{ flex: 1, minWidth: 0, cursor: 'pointer' }} onClick={() => patch(it.key, { open: !it.open })}>
-                    <p className="serif" style={{ fontStyle: 'italic', fontSize: '1.15rem' }}>{it.draft.name}</p>
-                    <p className="muted" style={{ fontSize: '.72rem' }}>
-                      {sectionLabel(it.draft.section_id, sections, books)} · {it.draft.category}
-                      {it.draft.dish_group && ` · ${it.draft.dish_group}`} · {it.draft.ingredients.filter((i) => i.name).length} ingredienti · {it.draft.steps.filter((s) => s.body).length} passaggi
-                    </p>
-                    {it.error && <p className="err">{it.error}</p>}
-                  </div>
-                  {it.savedId
-                    ? <Link href={`/ricette/${it.savedId}`} className="chip">✓ Salvata · apri</Link>
-                    : <>
-                        <button className="btn btn-sm" onClick={() => patch(it.key, { open: !it.open })}>{it.open ? 'Chiudi' : 'Modifica'}</button>
-                        <button className="icon-btn" title="Scarta" onClick={() => setItems((x) => x.filter((y) => y.key !== it.key))}>×</button>
-                      </>}
-                </div>
-                {it.open && !it.savedId && (
-                  <div style={{ padding: '0 12px 14px', background: 'var(--bg2)', borderTop: '1px solid var(--rim)' }}>
-                    <div style={{ paddingTop: 14 }}>
-                      <DraftFields draft={it.draft} onChange={(d) => patch(it.key, { draft: d })} books={books} sections={sections} groups={groups} ingredientNames={ingredientNames} />
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
+              <div key={it.key} className="stack" style={{ gap: 0 }}>
+                {it.open ? (
+                  <div className="panel" style={{ padding: 14 }}>
+                    <DraftFields draft={it.draft} onChange={(d) => patch(it.key, { draft: d })} books={books} sections={sections} groups={groups} ingredientNames={ingredientNames} />
+                    {it.error && <p className="err" style={{ marginTop: 8 }}>{it.error}</p>}
+                    <div className="row" style={{ justifyContent: 'flex-end', marginTop: 12 }}>
+                      <button className="btn btn-sm" onClick={() => patch(it.key, { open: false })}>Vedi anteprima</button>
                       <button className="btn btn-gold btn-sm" onClick={() => saveOne(it)}>Salva questa</button>
                     </div>
                   </div>
+                ) : (
+                  <RecipeSheet procOpen selected={it.checked} r={draftToSheet(it.draft, sectionLabel(it.draft.section_id, sections, books))}
+                    actions={<>
+                      <label className="btn" style={{ cursor: 'pointer' }}><input type="checkbox" checked={it.checked} onChange={(e) => patch(it.key, { checked: e.target.checked })} style={{ accentColor: 'var(--accent)' }} /> Da salvare</label>
+                      <button className="btn" onClick={() => patch(it.key, { open: true })}>Modifica</button>
+                      <button className="btn" onClick={() => saveOne(it)}>Salva</button>
+                      <button className="btn" onClick={() => setItems((x) => x.filter((y) => y.key !== it.key))} aria-label="Scarta">Scarta</button>
+                    </>} />
                 )}
+                {it.error && !it.open && <p className="err" style={{ marginTop: 6 }}>{it.error}</p>}
               </div>
             ))}
           </div>
           {pending > 0 && (
             <div className="sticky-actions">
               <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <button className="btn btn-gold" disabled={!!busy} onClick={saveSelected}>Salva {pending} {pending === 1 ? 'ricetta' : 'ricette'}</button>
+                <button className="btn btn-gold" disabled={!!busy} onClick={saveSelected}>{busy || `Salva ${pending} ${pending === 1 ? 'ricetta' : 'ricette'}`}</button>
               </div>
             </div>
           )}

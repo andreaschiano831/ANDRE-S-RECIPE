@@ -85,6 +85,7 @@ export default function AddToDocument({ recipeIds, dose: initialDose = 1, onClos
         {err && <p className="err" style={{ marginTop: 10 }}>{err}</p>}
         <div style={{ display: 'flex', gap: 8, marginTop: 18 }}>
           <button className="btn" style={{ flex: 1 }} onClick={() => onClose(false)}>Annulla</button>
+          <button className="btn" style={{ flex: 1 }} onClick={() => { onClose(false); router.push(`/stampa?ids=${recipeIds.join(',')}&dose=${dose}`) }}>Stampa subito</button>
           <button className="btn btn-gold" style={{ flex: 1 }} disabled={busy || docs === null} onClick={confirm}>{busy ? <span className="spin" /> : 'Aggiungi'}</button>
         </div>
       </div>
