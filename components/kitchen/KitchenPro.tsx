@@ -13,6 +13,7 @@ import ServizioHub from "./hub/Servizio";
 import HaccpHub from "./haccp/Haccp";
 import Economia from "./econ/Economia";
 import MagazzinoHub from "./hub/Magazzino";
+import BadgeEmitter from "./hub/Badges";
 
 /* ════ useIsMobile — JS-based reactive, mai window.innerWidth diretto ════ */
 function useIsMobile(bp=768) {
@@ -9498,6 +9499,7 @@ function KitchenProInner() {
             {section==="dashboard"    && <details style={{marginTop:24}}><summary style={{cursor:"pointer",color:t.inkMuted,fontSize:14,padding:"8px 0"}}>Indicatori del magazzino</summary><div style={{marginTop:12}}><DashboardView t={t}/></div></details>}
             {section==="piatti"       && <PiattiView/>}
             {section==="linea"        && <LineaView/>}
+            <BadgeEmitter/>
             {section==="giacenze"     && <MagazzinoHub legacy={<InventoryView t={t}/>}/>}
             {section==="preparazioni" && <PreparazioniHub legacy={<PrepMepView t={t}/>}/>}
             {false && section==="preparazioni" && isMobile && <QuickPrepFAB t={t}/>}

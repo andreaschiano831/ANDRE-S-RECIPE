@@ -95,6 +95,7 @@ export function smistaOps(p: Prep, parts: Part[], k: any) {
     else ops.push({ add: {
       id: uid(), name: p.nome, quantity: round(part.qty, 4), unit, location: part.location, partita: part.location === 'counter' ? part.partita : p.partita,
       recipeId: p.recipeId ?? undefined, expiresAt: exp, insertedAt: new Date().toISOString(), notes: 'Da preparazione',
+      lot: p.lotto || undefined, tracciabilita: p.tracciabilita?.length ? p.tracciabilita : undefined,
       parLevel: part.location === 'counter' ? null : null,
     } as any })
   }

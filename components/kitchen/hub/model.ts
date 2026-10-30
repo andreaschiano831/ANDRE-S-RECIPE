@@ -24,6 +24,7 @@ export type Prep = {
   id: string; nome: string; quantita: number; unitaMisura: string; status: string
   reparto?: string; partita?: string; categoriaKey?: string; recipeId?: string | null; piattoId?: string | null
   scadeIl?: string | null; note?: string | null; createdAt?: string; svoltaIl?: string | null; destinazione?: string | null
+  lotto?: string; tracciabilita?: { ingrediente: string; lotto: string; fornitore?: string; doc?: string; data?: string; scadenza?: string; fonte: string }[]
 }
 
 export const PIATTO_CATEGORIE = [

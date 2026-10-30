@@ -1,8 +1,9 @@
 'use client'
 import { useMemo, useState } from 'react'
-import { ArrowRightLeft, Check, ChevronDown, ChevronUp, ExternalLink, Play, Plus, Trash2, Wand2 } from 'lucide-react'
+import { ArrowRightLeft, Check, ChevronDown, ChevronUp, ExternalLink, Play, Plus, ScanBarcode, Trash2, Wand2 } from 'lucide-react'
 import { ItemCombo, recipeUrl, Stepper, useHub, type Pick } from './ui'
 import Smista from './Smista'
+import { Tracciabilita } from './lotti'
 import { fabbisogno, fmtQty, fromBase, lineaFor, lineaItems, PARTITE, partitaLabel, recipeWeight, round, toBase, type Need, type Piatto, type Prep } from './model'
 
 const CAT_TO_PARTITA: Record<string, string> = { antipasto: 'antipasti', primo: 'primi', secondo: 'secondi', dessert: 'pasticceria', buffet: 'buffet', speciale: 'antipasti' }
@@ -126,6 +127,9 @@ function Piano() {
 function PrepCard({ p, onDone }: { p: Prep; onDone: () => void }) {
   const { api, k, recipes, canEdit } = useHub()
   const [open, setOpen] = useState(false)
+  const [trace, setTrace] = useState(false)
+  const nTr = p.tracciabilita?.length || 0
+  const nIng = p.recipeId ? (recipes.find((x) => x.id === p.recipeId)?.ingredients.length || 0) : 0
   const r = p.recipeId ? recipes.find((x) => x.id === p.recipeId) : null
   const w = r ? recipeWeight(r) : 0
   const b = toBase(p.quantita, p.unitaMisura)
@@ -172,9 +176,12 @@ function PrepCard({ p, onDone }: { p: Prep; onDone: () => void }) {
           {p.status === 'da_fare' && <button className="btn btn-sm" onClick={() => api.prepStatus(p.id, 'in_corso')}><Play /> Inizia</button>}
           {(p.status === 'da_fare' || p.status === 'in_corso') && <button className="btn btn-gold btn-sm" onClick={onDone}><Check /> Fatta</button>}
           {p.status === 'svolta' && <button className="btn btn-gold btn-sm" onClick={onDone}><ArrowRightLeft /> Smista</button>}
+          <button className={`btn btn-sm lt-btn ${nTr ? (nIng && nTr >= nIng ? 'full' : 'part') : ''}`} onClick={() => setTrace(true)} title="Lotti e DDT degli ingredienti"><ScanBarcode /> {nTr ? `Lotti ${nTr}${nIng ? `/${nIng}` : ''}` : 'Lotti'}</button>
           <button className="icon-btn" style={{ marginLeft: 'auto', width: 30, height: 30 }} onClick={() => confirm(`Eliminare «${p.nome}»?`) && api.prepRemove(p.id)} aria-label="Elimina"><Trash2 size={14} /></button>
         </div>
       )}
+      {p.lotto && <span className="small muted">lotto {p.lotto}</span>}
+      {trace && <Tracciabilita p={p} onClose={() => setTrace(false)} />}
     </div>
   )
 }

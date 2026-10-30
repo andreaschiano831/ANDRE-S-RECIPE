@@ -2,13 +2,14 @@
 import { useMemo, useState } from 'react'
 import {
   AlertTriangle, ArrowRightLeft, Boxes, CalendarPlus, ClipboardCheck, FileUp, LayoutList, LayoutGrid, MoreHorizontal,
-  Package, Pencil, Plus, Refrigerator, Search, ShoppingCart, Snowflake, Trash, Trash2, Utensils, Warehouse, X,
+  Package, Pencil, Plus, Refrigerator, ScanBarcode, Search, ShoppingCart, Snowflake, Trash, Trash2, Utensils, Warehouse, X,
 } from 'lucide-react'
 import { Drawer, Stepper, go, useHub } from './ui'
 import { PRODUCT_CATALOG } from '../KitchenPro'
 import { PARTITE, norm, partitaLabel, priceFor, round, toBase, type StockItem } from './model'
 import { stockValue } from '../econ/Panoramica'
 import { MC, QuickBar, mc, type QAction } from '../quick/Quick'
+import { LottoPicker, type Lotto } from './lotti'
 
 type Item = StockItem & { lot?: string; notes?: string; macro?: string }
 const LOCS = [
@@ -264,7 +265,7 @@ function EditDrawer({ x, onClose, onWaste }: { x: Item; onClose: () => void; onW
       <div className="hz-grid2">
         <div className="field"><span className="label">Scadenza</span><input className="input" type="date" value={f.expires} onChange={(e) => set({ expires: e.target.value })} />
           <div className="hz-chips">{quick.map((d) => <button key={d} type="button" className="pill" onClick={() => { const b = new Date(); b.setDate(b.getDate() + d); set({ expires: b.toISOString().slice(0, 10) }) }}>+{d} gg</button>)}{f.expires && <button type="button" className="pill" onClick={() => set({ expires: '' })}>nessuna</button>}</div></div>
-        <div className="field"><span className="label">Lotto</span><input className="input" value={f.lot} placeholder="es. L2290" onChange={(e) => set({ lot: e.target.value })} /></div>
+        <LotField nome={f.name} value={f.lot} onChange={(lot) => set({ lot })} onPick={(l) => set({ lot: l.lotto, notes: [l.doc, l.fornitore].filter(Boolean).join(' · ') || f.notes, ...(l.scadenza && !f.expires ? { expires: l.scadenza } : {}) })} />
         <div className="field"><span className="label">Scorta minima ({f.unit})</span><Stepper value={f.par} step={stepFor(f.unit)} onChange={(v) => set({ par: round(v, 3) })} /><span className="small muted">Sotto il minimo finisce in «Sotto scorta» e nella spesa.</span></div>
         <div className="field"><span className="label">Prezzo € per {f.unit === 'g' ? 'kg' : f.unit === 'ml' ? 'l' : f.unit}</span>
           <input className="input" inputMode="decimal" defaultValue={f.prezzo ?? ''} placeholder={pr ? `${(pr.perBase * (pr.dim === 'm' ? 1000 : 1)).toFixed(2).replace('.', ',')} dal ${pr.source}` : 'dal listino'} onBlur={(e) => { const n = parseFloat(e.target.value.replace(',', '.')); set({ prezzo: isFinite(n) ? n : null }) }} />
@@ -281,7 +282,7 @@ function EditDrawer({ x, onClose, onWaste }: { x: Item; onClose: () => void; onW
 /* ── carico: catalogo con durata, oppure nome libero ── */
 function AddDrawer({ loc, onClose }: { loc: string; onClose: () => void }) {
   const { api, toast, stock } = useHub()
-  const blank = { name: '', quantity: 1, unit: 'kg', location: loc, category: 'custom', expires: '', lot: '', par: 0, partita: '' }
+  const blank = { name: '', quantity: 1, unit: 'kg', location: loc, category: 'custom', expires: '', lot: '', par: 0, partita: '', notes: '' }
   const [f, setF] = useState(blank)
   const [n, setN] = useState(0)
   const set = (p: Partial<typeof f>) => setF((v) => ({ ...v, ...p }))
@@ -295,7 +296,7 @@ function AddDrawer({ loc, onClose }: { loc: string; onClose: () => void }) {
   }
   function add(close: boolean) {
     if (!f.name.trim()) return
-    api.stockAdd({ name: f.name.trim(), quantity: f.quantity, unit: f.unit, location: f.location, category: f.category, macro: ECONOMATO.has(f.category) ? 'economato' : 'alimenti', expiresAt: f.expires ? new Date(f.expires + 'T23:00').toISOString() : undefined, lot: f.lot || undefined, parLevel: f.par || undefined, partita: f.partita || undefined })
+    api.stockAdd({ name: f.name.trim(), quantity: f.quantity, unit: f.unit, location: f.location, category: f.category, macro: ECONOMATO.has(f.category) ? 'economato' : 'alimenti', expiresAt: f.expires ? new Date(f.expires + 'T23:00').toISOString() : undefined, lot: f.lot || undefined, notes: f.notes || undefined, parLevel: f.par || undefined, partita: f.partita || undefined })
     toast(`${f.name}: ${fmtQ(f.quantity)} ${f.unit} in ${locLabel(f.location).toLowerCase()}`, 'success')
     setN((c) => c + 1)
     if (close) onClose(); else setF({ ...blank, location: f.location })
@@ -312,7 +313,7 @@ function AddDrawer({ loc, onClose }: { loc: string; onClose: () => void }) {
       <div className="field"><span className="label">Dove</span><div className="mg-locpick">{LOCS.map((l) => <button key={l.key} type="button" className={f.location === l.key ? 'on' : ''} style={mc(l.color)} onClick={() => set({ location: l.key })}><span className="qk-ic">{l.icon}</span>{l.label}</button>)}</div></div>
       <div className="hz-grid2">
         <div className="field"><span className="label">Scadenza</span><input className="input" type="date" value={f.expires} onChange={(e) => set({ expires: e.target.value })} /></div>
-        <div className="field"><span className="label">Lotto</span><input className="input" value={f.lot} onChange={(e) => set({ lot: e.target.value })} /></div>
+        <LotField nome={f.name} value={f.lot} onChange={(lot) => set({ lot })} onPick={(l) => set({ lot: l.lotto, notes: [l.doc, l.fornitore].filter(Boolean).join(' · '), ...(l.scadenza && !f.expires ? { expires: l.scadenza } : {}) })} />
         <div className="field"><span className="label">Categoria</span><select className="select" value={f.category} onChange={(e) => set({ category: e.target.value })}>{Object.entries(CATS).map(([k2, l]) => <option key={k2} value={k2}>{l}</option>)}</select></div>
         <div className="field"><span className="label">Scorta minima</span><Stepper value={f.par} step={stepFor(f.unit)} onChange={(v) => set({ par: round(v, 3) })} /></div>
       </div>
@@ -382,5 +383,17 @@ function CountDrawer({ items, where, onClose }: { items: Item[]; where: string; 
         })}
       </section>
     </Drawer>
+  )
+}
+
+/** lotto scritto a mano o scelto da fatture, DDT e magazzino */
+function LotField({ nome, value, onChange, onPick }: { nome: string; value: string; onChange: (v: string) => void; onPick: (l: Lotto) => void }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="field"><span className="label">Lotto</span>
+      <div className="lt-field"><input className="input" value={value} placeholder="es. L2290" onChange={(e) => onChange(e.target.value)} />
+        <button type="button" className="btn btn-sm" onClick={() => setOpen(true)}><ScanBarcode /> Da fatture e DDT</button></div>
+      {open && <LottoPicker nome={nome} onPick={onPick} onClose={() => setOpen(false)} />}
+    </div>
   )
 }

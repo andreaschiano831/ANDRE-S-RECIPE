@@ -40,7 +40,7 @@ export default function Etichette({ prefill, onUsed }: { prefill?: Partial<EtiDa
           <section className="panel hz-form">
             <div className="hz-form-body">
               <F label="Prodotto o preparazione">
-                {preps.length > 0 && <div className="hz-chips">{preps.map((p) => <button key={p.id} type="button" className={`pill ${d.prepId === p.id ? 'on' : ''}`} onClick={() => set({ prodotto: p.nome, prepId: p.id, recipeId: p.recipeId || null, ...(p.scadeIl ? { scadenza: dayKey(p.scadeIl) } : {}) })}>{p.nome}</button>)}</div>}
+                {preps.length > 0 && <div className="hz-chips">{preps.map((p) => <button key={p.id} type="button" className={`pill ${d.prepId === p.id ? 'on' : ''}`} onClick={() => set({ prodotto: p.nome, prepId: p.id, recipeId: p.recipeId || null, ...(p.scadeIl ? { scadenza: dayKey(p.scadeIl) } : {}), ...(p.lotto ? { lotto: p.lotto } : {}), ...(p.tracciabilita?.length ? { ddt: p.tracciabilita.filter((t) => t.doc).map((t, i) => ({ id: `tr-${i}`, ddt: `${t.doc}${t.lotto ? ` (${t.ingrediente} L.${t.lotto})` : ''}`, fornitore: t.fornitore || '' })) } : {}) })}>{p.nome}</button>)}</div>}
                 <input className="input" list="hz-eti-r" value={d.prodotto} placeholder="es. Lasagne al ragù" onChange={(e) => set({ prodotto: e.target.value, prepId: null, recipeId: recipes.find((r) => r.name === e.target.value)?.id || null })} />
                 <datalist id="hz-eti-r">{recipes.map((r) => <option key={r.id} value={r.name} />)}</datalist>
               </F>
@@ -116,7 +116,7 @@ function labelHtml(d: EtiData, svg: string) {
   ${d.note ? `<p class="n">${esc(d.note)}</p>` : ''}
   <div class="dates"><div><span>Prodotto il</span><b>${esc(fmtDT(d.prodottoIl))}</b></div><div><span>Consumare entro</span><b>${esc(fmtDateLong(d.scadenza))}</b></div></div>
   <div class="foot"><span>Conservare ${esc(d.conservazione)}</span><span>Op. ${esc(d.operatore || '')}</span></div>
-  ${d.ddt?.length ? `<p class="t">Materie prime: ${d.ddt.map((x) => `DDT ${esc(x.ddt)} ${esc(x.fornitore)}`).join(' · ')}</p>` : ''}</section>`
+  ${d.ddt?.length ? `<p class="t">Materie prime: ${d.ddt.map((x) => `${/^(DDT|Fattura)/.test(x.ddt) ? '' : 'DDT '}${esc(x.ddt)} ${esc(x.fornitore)}`).join(' · ')}</p>` : ''}</section>`
 }
 const LABEL_CSS = `@page{size:100mm 70mm;margin:3mm}*{box-sizing:border-box}body{margin:0;font-family:Helvetica,Arial,sans-serif;color:#000}
 .l{height:63.5mm;border:.4mm solid #000;padding:2.5mm 3mm;display:flex;flex-direction:column;gap:1.2mm;page-break-after:always;break-after:page;overflow:hidden}
