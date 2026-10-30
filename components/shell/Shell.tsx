@@ -6,6 +6,7 @@ import { BookOpen, ChefHat, Home, Menu, Plus, Search, Sparkles, PenLine, Camera,
 import { KITCHEN_SECTIONS } from '@/lib/nav'
 import { APP_ICON, SECTION_ICON } from './icons'
 import CommandPalette from './CommandPalette'
+import { kitchenNav } from './kitchen-nav'
 
 type Kitchen = { id: string; name: string }
 type User = { name: string; role: string; canEdit: boolean; isAdmin: boolean }
@@ -30,7 +31,7 @@ function Nav({ appName, tagline, user, kitchens, onSearch }: { appName: string; 
   const isOn = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href))
 
   const link = (href: string, label: string, Icon: React.ComponentType<{ size?: number }>, on = isOn(href)) => (
-    <Link key={href} href={href} className={`side-link ${on ? 'on' : ''}`}><Icon size={18} /> {label}</Link>
+    <Link key={href} href={href} className={`side-link ${on ? 'on' : ''}`} onClick={(e) => kitchenNav(e, href)}><Icon size={18} /> {label}</Link>
   )
 
   return (
@@ -137,7 +138,7 @@ function MobileBars({ appName, user, kitchens, onSearch }: { appName: string; us
                     <div className="sheet-grid" style={{ marginBottom: 18 }}>
                       {KITCHEN_SECTIONS.map((s) => {
                         const Icon = SECTION_ICON[s.id]
-                        return <Link key={s.id} href={`/cucine/${kitchen.id}/app?s=${s.id}`}><Icon size={22} /> {s.label}</Link>
+                        return <Link key={s.id} href={`/cucine/${kitchen.id}/app?s=${s.id}`} onClick={(e) => kitchenNav(e, `/cucine/${kitchen.id}/app?s=${s.id}`)}><Icon size={22} /> {s.label}</Link>
                       })}
                     </div>
                   </>
@@ -163,6 +164,14 @@ export default function Shell({ appName, tagline, user, kitchens, children }: {
   appName: string; tagline: string; user: User; kitchens: Kitchen[]; children: React.ReactNode
 }) {
   const [cmd, setCmd] = useState(false)
+  // la cucina è un modulo grande: lo scarico in anticipo quando il telefono è libero
+  useEffect(() => {
+    if (!kitchens.length) return
+    const w = window as any
+    const load = () => { import('@/components/kitchen/KitchenPro').catch(() => {}) }
+    const id = w.requestIdleCallback ? w.requestIdleCallback(load, { timeout: 5000 }) : setTimeout(load, 3000)
+    return () => { if (w.cancelIdleCallback) w.cancelIdleCallback(id); else clearTimeout(id) }
+  }, [kitchens.length])
   useEffect(() => {
     const h = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); setCmd((v) => !v) }

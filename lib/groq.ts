@@ -27,8 +27,16 @@ export async function groqChat(opts: { system?: string; user: string; images?: s
       messages: [...(opts.system ? [{ role: 'system', content: opts.system }] : []), { role: 'user', content }],
     }
     if (opts.json) body.response_format = { type: 'json_object' }
-    const res = await fetch(GROQ_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` }, body: JSON.stringify(body) })
-    const data = await res.json().catch(() => null)
+    // meno "ragionamento" = risposta molto più veloce (per estrarre ricette non serve)
+    if (model.startsWith('openai/gpt-oss')) body.reasoning_effort = 'low'
+    else if (model.startsWith('qwen/')) body.reasoning_effort = 'none'
+    const call = (b: Record<string, unknown>) => fetch(GROQ_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` }, body: JSON.stringify(b) })
+    let res = await call(body)
+    let data = await res.json().catch(() => null)
+    if (!res.ok && res.status === 400 && body.reasoning_effort && /reasoning/i.test(data?.error?.message || '')) {
+      delete body.reasoning_effort
+      res = await call(body); data = await res.json().catch(() => null)
+    }
     if (res.ok && data?.choices?.[0]?.message?.content) return clean(data.choices[0].message.content)
     const msg: string = data?.error?.message || `Errore Groq ${res.status}`
     if (res.status === 401) throw new GroqError('Chiave Groq non valida: controlla GROQ_API_KEY su Vercel', 401)

@@ -9260,7 +9260,7 @@ function KitchenProInner() {
   const { state, kitchen } = useK();
   const alertCount = selectAlertCritici(kitchen).length;
 
-  useEffect(()=>{ setTimeout(()=>setReady(true),60); },[]);
+  useEffect(()=>{ setReady(true); },[]);
   useEffect(()=>{ localStorage.setItem("kp-theme",themeKey); },[themeKey]);
   /* listener per Quick Actions della Dashboard */
   useEffect(()=>{
@@ -9455,7 +9455,7 @@ function KitchenProInner() {
           padding:isMobile?"10px 8px 80px":"28px 36px 48px",
           overflow:"auto",
         }} key={section}>
-          <div style={{animation:ready?"cardIn 0.45s cubic-bezier(0.4,0,0.2,1) both":"none",width:"100%",minWidth:0}}>
+          <div style={{animation:ready?"cardInFast 0.16s ease-out both":"none",width:"100%",minWidth:0}}>
             {section==="dashboard"    && <Panoramica/>}
             {section==="dashboard"    && <details style={{marginTop:24}}><summary style={{cursor:"pointer",color:t.inkMuted,fontSize:14,padding:"8px 0"}}>Indicatori del magazzino</summary><div style={{marginTop:12}}><DashboardView t={t}/></div></details>}
             {section==="piatti"       && <PiattiView/>}

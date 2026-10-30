@@ -9,9 +9,11 @@ export const MANAGER_ROLES = ['admin', 'chef', 'sous-chef']
 
 /** Cucina + brigata con i nomi; null se l'utente non ne fa parte */
 export async function loadKitchen(supabase: SupabaseClient, id: string, userId: string) {
-  const { data: kitchen } = await supabase.from('kitchens').select('id, name, code').eq('id', id).maybeSingle()
+  const [{ data: kitchen }, { data: km }] = await Promise.all([
+    supabase.from('kitchens').select('id, name, code').eq('id', id).maybeSingle(),
+    supabase.from('kitchen_members').select('user_id, role, joined_at').eq('kitchen_id', id).order('joined_at'),
+  ])
   if (!kitchen) return null
-  const { data: km } = await supabase.from('kitchen_members').select('user_id, role, joined_at').eq('kitchen_id', id).order('joined_at')
   const ids = (km ?? []).map((m) => m.user_id)
   const { data: profiles } = ids.length ? await supabase.from('profiles').select('id, full_name').in('id', ids) : { data: [] }
   const nameOf = new Map((profiles ?? []).map((p) => [p.id, p.full_name as string]))

@@ -1,4 +1,5 @@
 'use client'
+import { kitchenNav } from './kitchen-nav'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { BookOpen, ChefHat, CornerDownLeft, PenLine, Search, Sparkles, Palette } from 'lucide-react'
@@ -28,7 +29,7 @@ export default function CommandPalette({ onClose, user, kitchens }: {
       .then(({ data }) => { recipeCache = (data ?? []) as R[]; setRecipes(recipeCache) })
   }, [])
 
-  const go = (href: string) => () => { onClose(); router.push(href) }
+  const go = (href: string) => () => { onClose(); if (!kitchenNav(null, href)) router.push(href) }
   const kitchenId = useMemo(() => {
     try { const k = localStorage.getItem('rc_kitchen'); if (kitchens.some((x) => x.id === k)) return k } catch {}
     return kitchens[0]?.id ?? null

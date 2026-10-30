@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { AlertTriangle, BookOpen, Camera, ChefHat, ClipboardList, Clock, PackageMinus, PenLine } from 'lucide-react'
-import { getSession } from '@/lib/supabase/server'
+import { getMyKitchens, getSession } from '@/lib/supabase/server'
 import { loadCatalog } from '@/lib/catalog'
 import { bookGradient } from '@/lib/ui'
 
@@ -35,21 +35,19 @@ function when(hours: number) {
 
 export default async function Home() {
   const s = (await getSession())!
-  const { data: km } = await s.supabase.from('kitchen_members').select('kitchen_id').eq('user_id', s.user.id)
-  const kitchenIds = (km ?? []).map((k) => k.kitchen_id)
-  const [{ books, sections }, { data: rows }, { data: recent }, { data: kitchens }, { data: states }] = await Promise.all([
+  const kitchens = await getMyKitchens()
+  const kitchen = kitchens[0]
+  const [{ books, sections }, { data: rows }, { data: recent }, { data: st }] = await Promise.all([
     loadCatalog(s.supabase),
     s.supabase.from('recipes').select('section_id'),
     s.supabase.from('recipes').select('id, name, category, section_id, updated_at').order('updated_at', { ascending: false }).limit(6),
-    kitchenIds.length ? s.supabase.from('kitchens').select('id, name').in('id', kitchenIds).order('created_at') : Promise.resolve({ data: [] as { id: string; name: string }[] }),
-    kitchenIds.length ? s.supabase.from('kitchen_state').select('kitchen_id, data').in('kitchen_id', kitchenIds) : Promise.resolve({ data: [] as { kitchen_id: string; data: unknown }[] }),
+    kitchen ? s.supabase.from('kitchen_state').select('data').eq('kitchen_id', kitchen.id).maybeSingle() : Promise.resolve({ data: null as { data: unknown } | null }),
   ])
   const bookOf = new Map(sections.map((x) => [x.id, x.book_id]))
   const counts: Record<string, number> = {}
   for (const r of rows ?? []) { const b = bookOf.get(r.section_id); if (b) counts[b] = (counts[b] ?? 0) + 1 }
   const total = rows?.length ?? 0
-  const kitchen = (kitchens ?? [])[0]
-  const summary = kitchen ? kitchenSummary((states ?? []).find((x: any) => x.kitchen_id === kitchen.id)?.data) : null
+  const summary = kitchen ? kitchenSummary(st?.data) : null
   const hour = new Date().toLocaleString('it-IT', { hour: 'numeric', hour12: false, timeZone: 'Europe/Rome' })
   const greeting = +hour < 12 ? 'Buongiorno' : +hour < 18 ? 'Buon pomeriggio' : 'Buonasera'
   const first = s.name.split(' ')[0]

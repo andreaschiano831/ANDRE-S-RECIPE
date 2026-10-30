@@ -8,30 +8,23 @@ export const dynamic = 'force-dynamic'
 export default async function KitchenAppPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ s?: string }> }) {
   const [{ id }, { s: sec }] = await Promise.all([params, searchParams])
   const s = (await getSession())!
-  const k = await loadKitchen(s.supabase, id, s.user.id)
-  if (!k) notFound()
-
-  const [{ data: state }, { data: kb }] = await Promise.all([
+  // tutto in parallelo: cucina e brigata, stato condiviso, ricettari collegati, ricette
+  const [k, { data: state }, { data: kb }, { data: rs }] = await Promise.all([
+    loadKitchen(s.supabase, id, s.user.id),
     s.supabase.from('kitchen_state').select('data, version').eq('kitchen_id', id).maybeSingle(),
     s.supabase.from('kitchen_books').select('book_id').eq('kitchen_id', id),
+    s.supabase.from('recipes').select('id, name, section_id, sections!inner(name, book_id), recipe_ingredients(name, quantity, unit, position)').order('name'),
   ])
-  const bookIds = (kb ?? []).map((b) => b.book_id)
+  if (!k) notFound()
   // ricettari collegati alla cucina; se nessuno è collegato, tutti quelli visibili
-  const { data: secs } = bookIds.length
-    ? await s.supabase.from('sections').select('id, name').in('book_id', bookIds)
-    : await s.supabase.from('sections').select('id, name')
-  const secName = new Map((secs ?? []).map((x) => [x.id, x.name as string]))
-  let recipes: KPRecipe[] = []
-  if (secName.size) {
-    const { data: rs } = await s.supabase.from('recipes')
-      .select('id, name, section_id, recipe_ingredients(name, quantity, unit, position)')
-      .in('section_id', Array.from(secName.keys())).order('name')
-    recipes = (rs ?? []).map((r: any) => ({
-      id: r.id, name: r.name, section: secName.get(r.section_id) ?? '',
+  const bookIds = new Set((kb ?? []).map((b) => b.book_id))
+  const recipes: KPRecipe[] = (rs ?? [])
+    .filter((r: any) => !bookIds.size || bookIds.has(r.sections?.book_id))
+    .map((r: any) => ({
+      id: r.id, name: r.name, section: r.sections?.name ?? '',
       ingredients: (r.recipe_ingredients ?? []).sort((a: any, b: any) => a.position - b.position)
         .map((i: any) => ({ name: i.name, quantity: i.quantity == null ? null : Number(i.quantity), unit: i.unit })),
     }))
-  }
 
   return (
     <KitchenApp

@@ -35,7 +35,9 @@ async function guard(request: NextRequest) {
     },
   )
 
-  const { data: { user } } = await supabase.auth.getUser()
+  // verifica del token in locale quando il progetto usa chiavi asimmetriche (niente viaggio al server di Supabase)
+  const { data } = await supabase.auth.getClaims()
+  const user = data?.claims?.sub ? data.claims : null
   const path = request.nextUrl.pathname
   const isPublic = PUBLIC_PATHS.some((p) => path.startsWith(p))
 
