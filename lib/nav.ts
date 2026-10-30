@@ -8,7 +8,7 @@ export const KITCHEN_SECTIONS = [
   { id: 'servizio', label: 'Servizio', hint: 'Uscite dei piatti, scarico dalla linea' },
   { id: 'spesa', label: 'Spesa', hint: 'Lista, fornitori, fatture' },
   { id: 'economato', label: 'Economato', hint: 'Ordini e ricevimento merce' },
-  { id: 'haccp', label: 'HACCP', hint: 'Temperature, checklist, lotti' },
+  { id: 'haccp', label: 'HACCP', hint: 'Temperature, sanificazione, merci, abbattimenti, etichette' },
   { id: 'spttp', label: 'Fine turno', hint: 'Chiusura e consegne' },
   { id: 'brigata', label: 'Brigata', hint: 'Persone e ruoli' },
   { id: 'settings', label: 'Impostazioni cucina', hint: 'Livelli PAR, AI' },

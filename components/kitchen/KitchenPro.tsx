@@ -11,6 +11,7 @@ import PreparazioniHub from "./hub/Preparazioni";
 import FoodCostView from "./hub/FoodCost";
 import Panoramica from "./hub/Panoramica";
 import ServizioHub from "./hub/Servizio";
+import HaccpHub from "./haccp/Haccp";
 
 /* ════ useIsMobile — JS-based reactive, mai window.innerWidth diretto ════ */
 function useIsMobile(bp=768) {
@@ -407,6 +408,15 @@ function reducer(state, action) {
       })};
     case "LISTINO_REMOVE":
       return { ...state, kitchens: mapK(action.kitchenId, k=>({...k, listino:(k.listino||[]).filter(x=>x.id!==action.id)}))};
+    /* ── HACCP: impostazioni (frighi, attrezzature, friggitrici, scadenze) ── */
+    case "HACCP_CFG_UPSERT":
+      return { ...state, kitchens: mapK(action.kitchenId, k=>{
+        const h = k.haccp||{}; const list = h[action.key]||[];
+        const has = list.some(x=>x.id===action.item.id);
+        return {...k, haccp:{...h, [action.key]: has ? list.map(x=>x.id===action.item.id?{...x,...action.item}:x) : [...list, action.item]}};
+      })};
+    case "HACCP_CFG_REMOVE":
+      return { ...state, kitchens: mapK(action.kitchenId, k=>{ const h=k.haccp||{}; return {...k, haccp:{...h, [action.key]:(h[action.key]||[]).filter(x=>x.id!==action.id)}}; })};
     case "KITCHEN_PATCH": {
       const allowed = ["servizioPiano","fcTarget"];
       const patch = Object.fromEntries(Object.entries(action.patch||{}).filter(([key])=>allowed.includes(key)));
@@ -661,6 +671,8 @@ function KitchenProvider({ children }) {
       listinoRemove: (id) => { const k=kid(); if(k)dispatch({type:"LISTINO_REMOVE",kitchenId:k,id}); },
       kitchenPatch: (patch) => { const k=kid(); if(k)dispatch({type:"KITCHEN_PATCH",kitchenId:k,patch}); },
       stockOps: (ops, extra={}) => { const k=kid(); if(k && (ops?.length || extra.prep || extra.log || extra.undoLogId)) dispatch({type:"STOCK_OPS",kitchenId:k,ops:ops||[],...extra}); },
+      haccpUpsert: (key, item) => { const k=kid(); if(k && item?.id) dispatch({type:"HACCP_CFG_UPSERT",kitchenId:k,key,item}); },
+      haccpRemove: (key, id) => { const k=kid(); if(k) dispatch({type:"HACCP_CFG_REMOVE",kitchenId:k,key,id}); },
       wasteRemove: (id) => { const k=kid(); if(k)dispatch({type:"WASTE_REMOVE",kitchenId:k,id}); },
       canEdit: () => { const k=curKitchen(); const m=k?.members.find(x=>x.id===state.selectedMemberId)||k?.members[0]; return CAN_EDIT.includes(m?.role||"admin"); },
       setExternalAppUrl: (url) => { const k=kid(); if(k)dispatch({type:"KITCHEN_SET_EXTERNAL_URL",kitchenId:k,url}); },
@@ -9491,7 +9503,7 @@ function KitchenProInner() {
             {section==="spesa"        && <SpesaView t={t}/>}
             {section==="economato"    && <EconomatoView t={t}/>}
             {section==="servizio"     && <ServizioHub legacy={<ServizioViewFull t={t}/>}/>}
-            {section==="haccp"        && <HaccpViewFull t={t}/>}
+            {section==="haccp"        && <HaccpHub legacy={<HaccpViewFull t={t}/>}/>}
             {section==="spttp"        && <SpttpView t={t}/>}
             {section==="foodcost"     && <FoodCostView/>}
             {section==="brigata"      && <BrigataBridgeView t={t}/>}
