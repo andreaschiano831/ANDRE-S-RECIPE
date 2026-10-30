@@ -98,7 +98,7 @@ export default function DraftFields({ draft, onChange, books, sections, groups =
   }
 
   return (
-    <div className="stack" style={{ gap: 18 }}>
+    <div className="stack ed-wrap" style={{ gap: 18 }}>
       <datalist id={`groups-${uid}`}>{groups.map((g) => <option key={g} value={g} />)}</datalist>
       <datalist id="ing-names">{ingredientNames.map((g) => <option key={g} value={g} />)}</datalist>
       <datalist id="units">{UNITS.map((u) => <option key={u} value={u} />)}</datalist>

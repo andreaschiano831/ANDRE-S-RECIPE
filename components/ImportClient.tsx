@@ -264,7 +264,7 @@ export default function ImportClient({ books: books0, sections: sections0, group
           </div>
           <div className="rsheets">
             {items.map((it) => (
-              <div key={it.key} className="stack" style={{ gap: 0 }}>
+              <div key={it.key} className="stack" style={{ gap: 0, gridColumn: it.open ? '1 / -1' : undefined }}>
                 {it.open ? (
                   <div className="panel" style={{ padding: 14 }}>
                     <DraftFields draft={it.draft} onChange={(d) => patch(it.key, { draft: d })} books={books} sections={sections} groups={groups} ingredientNames={ingredientNames} />
