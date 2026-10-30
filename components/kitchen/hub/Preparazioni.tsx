@@ -1,7 +1,8 @@
 'use client'
 import { useMemo, useState } from 'react'
-import { Check, ChevronDown, ChevronUp, ExternalLink, Play, Plus, Trash2, Wand2 } from 'lucide-react'
-import { Drawer, ItemCombo, recipeUrl, Stepper, useHub, type Pick } from './ui'
+import { ArrowRightLeft, Check, ChevronDown, ChevronUp, ExternalLink, Play, Plus, Trash2, Wand2 } from 'lucide-react'
+import { ItemCombo, recipeUrl, Stepper, useHub, type Pick } from './ui'
+import Smista from './Smista'
 import { fabbisogno, fmtQty, fromBase, lineaFor, lineaItems, PARTITE, partitaLabel, recipeWeight, round, toBase, type Need, type Piatto, type Prep } from './model'
 
 const CAT_TO_PARTITA: Record<string, string> = { antipasto: 'antipasti', primo: 'primi', secondo: 'secondi', dessert: 'pasticceria', buffet: 'buffet', speciale: 'antipasti' }
@@ -117,7 +118,7 @@ function Piano() {
         ))}
       </div>
 
-      {done && <DoneDrawer p={done} onClose={() => setDone(null)} />}
+      {done && <Smista p={done} onClose={() => setDone(null)} />}
     </>
   )
 }
@@ -170,60 +171,10 @@ function PrepCard({ p, onDone }: { p: Prep; onDone: () => void }) {
         <div className="acts">
           {p.status === 'da_fare' && <button className="btn btn-sm" onClick={() => api.prepStatus(p.id, 'in_corso')}><Play /> Inizia</button>}
           {(p.status === 'da_fare' || p.status === 'in_corso') && <button className="btn btn-gold btn-sm" onClick={onDone}><Check /> Fatta</button>}
+          {p.status === 'svolta' && <button className="btn btn-gold btn-sm" onClick={onDone}><ArrowRightLeft /> Smista</button>}
           <button className="icon-btn" style={{ marginLeft: 'auto', width: 30, height: 30 }} onClick={() => confirm(`Eliminare «${p.nome}»?`) && api.prepRemove(p.id)} aria-label="Elimina"><Trash2 size={14} /></button>
         </div>
       )}
     </div>
-  )
-}
-
-function DoneDrawer({ p, onClose }: { p: Prep; onClose: () => void }) {
-  const { api, k, toast } = useHub()
-  const [dest, setDest] = useState<'counter' | 'fridge' | 'freezer' | 'none'>('counter')
-  const [partita, setPartita] = useState(p.partita || p.reparto || 'antipasti')
-  const [qty, setQty] = useState(p.quantita)
-  const [days, setDays] = useState(2)
-  const DEST = [
-    { k: 'counter' as const, l: 'In linea', d: 2 }, { k: 'fridge' as const, l: 'In frigo', d: 3 },
-    { k: 'freezer' as const, l: 'In freezer', d: 30 }, { k: 'none' as const, l: 'Non caricare', d: 0 },
-  ]
-  function confirmDone() {
-    const same = dest === 'counter' ? (k.counter || []).find((s: any) => s.partita === partita && s.unit === p.unitaMisura && ((p.recipeId && s.recipeId === p.recipeId) || s.name === p.nome)) : null
-    if (same) api.itemUpdate(same.id, { quantity: round(same.quantity + qty, 3), expiresAt: new Date(Date.now() + days * 864e5).toISOString() })
-    else if (dest !== 'none') {
-      api.stockAdd({
-        name: p.nome, quantity: qty, unit: p.unitaMisura, location: dest, partita: dest === 'counter' ? partita : p.partita,
-        recipeId: p.recipeId, expiresAt: new Date(Date.now() + days * 864e5).toISOString(), notes: 'Da preparazione',
-      })
-    }
-    api.prepStatus(p.id, 'svolta')
-    api.prepUpdate(p.id, { quantita: qty, destinazione: dest === 'none' ? null : DEST.find((x) => x.k === dest)!.l.replace('In ', '').toLowerCase() })
-    toast(dest === 'none' ? `${p.nome} fatta` : `${p.nome} fatta e caricata ${DEST.find((x) => x.k === dest)!.l.toLowerCase()}`, 'success')
-    onClose()
-  }
-  return (
-    <Drawer onClose={onClose} title={<span className="dish" style={{ fontSize: '1.3rem' }}>{p.nome}: fatta</span>}
-      foot={<div className="row"><button className="btn" style={{ marginLeft: 'auto' }} onClick={onClose}>Annulla</button><button className="btn btn-gold" onClick={confirmDone}><Check /> Conferma</button></div>}>
-      <div className="stack" style={{ gap: 8 }}>
-        <span className="label">Quanta ne hai fatta</span>
-        <Stepper value={qty} step={p.unitaMisura === 'kg' ? 0.5 : p.unitaMisura === 'g' ? 100 : 1} unit={p.unitaMisura} onChange={setQty} />
-      </div>
-      <div className="stack" style={{ gap: 8 }}>
-        <span className="label">Dove va</span>
-        <div className="pills">{DEST.map((d) => <button key={d.k} className={`pill ${dest === d.k ? 'on' : ''}`} onClick={() => { setDest(d.k); if (d.d) setDays(d.d) }}>{d.l}</button>)}</div>
-      </div>
-      {dest === 'counter' && (
-        <div className="stack" style={{ gap: 8 }}>
-          <span className="label">Partita</span>
-          <div className="pills">{PARTITE.map((x) => <button key={x.key} className={`pill ${partita === x.key ? 'on' : ''}`} onClick={() => setPartita(x.key)}>{x.label}</button>)}</div>
-        </div>
-      )}
-      {dest !== 'none' && (
-        <div className="stack" style={{ gap: 8 }}>
-          <span className="label">Valida per</span>
-          <Stepper value={days} step={1} min={1} unit="giorni" onChange={(v) => setDays(Math.round(v))} />
-        </div>
-      )}
-    </Drawer>
   )
 }

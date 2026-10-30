@@ -736,3 +736,25 @@ button.stat{cursor:pointer;transition:border-color .15s,transform .15s}button.st
 .rd-page .textLayer>:not(.markedContent),.rd-page .textLayer .markedContent span:not(.markedContent){z-index:1}
 .rd-page .textLayer span.markedContent{top:0;height:0}
 .rd-page .textLayer .endOfContent{display:block;position:absolute;inset:100% 0 0;z-index:0;cursor:default;user-select:none}
+.smista-row{border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden;transition:border-color .15s}
+.smista-row.on{border-color:var(--accent)}
+.smista-head{display:flex;align-items:center;gap:10px;width:100%;padding:12px 14px;text-align:left}
+.smista-head b{font-weight:600}
+.smista-body{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:0 14px 12px}
+/* ── servizio ── */
+.pass-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.pass-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:14px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow)}
+.pass-card h3{font-family:var(--f-display);font-style:italic;font-weight:500;font-size:1.25rem;line-height:1.15}
+.pass-cov{min-width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-family:var(--f-display);font-size:1.3rem;background:var(--sunk);color:var(--ink-2)}
+.pass-cov.ok{background:var(--ok-soft);color:var(--ok)}.pass-cov.low{background:var(--warn-soft);color:var(--warn)}.pass-cov.none{background:var(--danger-soft);color:var(--danger)}
+.pass-comps{display:flex;flex-wrap:wrap;gap:5px}
+.pass-comp{font-size:.74rem;padding:2px 8px;border-radius:99px;background:var(--ok-soft);color:var(--ok)}
+.pass-comp.low{background:var(--warn-soft);color:var(--warn)}
+.pass-comp.out{background:var(--danger-soft);color:var(--danger)}
+.pass-comp.off{background:var(--sunk);color:var(--muted)}
+.pass-actions{display:flex;align-items:center;gap:8px;margin-top:auto}
+.pass-fire{flex:1;height:44px;font-size:1rem}
+.pass-fire:active{transform:scale(.96)}
+.trow.under{background:var(--warn-soft)}
+.minchip{font-size:.74rem;padding:2px 8px;border-radius:99px;border:1px dashed var(--line-2);color:var(--muted);white-space:nowrap}
+.minchip.set{border-style:solid;color:var(--ink-2)}

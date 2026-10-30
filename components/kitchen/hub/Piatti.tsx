@@ -2,6 +2,7 @@
 import { useMemo, useState } from 'react'
 import { BookOpen, Check, ExternalLink, Plus, Search, Trash2, UtensilsCrossed } from 'lucide-react'
 import { Drawer, ItemCombo, recipeUrl, Stepper, useHub, type Pick } from './ui'
+import { fireOps, uid } from './ops'
 import {
   componentiOf, copertura, eur, fcTone, lineaFor, lineaItems, norm, PIATTO_CATEGORIE, nameScore, piattoCost, recipeCost, recipeWeight, round, toBase,
   type Componente, type Piatto, type RecipeCost,
@@ -166,21 +167,12 @@ function PiattoEditor({ piatto, onClose }: { piatto: Piatto | null; onClose: () 
   }
   function served() {
     if (!piatto) return
-    const done: string[] = []
-    for (const c of comps) {
-      const b = toBase(c.qty, c.unit); if (!b) continue
-      let left = b.q * serve
-      for (const it of lineaFor(c, linea).items) {
-        const ib = toBase(it.quantity, it.unit); if (!ib || ib.dim !== b.dim || left <= 0) continue
-        const take = Math.min(left, ib.q)
-        api.adjustItem(it.id, -(take / (ib.q / it.quantity)))
-        left -= take
-      }
-      if (left < b.q * serve) done.push(c.nome)
-    }
-    api.piattoUpdate(piatto.id, { storico: [...(piatto.storico || []), { data: new Date().toISOString().slice(0, 10), coperti: serve, ts: new Date().toISOString() }] })
-    toast(done.length ? `Scaricati dalla linea: ${done.join(', ')}` : `Registrate ${serve} porzioni (niente in linea da scaricare)`, 'success')
+    const { ops, short } = fireOps({ ...piatto, componenti: comps }, serve, linea)
+    const entry = { id: uid(), at: new Date().toISOString(), piattoId: piatto.id, nome: piatto.nome, porzioni: serve, deltas: ops.filter((o: any) => 'id' in o).map((o: any) => ({ id: o.id, delta: o.delta })) }
+    api.stockOps(ops, { log: entry })
+    toast(short.length ? `Registrate ${serve} porzioni · mancano in linea: ${short.map((x) => x.nome).join(', ')}` : `Scaricate dalla linea ${serve} porzioni di ${piatto.nome}`, short.length ? 'error' : 'success')
   }
+
 
   return (
     <Drawer onClose={onClose}

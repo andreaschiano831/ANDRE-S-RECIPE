@@ -10,6 +10,7 @@ import LineaView from "./hub/Linea";
 import PreparazioniHub from "./hub/Preparazioni";
 import FoodCostView from "./hub/FoodCost";
 import Panoramica from "./hub/Panoramica";
+import ServizioHub from "./hub/Servizio";
 
 /* ════ useIsMobile — JS-based reactive, mai window.innerWidth diretto ════ */
 function useIsMobile(bp=768) {
@@ -199,7 +200,7 @@ function ensureKitchen(k) {
     tempLogs:[], lots:[], ricette:[], ingredienti:[],
     wasteLog:[], tickets:[],
     service:null,
-    piatti:[], calendarNotes:[],
+    piatti:[], calendarNotes:[], servizioLog:[],
     listino:[], servizioPiano:{coperti:40, perPiatto:{}}, fcTarget:30,
     externalAppUrl:"",
     ...k
@@ -411,6 +412,29 @@ function reducer(state, action) {
       const patch = Object.fromEntries(Object.entries(action.patch||{}).filter(([key])=>allowed.includes(key)));
       return { ...state, kitchens: mapK(action.kitchenId, k=>({...k, ...patch}))};
     }
+    /* ── MOVIMENTI DI GIACENZA (servizio, smistamento, rifornimento) ──
+       Un'unica azione con variazioni relative: si riapplica bene sopra i dati
+       di un altro dispositivo e si può annullare. */
+    case "STOCK_OPS":
+      return { ...state, kitchens: mapK(action.kitchenId, k=>{
+        let kk = k;
+        for (const op of action.ops||[]) {
+          if (op.add) {
+            if (findLoc(kk, op.add.id)) continue;
+            const loc = op.add.location||"fridge";
+            kk = setStock(kk, loc, [op.add, ...mapStock(kk,loc)]);
+            continue;
+          }
+          const loc = findLoc(kk, op.id); if(!loc) continue;
+          kk = setStock(kk, loc, mapStock(kk,loc)
+            .map(x=>x.id!==op.id?x:{...x, ...(op.patch||{}), quantity: Math.max(0, Math.round(((x.quantity||0)+(op.delta||0))*1000)/1000)})
+            .filter(x=>x.id!==op.id || op.keep || x.quantity>0));
+        }
+        if (action.log) kk = {...kk, servizioLog:[action.log, ...(kk.servizioLog||[])].slice(0,300)};
+        if (action.undoLogId) kk = {...kk, servizioLog:(kk.servizioLog||[]).map(l=>l.id===action.undoLogId?{...l,undone:true}:l)};
+        if (action.prep) kk = {...kk, preparazioni:(kk.preparazioni||[]).map(p=>p.id!==action.prep.id?p:{...p, ...action.prep.patch})};
+        return kk;
+      })};
     case "WASTE_REMOVE":
       return { ...state, kitchens: mapK(action.kitchenId, k=>({...k, wasteLog:(k.wasteLog||[]).filter(x=>x.id!==action.id)}))};
     case "KITCHEN_SET_EXTERNAL_URL":
@@ -636,6 +660,7 @@ function KitchenProvider({ children }) {
       listinoUpsert: (item) => { const k=kid(); if(k)dispatch({type:"LISTINO_UPSERT",kitchenId:k,item:{...item,id:item.id||genId(),aggiornatoIl:nowISO()}}); },
       listinoRemove: (id) => { const k=kid(); if(k)dispatch({type:"LISTINO_REMOVE",kitchenId:k,id}); },
       kitchenPatch: (patch) => { const k=kid(); if(k)dispatch({type:"KITCHEN_PATCH",kitchenId:k,patch}); },
+      stockOps: (ops, extra={}) => { const k=kid(); if(k && (ops?.length || extra.prep || extra.log || extra.undoLogId)) dispatch({type:"STOCK_OPS",kitchenId:k,ops:ops||[],...extra}); },
       wasteRemove: (id) => { const k=kid(); if(k)dispatch({type:"WASTE_REMOVE",kitchenId:k,id}); },
       canEdit: () => { const k=curKitchen(); const m=k?.members.find(x=>x.id===state.selectedMemberId)||k?.members[0]; return CAN_EDIT.includes(m?.role||"admin"); },
       setExternalAppUrl: (url) => { const k=kid(); if(k)dispatch({type:"KITCHEN_SET_EXTERNAL_URL",kitchenId:k,url}); },
@@ -662,7 +687,7 @@ function ToastProvider({ children }) {
   return (
     <ToastCtx.Provider value={show}>
       {children}
-      <div style={{position:"fixed",top:20,right:20,zIndex:9999,display:"flex",flexDirection:"column",gap:8}}>
+      <div style={{position:"fixed",bottom:"calc(96px + env(safe-area-inset-bottom))",left:"50%",transform:"translateX(-50%)",zIndex:9999,display:"flex",flexDirection:"column",alignItems:"center",gap:8,pointerEvents:"none",width:"max-content",maxWidth:"calc(100vw - 32px)"}}>
         {toasts.map(t=>(
           <div key={t.id} style={{
             padding:"10px 18px",borderRadius:10,fontSize:12,fontFamily:"var(--mono)",fontWeight:500,
@@ -8538,7 +8563,7 @@ const SECTION_TITLE = {
   linea:        "Linea",
   giacenze:     "Magazzino",
   preparazioni: "Preparazioni",
-  servizio:     "Servizio Live",
+  servizio:     "Servizio",
   spesa:        "Lista della Spesa",
   economato:    "Economato",
   haccp:        "HACCP & Tracciabilità",
@@ -9465,7 +9490,7 @@ function KitchenProInner() {
             {false && section==="preparazioni" && isMobile && <QuickPrepFAB t={t}/>}
             {section==="spesa"        && <SpesaView t={t}/>}
             {section==="economato"    && <EconomatoView t={t}/>}
-            {section==="servizio"     && <ServizioViewFull t={t}/>}
+            {section==="servizio"     && <ServizioHub legacy={<ServizioViewFull t={t}/>}/>}
             {section==="haccp"        && <HaccpViewFull t={t}/>}
             {section==="spttp"        && <SpttpView t={t}/>}
             {section==="foodcost"     && <FoodCostView/>}

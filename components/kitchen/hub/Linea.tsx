@@ -1,7 +1,10 @@
 'use client'
 import { useMemo, useRef, useState } from 'react'
-import { Camera, Check, ClipboardList, ExternalLink, Play, Plus, RefreshCw, Trash2, X } from 'lucide-react'
+import { ArrowRightLeft, Camera, Check, ClipboardList, ExternalLink, Play, Plus, RefreshCw, Trash2, X } from 'lucide-react'
 import { askAI, Drawer, ItemCombo, recipeUrl, shrinkImage, Stepper, useHub, type Pick } from './ui'
+import Smista from './Smista'
+import Rifornisci from './Rifornisci'
+import { available, describe, sourcesFor, underMin } from './ops'
 import { bestMatch, componentiOf, fabbisogno, fmtQty, fromBase, lineaItems, nameScore, PARTITE, partitaLabel, recipeWeight, round, toBase, type KRecipe, type Need, type Piatto, type Prep, type StockItem } from './model'
 
 const LINEA_SYSTEM = `Sei l'assistente di una brigata di cucina professionale.
@@ -24,6 +27,10 @@ export default function LineaView() {
   const piatti: Piatto[] = (k.piatti || []).filter((p: Piatto) => p.attivo)
   const [partita, setPartita] = useState<string>(() => { try { return localStorage.getItem('kp-linea-partita') || 'tutte' } catch { return 'tutte' } })
   const [scan, setScan] = useState(false)
+  const [smista, setSmista] = useState<Prep | null>(null)
+  const [refill, setRefill] = useState<StockItem[] | null>(null)
+  const [editMin, setEditMin] = useState<string | null>(null)
+  const toFix = underMin(linea)
   const pick = (p: string) => { setPartita(p); try { localStorage.setItem('kp-linea-partita', p) } catch {} }
 
   // preparazioni aperte e mancanze del servizio, per partita: la linea si riempie da qui
@@ -53,16 +60,6 @@ export default function LineaView() {
     api.prepAddFull({ nome, quantita: q.qty, unitaMisura: q.unit, recipeId: recipeId ?? null, partita: part || 'antipasti', note: 'Per la linea' })
     toast(`${nome}: ${q.qty} ${q.unit} da preparare`, 'success')
   }
-  /** preparazione finita: va direttamente in linea (si somma a quello che c'è già) */
-  function doneToLinea(p: Prep) {
-    const part = prepPart(p) || 'antipasti'
-    const same = linea.find((s) => s.partita === part && s.unit === p.unitaMisura && ((p.recipeId && s.recipeId === p.recipeId) || s.name === p.nome))
-    if (same) api.itemUpdate(same.id, { quantity: round(same.quantity + p.quantita, 3), expiresAt: new Date(Date.now() + 2 * 864e5).toISOString() })
-    else api.stockAdd({ name: p.nome, quantity: p.quantita, unit: p.unitaMisura, location: 'counter', partita: part, recipeId: p.recipeId, expiresAt: new Date(Date.now() + 2 * 864e5).toISOString(), notes: 'Da preparazione' })
-    api.prepStatus(p.id, 'svolta'); api.prepUpdate(p.id, { destinazione: 'linea' })
-    toast(`${p.nome} in linea ${partitaLabel(part)}`, 'success')
-  }
-
   // in quali piatti si usa una preparazione e per quante porzioni basta
   function uses(s: StockItem) {
     const out: { piatto: string; porz: number | null }[] = []
@@ -95,6 +92,7 @@ export default function LineaView() {
             return <button key={p.key} className={`pill ${partita === p.key ? 'on' : ''}`} onClick={() => pick(p.key)}>{p.label}{n ? <small>{n}</small> : null}</button>
           })}
         </div>
+        {canEdit && toFix.length > 0 && <button className="btn" onClick={() => setRefill(toFix)}><ArrowRightLeft /> Rifornisci ({toFix.length})</button>}
         {canEdit && <button className="btn btn-gold" onClick={() => setScan(true)}><Camera /> Imposta da foto</button>}
       </div>
 
@@ -131,7 +129,7 @@ export default function LineaView() {
                 <div key={p.id} className="trow" style={{ borderTop: 'none' }}>
                   <span className="nm"><b>{p.nome}</b><small>{p.quantita} {p.unitaMisura} · {p.status === 'in_corso' ? 'in corso' : 'da fare'}</small></span>
                   {canEdit && p.status === 'da_fare' && <button className="btn btn-sm" onClick={() => api.prepStatus(p.id, 'in_corso')}><Play /> Inizia</button>}
-                  {canEdit && <button className="btn btn-gold btn-sm" onClick={() => doneToLinea(p)}><Check /> Fatta, in linea</button>}
+                  {canEdit && <button className="btn btn-gold btn-sm" onClick={() => setSmista(p)}><Check /> Fatta</button>}
                 </div>
               ))}
             </div>
@@ -143,7 +141,7 @@ export default function LineaView() {
             const r = s.recipeId ? recipes.find((x) => x.id === s.recipeId) : null
             const step = s.unit === 'kg' || s.unit === 'l' ? 0.1 : s.unit === 'g' || s.unit === 'ml' ? 50 : 1
             return (
-              <div key={s.id} className="trow" style={{ flexWrap: 'wrap' }}>
+              <div key={s.id} className={`trow ${(s.parLevel || 0) > 0 && s.quantity <= (s.parLevel || 0) ? 'under' : ''}`} style={{ flexWrap: 'wrap' }}>
                 <div className="nm" style={{ minWidth: 180 }}>
                   <b>{s.name}{r && <a href={recipeUrl(r.id)} target="_blank" rel="noreferrer" style={{ marginLeft: 6, color: 'var(--muted)' }} aria-label="Apri ricetta"><ExternalLink size={13} /></a>}</b>
                   <small>
@@ -151,7 +149,11 @@ export default function LineaView() {
                   </small>
                 </div>
                 {h != null && <span className={`chip ${h < 0 ? 'chip-danger' : h < 24 ? 'chip-warn' : ''}`}>{h < 0 ? 'scaduta' : h < 24 ? `scade tra ${Math.max(1, Math.round(h))} h` : `${Math.round(h / 24)} gg`}</span>}
-                {canEdit ? <Stepper value={s.quantity} step={step} unit={s.unit} onChange={(v) => (v <= 0 ? api.removeItem(s.id) : api.itemUpdate(s.id, { quantity: v }))} /> : <span className="tnum">{s.quantity} {s.unit}</span>}
+                {canEdit ? <Stepper value={s.quantity} step={step} unit={s.unit} onChange={(v) => api.itemUpdate(s.id, { quantity: Math.max(0, v) })} /> : <span className="tnum">{s.quantity} {s.unit}</span>}
+                {editMin === s.id
+                  ? <span className="row" style={{ gap: 6 }}><span className="small muted">minimo</span><Stepper value={s.parLevel || 0} step={step} unit={s.unit} onChange={(v) => api.setItemPar(s.id, Math.max(0, v))} /><button className="btn btn-sm" onClick={() => setEditMin(null)}>Ok</button></span>
+                  : <button className={`minchip ${s.parLevel ? 'set' : ''}`} disabled={!canEdit} onClick={() => setEditMin(s.id)} title="Sotto questa quantità l’app ti chiede di rifornire">{s.parLevel ? `min ${describe(s.parLevel, s.unit)}` : 'imposta minimo'}</button>}
+                {canEdit && available(sourcesFor(s, k), s.unit) > 0 && <button className="icon-btn" title={`Porta dal magazzino (${describe(available(sourcesFor(s, k), s.unit), s.unit)} disponibili)`} onClick={() => setRefill([s])} aria-label={`Rifornisci ${s.name}`}><ArrowRightLeft size={15} /></button>}
                 {canEdit && <button className="icon-btn" title="Prepara ancora" onClick={() => prepFor(s.name, s.recipeId, s.partita || g.key)} aria-label={`Prepara ancora ${s.name}`}><ClipboardList size={15} /></button>}
                 {canEdit && <button className="icon-btn" onClick={() => api.removeItem(s.id)} aria-label={`Togli ${s.name}`}><Trash2 size={15} /></button>}
               </div>
@@ -160,6 +162,8 @@ export default function LineaView() {
         </section>
       ))}
 
+      {smista && <Smista p={smista} onClose={() => setSmista(null)} />}
+      {refill && <Rifornisci items={refill} onClose={() => setRefill(null)} />}
       {scan && <ScanLinea partitaInit={partita === 'tutte' ? 'auto' : partita} onClose={() => setScan(false)} />}
     </div>
   )
