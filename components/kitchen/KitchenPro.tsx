@@ -12,6 +12,7 @@ import Panoramica from "./hub/Panoramica";
 import ServizioHub from "./hub/Servizio";
 import HaccpHub from "./haccp/Haccp";
 import Economia from "./econ/Economia";
+import MagazzinoHub from "./hub/Magazzino";
 
 /* ════ useIsMobile — JS-based reactive, mai window.innerWidth diretto ════ */
 function useIsMobile(bp=768) {
@@ -743,7 +744,7 @@ class ErrorBoundary extends React.Component {
 /* ════════════════════════════════════════════════════════
    PRODUCT CATALOG — 120+ prodotti con shelf life
    ════════════════════════════════════════════════════════ */
-const PRODUCT_CATALOG = [
+export const PRODUCT_CATALOG = [
   {n:"Filetto manzo",c:"proteine",u:"kg",macro:"alimenti",shelf:4},
   {n:"Costata di manzo",c:"proteine",u:"kg",macro:"alimenti",shelf:4},
   {n:"Controfiletto",c:"proteine",u:"kg",macro:"alimenti",shelf:4},
@@ -9497,7 +9498,7 @@ function KitchenProInner() {
             {section==="dashboard"    && <details style={{marginTop:24}}><summary style={{cursor:"pointer",color:t.inkMuted,fontSize:14,padding:"8px 0"}}>Indicatori del magazzino</summary><div style={{marginTop:12}}><DashboardView t={t}/></div></details>}
             {section==="piatti"       && <PiattiView/>}
             {section==="linea"        && <LineaView/>}
-            {section==="giacenze"     && <InventoryView t={t}/>}
+            {section==="giacenze"     && <MagazzinoHub legacy={<InventoryView t={t}/>}/>}
             {section==="preparazioni" && <PreparazioniHub legacy={<PrepMepView t={t}/>}/>}
             {false && section==="preparazioni" && isMobile && <QuickPrepFAB t={t}/>}
             {section==="spesa"        && <SpesaView t={t}/>}
