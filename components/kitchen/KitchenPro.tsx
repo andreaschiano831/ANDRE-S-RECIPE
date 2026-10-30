@@ -8,10 +8,10 @@ import {
 import PiattiView from "./hub/Piatti";
 import LineaView from "./hub/Linea";
 import PreparazioniHub from "./hub/Preparazioni";
-import FoodCostView from "./hub/FoodCost";
 import Panoramica from "./hub/Panoramica";
 import ServizioHub from "./hub/Servizio";
 import HaccpHub from "./haccp/Haccp";
+import Economia from "./econ/Economia";
 
 /* ════ useIsMobile — JS-based reactive, mai window.innerWidth diretto ════ */
 function useIsMobile(bp=768) {
@@ -8559,7 +8559,7 @@ const DRAWER_NAV = [
   {key:"economato",  label:"Economato"},
   {key:"haccp",      label:"HACCP"},
   {key:"spttp",      label:"SPTTP Fine Turno"},
-  {key:"foodcost",   label:"Food Cost"},
+  {key:"foodcost",   label:"Food cost e conti"},
   {key:"brigata",    label:"Brigata"},
   {key:"settings",   label:"Impostazioni"},
 ];
@@ -8580,7 +8580,7 @@ const SECTION_TITLE = {
   economato:    "Economato",
   haccp:        "HACCP & Tracciabilità",
   spttp:         "SPTTP — Fine Turno",
-  foodcost:     "Food Cost",
+  foodcost:     "Food cost e conti",
   brigata:      "Brigata",
   settings:     "Impostazioni",
 };
@@ -9505,7 +9505,7 @@ function KitchenProInner() {
             {section==="servizio"     && <ServizioHub legacy={<ServizioViewFull t={t}/>}/>}
             {section==="haccp"        && <HaccpHub legacy={<HaccpViewFull t={t}/>}/>}
             {section==="spttp"        && <SpttpView t={t}/>}
-            {section==="foodcost"     && <FoodCostView/>}
+            {section==="foodcost"     && <Economia/>}
             {section==="brigata"      && <BrigataBridgeView t={t}/>}
             {section==="settings"     && <SettingsView t={t}/>}
           </div>

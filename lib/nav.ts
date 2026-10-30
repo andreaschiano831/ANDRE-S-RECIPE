@@ -4,7 +4,7 @@ export const KITCHEN_SECTIONS = [
   { id: 'linea', label: 'Linea', hint: 'Giacenze di linea, anche da foto' },
   { id: 'preparazioni', label: 'Preparazioni', hint: 'Cosa preparare per il servizio' },
   { id: 'giacenze', label: 'Magazzino', hint: 'Frigo, freezer, dispensa, lotti' },
-  { id: 'foodcost', label: 'Food cost', hint: 'Piatti, ricette, listino, sprechi' },
+  { id: 'foodcost', label: 'Food cost e conti', hint: 'Fatture, vendite, food cost, magazzino, conto economico' },
   { id: 'servizio', label: 'Servizio', hint: 'Uscite dei piatti, scarico dalla linea' },
   { id: 'spesa', label: 'Spesa', hint: 'Lista, fornitori, fatture' },
   { id: 'economato', label: 'Economato', hint: 'Ordini e ricevimento merce' },
